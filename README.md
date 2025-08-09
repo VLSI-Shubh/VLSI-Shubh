@@ -56,7 +56,7 @@ Whether it’s architecting FSMs, optimizing datapaths, or exploring memory syst
 - Full/empty status control with pointers
 - Synthesizable design validated through comprehensive waveform analysis
 - Post-synthesis schematic generation confirming zero-latch implementation
-- 
+
 ### ⚡ [Asynchronous FIFO Buffer](https://github.com/VLSI-Shubh/Asynchronous-FIFO)
 **Cross clock-domain FIFO with Gray code pointers & metastability prevention**  
 - Dual-clock operation enabling safe data transfer between independent clock domains
@@ -144,5 +144,6 @@ Specialization: VLSI Design & FPGA Systems
 
 
 ---
+
 
 
