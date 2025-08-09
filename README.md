@@ -86,11 +86,6 @@ Whether it’s architecting FSMs, optimizing datapaths, or exploring memory syst
 
 ## 🚧 Upcoming Projects
 
-### 🧠 Asynchronous FIFO  
-Custom parameterized FIFO design with asynchronous read/write clocks for robust data buffering in multi-clock domains  
-🗓️ ETA: 2025
-
-
 ### 🛰️ UART Communication Interface  
 Universal Asynchronous Receiver-Transmitter with baud rate control  
 🗓️ ETA: 2025
@@ -144,6 +139,7 @@ Specialization: VLSI Design & FPGA Systems
 
 
 ---
+
 
 
 
