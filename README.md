@@ -51,18 +51,18 @@ Whether it’s architecting FSMs, optimizing datapaths, or exploring memory syst
 
 ## 🌟 Featured Projects
 
-### 🔁 [Synchronous FIFO Buffer](https://github.com/VLSI-Shubh/FIFO)
-**Parameterized memory buffer with pointer arithmetic & flag detection**  
-- Full/empty status control with pointers
-- Synthesizable design validated through comprehensive waveform analysis
-- Post-synthesis schematic generation confirming zero-latch implementation
-
 ### ⚡ [Asynchronous FIFO Buffer](https://github.com/VLSI-Shubh/Asynchronous-FIFO)
 **Cross clock-domain FIFO with Gray code pointers & metastability prevention**  
 - Dual-clock operation enabling safe data transfer between independent clock domains
 - Gray code pointer synchronization with dual flip-flop synchronizers eliminating metastability
 - Industry-standard CDC implementation with extra MSB for full/empty distinction
 - Zero synthesis warnings with professional ModelSim simulation and Vivado synthesis verification
+  
+### 🔁 [Synchronous FIFO Buffer](https://github.com/VLSI-Shubh/FIFO)
+**Parameterized memory buffer with pointer arithmetic & flag detection**  
+- Full/empty status control with pointers
+- Synthesizable design validated through comprehensive waveform analysis
+- Post-synthesis schematic generation confirming zero-latch implementation
   
 ### 🚦 [Smart Traffic Controller FSM](https://github.com/VLSI-Shubh/Traffic-Controller-using-FSM)
 **Sensor-based intelligent traffic management system**  
@@ -144,6 +144,7 @@ Specialization: VLSI Design & FPGA Systems
 
 
 ---
+
 
 
 
