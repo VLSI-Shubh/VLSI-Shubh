@@ -49,7 +49,7 @@ Whether it’s architecting FSMs, optimizing datapaths, or exploring memory syst
 
 ---
 
-## 🌟 Featured Projects
+## 🌟 Featured Projects 
 
 ### ⚡ [Asynchronous FIFO Buffer](https://github.com/VLSI-Shubh/Asynchronous-FIFO)
 **Cross clock-domain FIFO with Gray code pointers & metastability prevention**  
@@ -75,6 +75,13 @@ Whether it’s architecting FSMs, optimizing datapaths, or exploring memory syst
 - True dual-port enabling simultaneous independent R/W operations
 - Parameterized depth/width for scalable memory solutions
 - Comprehensive sync vs async read performance analysis
+
+### 🛰️ [UART Communication Protocol](https://github.com/VLSI-Shubh/UART)  
+**Parameterized full-duplex UART with baud rate generator and FSM-based TX/RX logic**  
+- Implements a modular UART system with transmitter, receiver, and configurable baud rate generator  
+- Supports full-duplex communication using separate FSMs for transmission and reception  
+- Includes 16x oversampling and loopback testing for accurate serial communication  
+- Validated using Icarus Verilog simulation and GTKWave waveform analysis 
 
 ### 🧮 [8×8 Dadda Multiplier](https://github.com/VLSI-Shubh/Delay-and-Power-Analysis-of-a-Static-8x8-Dadda-Multiplier-Circuit)
 **High-performance multiplier with hybrid logic optimization**  
@@ -139,6 +146,7 @@ Specialization: VLSI Design & FPGA Systems
 
 
 ---
+
 
 
 
