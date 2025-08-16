@@ -81,7 +81,8 @@ Whether it’s architecting FSMs, optimizing datapaths, or exploring memory syst
 - Implements a modular UART system with transmitter, receiver, and configurable baud rate generator  
 - Supports full-duplex communication using separate FSMs for transmission and reception  
 - Includes 16x oversampling and loopback testing for accurate serial communication  
-- Validated using Icarus Verilog simulation and GTKWave waveform analysis 
+- Validated using Icarus Verilog simulation and GTKWave waveform analysis
+- Currently working on making the design work with FIFO (debugging errors)
 
 ### 🧮 [8×8 Dadda Multiplier](https://github.com/VLSI-Shubh/Delay-and-Power-Analysis-of-a-Static-8x8-Dadda-Multiplier-Circuit)
 **High-performance multiplier with hybrid logic optimization**  
@@ -93,11 +94,7 @@ Whether it’s architecting FSMs, optimizing datapaths, or exploring memory syst
 
 ## 🚧 Upcoming Projects
 
-### 🛰️ UART Communication Interface  
-Universal Asynchronous Receiver-Transmitter with baud rate control  
-🗓️ ETA: 2025
-
-### ⚙️ 5-Stage 32-bit Pipelined MIPS Processor  
+### ⚙️ 5-Stage 32-bit Pipelined RISC-V Processor  
 Complete RISC implementation with hazard detection & forwarding  
 🗓️ ETA: 2025
 
@@ -146,6 +143,7 @@ Specialization: VLSI Design & FPGA Systems
 
 
 ---
+
 
 
 
