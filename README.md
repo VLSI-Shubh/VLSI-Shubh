@@ -91,15 +91,6 @@ Whether it’s architecting FSMs, optimizing datapaths, or exploring memory syst
 - Comprehensive comparison vs Wallace Tree & Booth architectures
 ---
 
-
-## 🚧 Upcoming Projects
-
-### ⚙️ 5-Stage 32-bit Pipelined RISC-V Processor  
-Complete RISC implementation with hazard detection & forwarding  
-🗓️ ETA: 2025
-
----
-
 ## 💼 Experience
 
 ### 🎓 Graduate Teaching Assistant @ Purdue University (EPICS)  
@@ -143,6 +134,7 @@ Specialization: VLSI Design & FPGA Systems
 
 
 ---
+
 
 
 
