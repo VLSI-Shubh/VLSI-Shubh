@@ -3,7 +3,7 @@
 🚀 **VLSI Design Engineer | MS in Electrical Engineering @ Purdue**  
 🔍 *Specializing in RTL Design, FPGA Development & Digital System Architecture*
 
-📧 [Email](mailto:vlsi.shubh@gmail.com)  |  🔗 [LinkedIn](https://linkedin.com/in/shubhamupadhyay0804)  |  📄 [Resume](https://drive.google.com/file/d/13tmAzwAvca08Ae4GNJHpLmts8DAGJEhV/view?usp=drive_link)  |  📍 United States
+📧 [Email](mailto:vlsi.shubh@gmail.com)  |  🔗 [LinkedIn](https://linkedin.com/in/shubhamupadhyay0804)  |  📄 [Resume](https://drive.google.com/file/d/1NCIxMmLmM78j3nEdt0lJmdoHUu_N04Ju/view?usp=drive_link)  |  📍 United States
 
 
 ---
@@ -92,6 +92,11 @@ Whether it’s architecting FSMs, optimizing datapaths, or exploring memory syst
 ---
 
 ## 💼 Experience
+### 💻 Firmware Engineer @ WinWinLabs (Volunteer)  
+*Aug 2025 – Present | Remote*  
+- Designed and debugged embedded firmware for IoT and microcontroller-based systems using **C/C++**.  
+- Implemented and validated communication protocols (**UART, SPI, I²C**) with real-time constraints.  
+- Collaborated with hardware engineers on **board bring-up, interface testing, and system-level debugging**.  
 
 ### 🎓 Graduate Teaching Assistant @ Purdue University (EPICS)  
 *Aug 2024 – May 2025 | Indianapolis, IN*  
@@ -134,6 +139,7 @@ Specialization: VLSI Design & FPGA Systems
 
 
 ---
+
 
 
 
