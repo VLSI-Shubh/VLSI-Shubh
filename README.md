@@ -71,6 +71,17 @@ Whether it’s architecting FSMs, optimizing datapaths, or exploring memory syst
 - Demonstrated **sequential data integrity** (10 → 20 → 30 …) through waveform analysis, confirming strict FIFO ordering.  
 - Applications: **Pipelined data buffering, inter-module communication, and embedded controllers**.  
 
+### 🎨 [Morphological Image Filtering on PYNQ FPGA](https://github.com/VLSI-Shubh/Morphological-Image-Filtering-on-PYNQ-FPGA)  
+**Real-time image enhancement with FPGA-accelerated min, max, and median filters**  
+
+- Implemented **morphological filtering (min, max, median)** on a **PYNQ-Z2 FPGA**, processing **64×64 RGB images** via AXI streams and DMA.  
+- Designed custom **VHDL IP (`FilterSelect_v1_0`)** with independent R/G/B filter modules using shift registers and bubble sort for median filtering.  
+- Integrated **hardware acceleration + Python control**, achieving **<10% LUT usage** while maintaining real-time performance.  
+- Enabled **interactive filter selection** with 2 physical board switches, supporting min (00), median (01), and max (10) operations in real time.  
+- Validated FPGA outputs against **MATLAB image processing**, confirming pixel-accurate results for noise reduction, edge preservation, and texture segmentation.  
+- Overcame design challenges in **RGB channel handling and reconstruction**, ensuring lossless image recombination post-processing.  
+- Excluded mean filter due to excessive latency, but maintained project timeline with full feature delivery.  
+- Applications: **Biomedical imaging, digital photography, visual inspection systems, and FPGA-accelerated computer vision**.  
   
 ### 🚦 [Smart Traffic Controller FSM](https://github.com/VLSI-Shubh/Traffic-Controller-using-FSM)
 **Sensor-based intelligent traffic management system**  
@@ -162,6 +173,7 @@ Specialization: VLSI Design & FPGA Systems
 
 
 ---
+
 
 
 
