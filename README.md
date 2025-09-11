@@ -38,7 +38,7 @@ Whether it’s architecting FSMs, optimizing datapaths, or exploring memory syst
 **Programming & Scripting**  
 `Python • C • C++ • MATLAB • Tcl/Tk`
 
-## 📊 Languages in My Repositories  
+### 📊 Languages in My Repositories  
 
 ![Shubham's Language Stats](https://github-readme-stats.vercel.app/api/top-langs/?username=VLSI-Shubh&layout=pie&theme=tokyonight)
 
@@ -181,6 +181,7 @@ Specialization: VLSI Design & FPGA Systems
 
 
 ---
+
 
 
 
