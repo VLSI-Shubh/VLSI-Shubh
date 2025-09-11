@@ -49,7 +49,7 @@ Whether it’s architecting FSMs, optimizing datapaths, or exploring memory syst
 
 ### 📊 Languages in My Repositories  
 
-[![Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=VLSI-Shubh&layout=pie&langs_count=10&theme=tokyonight)]
+![Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=VLSI-Shubh&layout=pie&langs_count=10&theme=tokyonight)
 
 
 > *This chart reflects the primary languages used across my GitHub repositories highlighting my focus on **HDLs (Verilog/VHDL)** along with supporting languages like **C, C++, Python, and Tcl** for verification, scripting, and testbench automation.*
@@ -68,15 +68,16 @@ Whether it’s architecting FSMs, optimizing datapaths, or exploring memory syst
 - Verified operation with comprehensive **VCD waveform analysis**, demonstrating safe flag propagation delays (1–2 cycles) and glitch-free operation.  
 - Applications: **SoC interconnects, network packet buffers, DDR controllers**, and other high-speed CDC use cases.  
 
-### 🔁 [Synchronous FIFO Buffer](https://github.com/VLSI-Shubh/FIFO)
-**Parameterized memory buffer with pointer arithmetic & flag detection**  
+### 📊 [Sorting Algorithm Visualizer in Python](https://github.com/VLSI-Shubh/Sorting-Algorithm-Visualizer-in-Python)  
+**Real-time comparison of Bubble, Quick, Merge, and Radix Sort algorithms with Python + matplotlib animation**  
 
-- Built a **parameterized synchronous FIFO** operating on a single clock domain with configurable depth/width.  
-- Designed **read/write pointer arithmetic with extra bit tracking** for accurate full/empty flag detection.  
-- Verified functional correctness across **20+ critical transitions**, including back-to-back writes, reads, and empty-to-full cycles.  
-- Achieved **zero synthesis warnings** in Vivado and clean RTL-to-gate mapping with no inferred latches.  
-- Demonstrated **sequential data integrity** (10 → 20 → 30 …) through waveform analysis, confirming strict FIFO ordering.  
-- Applications: **Pipelined data buffering, inter-module communication, and embedded controllers**.  
+- Implemented **four classic sorting algorithms** (Bubble, Quick, Merge, Radix) with **state instrumentation** for tracking comparisons, swaps, pivots, and merges.  
+- Developed a **visualization tool** using `matplotlib` animations, enabling **side-by-side execution** of multiple algorithms for educational and performance comparison.  
+- Designed **interactive CLI** with support for custom dataset size, number ranges, file input, and adjustable animation speed.  
+- Produced **animated visual outputs** and performance tables showing execution steps and timing (e.g., Radix fastest @ 0.07 ms vs Bubble slowest @ 2.72 ms).  
+- Applications: **Teaching tool for algorithms, complexity analysis, and computer science education**.  
+
+
 
 ### 🎨 [Morphological Image Filtering on PYNQ FPGA](https://github.com/VLSI-Shubh/Morphological-Image-Filtering-on-PYNQ-FPGA)  
 **Real-time image enhancement with FPGA-accelerated min, max, and median filters**  
@@ -180,6 +181,7 @@ Specialization: VLSI Design & FPGA Systems
 
 
 ---
+
 
 
 
