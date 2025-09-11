@@ -38,6 +38,13 @@ Whether it’s architecting FSMs, optimizing datapaths, or exploring memory syst
 **Programming & Scripting**  
 `Python • C • C++ • MATLAB • Tcl/Tk`
 
+## 📊 Languages in My Repositories  
+
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=VLSI-Shubh&layout=compact&langs_count=8&theme=tokyonight)
+
+> *This chart reflects the primary languages used across my GitHub repositories — highlighting my focus on **HDLs (Verilog/VHDL)** along with supporting languages like **C, C++, Python, and Tcl** for verification, scripting, and testbench automation.*
+
+
 **EDA Tools & Synthesis**  
 `Vivado • Cadence Virtuoso • Synopsys Design Compiler • GTKWave • Icarus Verilog • Yosys`
 
@@ -173,6 +180,7 @@ Specialization: VLSI Design & FPGA Systems
 
 
 ---
+
 
 
 
