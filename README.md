@@ -40,7 +40,8 @@ Whether it’s architecting FSMs, optimizing datapaths, or exploring memory syst
 
 ## 📊 Languages in My Repositories  
 
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=VLSI-Shubh&layout=compact&langs_count=8&theme=tokyonight)
+![Shubham's Language Stats](https://github-readme-stats.vercel.app/api/top-langs/?username=VLSI-Shubh&layout=pie&theme=tokyonight)
+
 
 > *This chart reflects the primary languages used across my GitHub repositories — highlighting my focus on **HDLs (Verilog/VHDL)** along with supporting languages like **C, C++, Python, and Tcl** for verification, scripting, and testbench automation.*
 
@@ -180,6 +181,7 @@ Specialization: VLSI Design & FPGA Systems
 
 
 ---
+
 
 
 
