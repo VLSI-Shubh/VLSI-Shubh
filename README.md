@@ -3,7 +3,7 @@
 🚀 **VLSI Design Engineer | MS in Electrical Engineering @ Purdue**  
 🔍 *Specializing in RTL Design, FPGA Development & Digital System Architecture*
 
-📧 [Email](mailto:vlsi.shubh@gmail.com)  |  🔗 [LinkedIn](https://linkedin.com/in/shubhamupadhyay0804)  |  📄 [Resume](https://drive.google.com/file/d/1vZD0DQ60Q5t_cLej9rW5qrR2kUnNIxtD/view?usp=sharing)  |  📍 United States
+📧 [Email](mailto:vlsi.shubh@gmail.com)  |  🔗 [LinkedIn](https://linkedin.com/in/shubhamupadhyay0804)  |  📄 [Resume](https://drive.google.com/file/d/1tPXmRhtbw7lPNnLKJvvKyUQjEdvfDIAj/view?usp=sharing)  |  📍 United States
 
 
 ---
@@ -181,6 +181,7 @@ Specialization: VLSI Design & FPGA Systems
 
 
 ---
+
 
 
 
