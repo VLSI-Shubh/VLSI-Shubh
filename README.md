@@ -40,8 +40,8 @@ I work in digital hardware design with a focus on RTL development, pipelined pro
 | Programming               | Python, C/C++, Tcl, MATLAB                                                       |
 | EDA & Simulation          | Vivado, Quartus, Yosys, Icarus Verilog, Verilator, GTKWave, ModelSim, Questa     |
 | Synthesis & STA           | Synopsys Design Compiler, Cadence Genus, OpenSTA, Timing closure               |
-| Verification              | UVM, SystemVerilog assertions, Cocotb, formal verification (optional)           |
-| PCB & Analog (bonus)      | Cadence Virtuoso, KiCad                                                          |
+| Verification              | UVM, SystemVerilog assertions, Cocotb, PYUVM          |
+| Analog Design      | Cadence Virtuoso, KLayout, MagicVLSI                                                          |
 
 
  
@@ -114,5 +114,6 @@ Petrocil Engineering • Mumbai, India
 - Scalable, synthesizable RTL design  
 
  
+
 
 
