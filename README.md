@@ -1,137 +1,118 @@
-# 👋 Hi, I'm Shubham Kapil Upadhyay
+# Shubham Kapil Upadhyay
 
-🚀 **VLSI Design Engineer | MS in Electrical Engineering @ Purdue**  
-🔍 *Specializing in RTL Design, FPGA Development & Digital System Architecture*
+**VLSI and Digital Design Engineer**  
+MS in Electrical Engineering, Purdue University
 
-📧 [Email](mailto:vlsi.shubh@gmail.com)  |  🔗 [LinkedIn](https://linkedin.com/in/shubhamupadhyay0804)  |  📄 [Resume](https://drive.google.com/file/d/1tPXmRhtbw7lPNnLKJvvKyUQjEdvfDIAj/view?usp=sharing)  |  📍 United States
+[![Email](https://img.shields.io/badge/Email-vlsi.shubh@gmail.com-blue?style=flat-square&logo=gmail&logoColor=white)](mailto:vlsi.shubh@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Shubham%20Upadhyay-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/shubhamupadhyay0804)
+[![Resume](https://img.shields.io/badge/Resume-View%20PDF-brightgreen?style=flat-square&logo=google-drive&logoColor=white)](https://drive.google.com/file/d/1tPXmRhtbw7lPNnLKJvvKyUQjEdvfDIAj/view?usp=sharing)
 
+ 
 
----
- 🧭 **Philosophy**
+## Philosophy
 
-> *"Designing tomorrow’s digital systems today — one clock cycle at a time."*
+Designing practical and reliable digital systems through clear architecture, disciplined RTL development, and structured verification.
 
----
-## 🧠 About Me
+ 
 
-I’m a passionate digital designer focused on building efficient, scalable, and synthesizable hardware systems. With a strong foundation in **Verilog**, **FPGA development**, and **memory architecture**, I love translating abstract logic into real-world digital hardware.
+## About Me
 
-Whether it’s architecting FSMs, optimizing datapaths, or exploring memory systems, I enjoy solving problems that live at the intersection of **elegant design and timing precision**.
+I work in digital hardware design with a focus on RTL development, pipelined processors, memory subsystems, and FPGA implementation. My work emphasizes synthesizable architecture, correctness, and timing-aware design.
 
----
+ 
 
-## 🛠️ What I Do Best
+## What I Work On
 
-- ✅ RTL Design & Verification (Verilog, VHDL)
-- ✅ FPGA-based System Implementation (Xilinx, Vivado)
-- ✅ Memory Architecture & FIFO Buffers
-- ✅ FSM Design & Control Logic
-- ✅ SoC Integration & Embedded Digital Systems
+- RTL design in Verilog, SystemVerilog, and VHDL  
+- Datapath and control architecture for processor pipelines  
+- FIFO and memory system design  
+- FPGA prototyping and hardware bring-up  
+- Functional verification and simulation flows  
+- Synthesis using open-source and industry-standard tools  
 
----
+ 
 
-## 🔧 Technical Toolbox
+### Technical Toolbox
 
-**Hardware Description Languages**  
-`Verilog • VHDL • SystemVerilog`
+| Category                  | Tools & Skills                                                                 |
+|---------------------------|-----------------------------------------------------------------------------------|
+| HDLs                      | Verilog, SystemVerilog, VHDL                                                     |
+| Programming               | Python, C/C++, Tcl, MATLAB                                                       |
+| EDA & Simulation          | Vivado, Quartus, Yosys, Icarus Verilog, Verilator, GTKWave, ModelSim, Questa     |
+| Synthesis & STA           | Synopsys Design Compiler, Cadence Genus, OpenSTA, Timing closure               |
+| Verification              | UVM, SystemVerilog assertions, Cocotb, formal verification (optional)           |
+| PCB & Analog (bonus)      | Cadence Virtuoso, KiCad                                                          |
 
-**Programming & Scripting**  
-`Python • C • C++ • MATLAB • Tcl/Tk`
 
-**EDA Tools & Synthesis**  
-`Vivado • Cadence Virtuoso • Synopsys Design Compiler • GTKWave • Icarus Verilog • Yosys`
+ 
 
-**Design & Verification**  
-`RTL Design • FSM Architecture • Memory Systems • Functional Verification • Logic Synthesis`
+## Selected Projects
 
-**Protocols & Analysis**  
-`UART • SPI • I2C • AXI • STA • CDC • Power Optimization`
+### **Round-Robin Arbiter**  
+[github.com/VLSI-Shubh/Round-Robin-Arbiter](https://github.com/VLSI-Shubh/Round-Robin-Arbiter)  
+A fair arbitration unit supporting cyclic priority rotation under concurrent requests. Includes clean control logic and simulation validation.
 
-### 📊 Languages in My Repositories  
+### **RISC-V RV32I Processor**  
+[github.com/VLSI-Shubh/RISCV-32I-Processor](https://github.com/VLSI-Shubh/RISCV-32I-Processor)  
+A 32-bit RISC-V implementation featuring both single-cycle and 5-stage pipelined architectures with hazard detection, forwarding, branch logic, and verification benches.
 
-![Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=VLSI-Shubh&layout=pie&langs_count=10&theme=tokyonight)
+### **Asynchronous FIFO**  
+[github.com/VLSI-Shubh/Asynchronous-FIFO](https://github.com/VLSI-Shubh/Asynchronous-FIFO)  
+CDC-safe FIFO using Gray-coded pointers and multi-flop synchronization. Verified across boundary and corner cases.
 
+### **Synchronous FIFO**  
+[github.com/VLSI-Shubh/Synchronous-FIFO](https://github.com/VLSI-Shubh/Synchronous-FIFO)  
+Single-clock FIFO with parameterized width/depth and a modular verification framework.
 
-> *This chart reflects the primary languages used across my GitHub repositories highlighting my focus on **HDLs (Verilog/VHDL)** along with supporting languages like **C, C++, Python, and Tcl** for verification, scripting, and testbench automation.*
+### **Sorting Algorithm Visualizer (Python)**  
+[github.com/VLSI-Shubh/Sorting-Algorithm-Visualizer-in-Python](https://github.com/VLSI-Shubh/Sorting-Algorithm-Visualizer-in-Python)  
+Interactive visualization tool demonstrating sorting behavior and algorithmic flow.
 
----
+### **Linear Feedback Shift Register (LFSR)**  
+[github.com/VLSI-Shubh/Linear-Feedback-Shift-Register-LFSR-](https://github.com/VLSI-Shubh/Linear-Feedback-Shift-Register-LFSR-)  
+Pseudo-random sequence generator implemented in Verilog for test patterns and simple BIST concepts.
 
-## 💼 Experience
+### **Smart Traffic Controller (FSM)**  
+[github.com/VLSI-Shubh/Smart-Traffic-Controller-FSM](https://github.com/VLSI-Shubh/Smart-Traffic-Controller-FSM)  
+Finite state machine with timing logic and well-structured state transitions to demonstrate control-path design.
 
-### 💻 Firmware Engineer @ WinWin Labs (Volunteer)  
-*Remote, US | Aug 2025 – Present*  
-- Developed embedded firmware for IoT systems using **C/C++**, implementing real-time communication protocols (**UART, SPI, I²C**) with interrupt handling and buffer management.  
-- Collaborated with hardware teams on board bring-up, interface validation, and system-level debugging of microcontroller-based platforms including **PlatformIO** development environments and **Arduino DevKit** boards.  
-- Programmed and tested embedded applications for connected IoT devices, ensuring reliable operation in resource-constrained environments with hands-on experience on **Xilinx Pynq-Z2** development boards and **ESP32** microcontroller platforms.   
+### Repository Language Stats
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=yourusername&layout=compact&theme=tokyonight" alt="Top Languages" />
 
-### 🎓 Graduate Teaching Assistant @ Purdue University (EPICS)  
-*Aug 2024 – May 2025 | Indianapolis, IN*  
-- Mentored 35+ engineering students in **AI/ML application development** for *Vaani Connect* speech-to-text translation project.  
-- Designed and implemented technical platforms and testing frameworks, improving project development efficiency by **30%**.  
-- Provided technical guidance in **digital design, RTL coding, and verification methodologies** across First-Year Engineering programs.  
+## Education
 
-### 👨‍💻 Engineering Intern @ Thyssenkrupp Crankshaft Company  
-*May 2024 – Aug 2024 | Illinois, US*  
-- Evaluated **Marposs system components** for electrical compatibility and upgrade planning across critical machines.  
-- Created standardized parts lists and collaborated with OEM support for phased system modernization.  
+**MS in Electrical Engineering**  
+Purdue University Indianapolis  
+Focus Areas: VLSI design, digital systems, FPGA implementation
+### Experience
 
-### 🧑‍🏭 Junior Electrical Manager @ 21 Knots Engineering  
-*Feb 2022 – July 2023 | Mumbai, IN*  
-- Led procurement and execution for major electrical engineering projects  
-- Maintained 100% execution success and high client satisfaction
+**Firmware Engineer (Volunteer)**  
+WinWin Labs • Remote, US  
+*Aug 2025 – Present*
 
-### 🧑‍🔧 Senior Electrical Design Engineer @ Petrocil Engineering  
-*June 2019 – Jan 2022 | Mumbai, IN*  
-- Delivered over 10 successful electrical design projects  
-- Improved on-site technical resolution by 10%
+**Graduate Teaching Assistant (EPICS)**  
+Purdue University • Indianapolis, IN  
+*Aug 2024 – May 2025*
 
----
+**Engineering Intern**  
+Thyssenkrupp Crankshaft Company • Illinois, US  
+*May 2024 – Aug 2024*
 
-## 🎓 Education
+**Junior Electrical Manager**  
+21 Knots Engineering • Mumbai, India  
+*Feb 2022 – Jul 2023*
 
-**MS Electrical Engineering**  
-*Purdue University Indianapolis*  
-Specialization: VLSI Design & FPGA Systems
+**Senior Electrical Design Engineer**  
+Petrocil Engineering • Mumbai, India  
+*Jun 2019 – Jan 2022*
 
----
 
-## 🏆 Highlights
+## Professional Interests
 
-- 💡 Passionate about crafting efficient, synthesizable hardware that just works  
-- 🔍 Continuously learning and mastering complex RTL design and verification techniques  
-- 🤝 Enjoy collaborating with cross-disciplinary teams to bring projects to life  
-- 🛠️ Experienced in bridging theoretical designs with practical FPGA implementations  
-- 🚀 Always pushing boundaries by exploring new architectures and optimization methods  
+- Processor architecture and digital system design  
+- Memory subsystems and timing optimization  
+- Testbench development and verification methodology  
+- FPGA prototyping and debugging  
+- Scalable, synthesizable RTL design  
 
-
----
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
