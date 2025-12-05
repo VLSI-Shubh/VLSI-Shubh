@@ -77,7 +77,7 @@ Pseudo-random sequence generator implemented in Verilog for test patterns and si
 Finite state machine with timing logic and well-structured state transitions to demonstrate control-path design.
 
 ### Repository Language Stats
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=yourusername&layout=compact&theme=tokyonight" alt="Top Languages" />
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=VLSI-Shubh&layout=compact&theme=tokyonight&hide_border=true&langs_count=8&card_width=450&hide=jupyter%20notebook,tex,html)
 
 ## Education
 
@@ -116,3 +116,4 @@ Petrocil Engineering • Mumbai, India
 - Scalable, synthesizable RTL design  
 
  
+
