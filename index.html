@@ -128,12 +128,16 @@
     font-weight: 700;
     color: var(--heading);
     letter-spacing: 0.5px;
+    position: relative;
+    z-index: 1001;
   }
 
   .nav-controls{
     display: flex;
     align-items: center;
     gap: 1rem;
+    position: relative;
+    z-index: 1001;
   }
 
   /* Hamburger button */
@@ -175,7 +179,7 @@
   /* Mobile menu overlay */
   .nav-menu{
     position: fixed;
-    top: var(--nav-h);
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
@@ -189,6 +193,8 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 320ms var(--easing);
+    z-index: 999;
+    padding-top: var(--nav-h);
   }
 
   .nav-menu.active{
@@ -197,17 +203,20 @@
   }
 
   .nav-menu a{
-    font-size: 1.5rem;
-    font-weight: 500;
+    font-size: 1.8rem;
+    font-weight: 600;
     color: var(--heading);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
+    padding: 0.75rem 2rem;
+    border-radius: 12px;
     transition: all 280ms var(--easing);
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
 
   .nav-menu a:hover{
-    background: rgba(6,182,212,.15);
+    background: rgba(6,182,212,.2);
     color: var(--accent);
+    transform: translateX(5px);
   }
 
   /* Theme toggle button */
@@ -1271,7 +1280,7 @@
             io.unobserve(e.target);
           }
         });
-      }, { threshold: 0.05 });
+      }, { threshold: 0.15 });
       reveals.forEach(el => io.observe(el));
     }
 
