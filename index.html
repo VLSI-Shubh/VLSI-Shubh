@@ -240,31 +240,6 @@
     min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
     text-align:center; padding:calc(var(--nav-h) + 2rem) 1.2rem 4rem; position: relative;
   }
-  
-  .profile-image{
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 2rem;
-    border: 4px solid var(--accent);
-    box-shadow: 0 8px 32px rgba(6,182,212,.4), 0 0 0 8px rgba(6,182,212,.1);
-    transition: all var(--dur) var(--easing);
-    background: var(--card);
-  }
-  
-  .profile-image:hover{
-    transform: scale(1.05);
-    box-shadow: 0 12px 40px rgba(6,182,212,.5), 0 0 0 12px rgba(6,182,212,.15);
-  }
-  
-  .profile-image img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  
   .logo-name{
     font-size:clamp(2rem, 5vw, 3.5rem); font-weight:800; margin-bottom:.3rem;
     background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
@@ -525,9 +500,6 @@
        ====================================== -->
   <header id="home" class="reveal">
     <div class="hero">
-      <div class="profile-image">
-        <img src="assets/profile/headshot.jpeg" alt="Shubham Upadhyay" loading="eager">
-      </div>
       <div class="logo-name">Shubham Upadhyay</div>
       <div class="logo-subtitle">VLSI Design Engineer</div>
       <h2>Crafting High-Performance Silicon from RTL to Tapeout</h2>
