@@ -17,12 +17,9 @@
 
 <style>
   /* =============================
-     VLSI Theme with Circuit Pattern
+     VLSI Theme
      ============================= */
   :root{
-    --edge-mask-inner: 44%;
-    --edge-mask-outer: 64%;
-
     --space-900:#0A0E1F; --space-800:#0F1629;
     --bg: var(--space-900);
     --text:#E2E8F0; --heading:#F1F5F9; --muted:#94A3B8;
@@ -35,7 +32,7 @@
     --shadow:0 28px 60px rgba(0,6,22,.55);
     --glass-blur:12px;
 
-    --radius-md:16px; --radius-pill:9999px; --nav-h:80px;
+    --radius-md:16px; --radius-pill:9999px; --nav-h:70px;
 
     --hover-glow: rgba(6,182,212,.40);
     --glow:0 0 30px var(--hover-glow);
@@ -61,15 +58,14 @@
     --glow:0 0 36px var(--hover-glow);
   }
 
-  *{ box-sizing:border-box }
+  *{ box-sizing:border-box; margin:0; padding:0; }
   html, body{
-    margin:0; color:var(--text); background:var(--bg);
+    color:var(--text); background:var(--bg);
     font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    line-height:1.6; scroll-behavior:smooth; overflow-x:hidden;
+    line-height:1.6; scroll-behavior:smooth;
     text-rendering: optimizeLegibility;
   }
 
-  /* This keeps space so the fixed nav doesn't cover anchors */
   html{ scroll-padding-top: var(--nav-h); }
 
   h1,h2,h3{
@@ -79,10 +75,10 @@
     font-weight:700;
   }
   a{ color:var(--accent); text-decoration:none; transition: filter var(--dur) var(--easing) }
-  a:hover{ filter: brightness(1.05) }
+  a:hover{ filter: brightness(1.15) }
   .container{ width:100%; max-width:1140px; margin:0 auto; padding:0 1.2rem }
 
-  /* Background */
+  /* Background gradients */
   body{
     position: relative;
     background:
@@ -95,513 +91,308 @@
       linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 60%);
   }
 
-  /* Circuit pattern background */
-  body::before{
-    content:""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    background-repeat: repeat, repeat;
-    background-size: 300px 300px, 450px 450px;
-    background-position: 0 0, 150px 150px;
-    background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cg fill='none' stroke='rgba(6,182,212,0.12)' stroke-width='1'%3E%3Cpath d='M30 50 L120 40 L180 65 L260 50'/%3E%3Cpath d='M40 150 L110 110 L190 135 L270 165'/%3E%3Cpath d='M60 240 L130 190 L200 215 L250 260'/%3E%3Cpath d='M30 50 L40 150 M120 40 L110 110 M180 65 L190 135 M260 50 L270 165'/%3E%3Cpath d='M40 150 L60 240 M110 110 L130 190 M190 135 L200 215 M270 165 L250 260'/%3E%3C/g%3E%3Cg fill='rgba(6,182,212,0.25)'%3E%3Crect x='28' y='48' width='4' height='4'/%3E%3Crect x='118' y='38' width='4' height='4'/%3E%3Crect x='178' y='63' width='4' height='4'/%3E%3Crect x='258' y='48' width='4' height='4'/%3E%3Crect x='38' y='148' width='4' height='4'/%3E%3Crect x='108' y='108' width='4' height='4'/%3E%3Crect x='188' y='133' width='4' height='4'/%3E%3Crect x='268' y='163' width='4' height='4'/%3E%3Crect x='58' y='238' width='4' height='4'/%3E%3Crect x='128' y='188' width='4' height='4'/%3E%3Crect x='198' y='213' width='4' height='4'/%3E%3Crect x='248' y='258' width='4' height='4'/%3E%3C/g%3E%3C/svg%3E"),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='450' height='450' viewBox='0 0 450 450'%3E%3Cg fill='none' stroke='rgba(6,182,212,0.09)' stroke-width='1'%3E%3Cpath d='M45 75 L165 60 L270 95 L390 75'/%3E%3Cpath d='M60 225 L165 165 L285 200 L405 245'/%3E%3Cpath d='M90 360 L195 285 L300 320 L375 390'/%3E%3Cpath d='M45 75 L60 225 M165 60 L165 165 M270 95 L285 200 M390 75 L405 245'/%3E%3Cpath d='M60 225 L90 360 M165 165 L195 285 M285 200 L300 320 M405 245 L375 390'/%3E%3C/g%3E%3Cg fill='rgba(6,182,212,0.18)'%3E%3Crect x='43' y='73' width='4' height='4'/%3E%3Crect x='163' y='58' width='4' height='4'/%3E%3Crect x='268' y='93' width='4' height='4'/%3E%3Crect x='388' y='73' width='4' height='4'/%3E%3Crect x='58' y='223' width='4' height='4'/%3E%3Crect x='163' y='163' width='4' height='4'/%3E%3Crect x='283' y='198' width='4' height='4'/%3E%3Crect x='403' y='243' width='4' height='4'/%3E%3Crect x='88' y='358' width='4' height='4'/%3E%3Crect x='193' y='283' width='4' height='4'/%3E%3Crect x='298' y='318' width='4' height='4'/%3E%3Crect x='373' y='388' width='4' height='4'/%3E%3C/g%3E%3C/svg%3E");
-    opacity:.80;
-    -webkit-mask-image: radial-gradient(120% 92% at 50% 50%, transparent 0 var(--edge-mask-inner), rgba(0,0,0,.98) var(--edge-mask-outer), #000 100%);
-            mask-image: radial-gradient(120% 92% at 50% 50%, transparent 0 var(--edge-mask-inner), rgba(0,0,0,.98) var(--edge-mask-outer), #000 100%);
-  }
-  html[data-theme="light"] body::before{
-    background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cg fill='none' stroke='rgba(8,145,178,0.10)' stroke-width='1'%3E%3Cpath d='M30 50 L120 40 L180 65 L260 50'/%3E%3Cpath d='M40 150 L110 110 L190 135 L270 165'/%3E%3Cpath d='M60 240 L130 190 L200 215 L250 260'/%3E%3Cpath d='M30 50 L40 150 M120 40 L110 110 M180 65 L190 135 M260 50 L270 165'/%3E%3Cpath d='M40 150 L60 240 M110 110 L130 190 M190 135 L200 215 M270 165 L250 260'/%3E%3C/g%3E%3Cg fill='rgba(8,145,178,0.18)'%3E%3Crect x='28' y='48' width='4' height='4'/%3E%3Crect x='118' y='38' width='4' height='4'/%3E%3Crect x='178' y='63' width='4' height='4'/%3E%3Crect x='258' y='48' width='4' height='4'/%3E%3Crect x='38' y='148' width='4' height='4'/%3E%3Crect x='108' y='108' width='4' height='4'/%3E%3Crect x='188' y='133' width='4' height='4'/%3E%3Crect x='268' y='163' width='4' height='4'/%3E%3Crect x='58' y='238' width='4' height='4'/%3E%3Crect x='128' y='188' width='4' height='4'/%3E%3Crect x='198' y='213' width='4' height='4'/%3E%3Crect x='248' y='258' width='4' height='4'/%3E%3C/g%3E%3C/svg%3E"),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='450' height='450' viewBox='0 0 450 450'%3E%3Cg fill='none' stroke='rgba(8,145,178,0.08)' stroke-width='1'%3E%3Cpath d='M45 75 L165 60 L270 95 L390 75'/%3E%3Cpath d='M60 225 L165 165 L285 200 L405 245'/%3E%3Cpath d='M90 360 L195 285 L300 320 L375 390'/%3E%3Cpath d='M45 75 L60 225 M165 60 L165 165 M270 95 L285 200 M390 75 L405 245'/%3E%3Cpath d='M60 225 L90 360 M165 165 L195 285 M285 200 L300 320 M405 245 L375 390'/%3E%3C/g%3E%3Cg fill='rgba(8,145,178,0.15)'%3E%3Crect x='43' y='73' width='4' height='4'/%3E%3Crect x='163' y='58' width='4' height='4'/%3E%3Crect x='268' y='93' width='4' height='4'/%3E%3Crect x='388' y='73' width='4' height='4'/%3E%3Crect x='58' y='223' width='4' height='4'/%3E%3Crect x='163' y='163' width='4' height='4'/%3E%3Crect x='283' y='198' width='4' height='4'/%3E%3Crect x='403' y='243' width='4' height='4'/%3E%3Crect x='88' y='358' width='4' height='4'/%3E%3Crect x='193' y='283' width='4' height='4'/%3E%3Crect x='298' y='318' width='4' height='4'/%3E%3Crect x='373' y='388' width='4' height='4'/%3E%3C/g%3E%3C/svg%3E");
-    opacity:.60;
-  }
-
   nav, header, main, footer { position: relative; z-index: 1; }
 
   /* =============================
-     NAVIGATION (Glassy pill nav)
+     HAMBURGER NAVIGATION
      ============================= */
   .nav-wrap{
     position: fixed; top: 0; left: 0; right: 0;
     height: var(--nav-h);
-    z-index: 1000; display:flex; align-items:center; background:transparent;
+    z-index: 1000; 
+    display:flex; align-items:center; 
+    background: transparent;
     padding:.6rem 0;
-    transform: translateY(0);
-    transition: transform 320ms var(--easing);
-    will-change: transform;
+    transition: background 280ms var(--easing);
   }
-  body.nav-hidden .nav-wrap{ transform: translateY(calc(-1 * var(--nav-h))); }
-
-  .nav-pill{
-    margin:0 auto; display:flex; align-items:center; justify-content:center; gap:8px; padding:10px; border-radius:var(--radius-pill);
-    background: linear-gradient(180deg, rgba(10,14,31,.75), rgba(15,22,41,.55));
-    backdrop-filter: blur(var(--glass-blur)) saturate(120%); -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
-    border:1px solid var(--border); box-shadow:0 10px 30px rgba(6,182,212,.20); width:fit-content;
-    transition: all var(--dur) var(--easing);
-  }
-  body.nav-scrolled .nav-pill{
-    background: linear-gradient(180deg, rgba(10,14,31,.85), rgba(15,22,41,.70));
-    box-shadow: 0 12px 36px rgba(6,182,212,.28);
-    border-color: rgba(148,163,184,.25);
+  
+  body.nav-scrolled .nav-wrap{
+    background: linear-gradient(180deg, rgba(10,14,31,.95), rgba(15,22,41,.85));
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0,0,0,.3);
   }
 
-  .nav-pill a{
-    font-weight:600; padding:10px 14px; border-radius:var(--radius-pill); outline:none; color:var(--text);
-    transition: all var(--dur) var(--easing);
-  }
-  .nav-pill a:hover,.nav-pill a:focus-visible{
-    background: rgba(6,182,212,.12);
-    text-shadow: 0 0 10px var(--hover-glow);
-    box-shadow: inset 0 0 0 3px rgba(6,182,212,.14);
-    transform: translateY(-1px);
-  }
-
-  html[data-theme="light"] .nav-pill{
-    background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.48));
-    border:1px solid rgba(0,0,0,.12);
-    box-shadow: 0 10px 28px rgba(17,24,39,.10);
-  }
-  html[data-theme="light"] body.nav-scrolled .nav-pill{
-    background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.62));
-    box-shadow: 0 12px 36px rgba(17,24,39,.14);
-  }
-  html[data-theme="light"] .nav-pill a:hover,
-  html[data-theme="light"] .nav-pill a:focus-visible{
-    background: rgba(8,145,178,.08);
-    box-shadow: inset 0 0 0 2px rgba(8,145,178,.20);
+  .nav-container{
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
+  .nav-brand{
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--heading);
+    letter-spacing: 0.5px;
+  }
+
+  .nav-controls{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* Hamburger button */
+  .hamburger{
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    padding: 0;
+    z-index: 1001;
+  }
+
+  .hamburger span{
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: all 280ms var(--easing);
+  }
+
+  .hamburger.active span:nth-child(1){
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger.active span:nth-child(2){
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3){
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile menu overlay */
+  .nav-menu{
+    position: fixed;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(10,14,31,.98), rgba(15,22,41,.95));
+    backdrop-filter: blur(16px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 320ms var(--easing);
+  }
+
+  .nav-menu.active{
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .nav-menu a{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--heading);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 280ms var(--easing);
+  }
+
+  .nav-menu a:hover{
+    background: rgba(6,182,212,.15);
+    color: var(--accent);
+  }
+
+  /* Theme toggle button */
   .theme-toggle{
-    margin-left:4px; display:inline-flex; align-items:center; justify-content:center;
-    width:40px; height:40px; border-radius:var(--radius-pill);
-    background: rgba(6,182,212,.12); border:1px solid rgba(6,182,212,.24);
-    color:inherit; cursor:pointer; box-shadow: 0 6px 18px rgba(0,8,24,.35);
+    width:40px; height:40px; display:flex; align-items:center; justify-content:center;
+    border:none; background:rgba(6,182,212,.15); color:var(--accent);
+    border-radius:50%; cursor:pointer;
     transition: all var(--dur) var(--easing);
   }
-  .theme-toggle:hover,.theme-toggle:focus-visible{
-    outline:none; transform: translateY(-1px);
-    box-shadow: inset 0 0 0 3px rgba(255,255,255,.10);
-  }
-  html[data-theme="light"] .theme-toggle{
-    background: rgba(255,255,255,.6); border:1px solid rgba(0,0,0,.12);
-  }
-  .theme-toggle svg{ width:20px; height:20px; display:block }
+  .theme-toggle:hover{ background:rgba(6,182,212,.25); transform:rotate(20deg) }
+  .theme-toggle svg{ width:20px; height:20px }
 
   /* =============================
-     HEADER / HERO
+     HERO SECTION
      ============================= */
-  header{
-    min-height: calc(100vh - var(--nav-h)); display:grid; place-items:center; text-align:center; padding:4rem 1.5rem;
+  .hero{
+    min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:calc(var(--nav-h) + 2rem) 1.2rem 4rem; position: relative;
   }
-  header::before{
-    content:""; position:absolute; inset:-20vmax 0 auto 0; height:60vmin; z-index:-1; pointer-events:none;
-    background:
-      radial-gradient(60% 100% at 50% -10%, rgba(6,182,212,.25), transparent 70%),
-      radial-gradient(60% 80%  at 50% -12%, rgba(14,165,233,.45), transparent 72%);
-    filter: blur(40px);
-  }
-  html[data-theme="light"] header::before{
-    background:
-      radial-gradient(55% 90% at 50% -10%, rgba(8,145,178,.12), transparent 70%),
-      radial-gradient(50% 80% at 55% -12%, rgba(6,182,212,.10), transparent 72%);
-  }
-
-  .hero{ transform: translateY(var(--hero-nudge)); transition: transform var(--dur) var(--easing); }
-
   .logo-name{
-    font-family:"Space Grotesk", Inter, system-ui, sans-serif;
-    font-size:clamp(2.8rem,5.5vw,4.2rem);
-    font-weight:800;
-    letter-spacing:-.5px;
-    background: linear-gradient(90deg, #06B6D4 0%, #0EA5E9 100%);
+    font-size:clamp(2rem, 5vw, 3.5rem); font-weight:800; margin-bottom:.3rem;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
     -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-    text-shadow: 0 0 30px rgba(6,182,212,.45);
+    background-clip:text;
   }
-  html[data-theme="light"] .logo-name{
-    background:none; -webkit-text-fill-color:initial; color:var(--heading);
-    text-shadow: 0 2px 0 rgba(255,255,255,.65), 0 10px 28px rgba(8,145,178,.18);
-  }
-
   .logo-subtitle{
-    margin-top:.55rem;
-    font-family:"Space Grotesk", Inter, system-ui, sans-serif;
-    font-size: clamp(0.95rem, 2.1vw, 1.2rem);
-    letter-spacing:.18em;
-    text-transform:uppercase;
-    background: linear-gradient(90deg, #67E8F9 0%, #06B6D4 100%);
-    -webkit-background-clip:text; -webkit-text-fill-color: transparent;
-    opacity:.95;
+    font-size:1.2rem; color:var(--muted); margin-bottom:1.5rem; letter-spacing:1px; text-transform:uppercase;
   }
-  html[data-theme="light"] .logo-subtitle{
-    background:none; -webkit-text-fill-color:initial; color:var(--muted);
+  .hero h2{
+    font-size:clamp(1.15rem, 2.5vw, 1.5rem); max-width:700px; color:var(--text); margin:0 auto 2rem; font-weight:500;
   }
 
-  header h2{ max-width:820px; margin-top:.8rem; font-weight:400; color:var(--muted); font-size:clamp(1rem,2vw,1.15rem) }
-  .cta-row{ margin-top:1.6rem; display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap }
+  /* CTA buttons */
+  .cta-row{
+    display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; margin-bottom:3rem;
+  }
+  .btn{
+    display:inline-block; padding:.9rem 2rem; border-radius:var(--radius-md);
+    font-weight:600; background:linear-gradient(135deg, var(--accent), var(--accent-2));
+    color:#fff; border:none; cursor:pointer; transition: all var(--dur) var(--easing);
+    box-shadow: 0 6px 20px rgba(6,182,212,.35);
+  }
+  .btn:hover{ transform:translateY(-3px); box-shadow:0 10px 28px rgba(6,182,212,.5) }
+  .btn.outline{
+    background:transparent; color:var(--accent);
+    border:2px solid var(--accent); box-shadow:none;
+  }
+  .btn.outline:hover{ background:rgba(6,182,212,.10) }
 
-  /* Stats Grid */
+  /* Stats cards */
   .stats-grid{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap:1rem;
-    margin-top:2.5rem;
-    max-width:700px;
-    margin-left:auto;
-    margin-right:auto;
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+    gap:1.5rem; max-width:600px; margin:0 auto;
   }
   .stat-card{
-    background: var(--card);
-    padding:1.2rem;
-    border-radius:var(--radius-md);
-    border:1px solid var(--border);
-    backdrop-filter: blur(var(--glass-blur));
-    box-shadow: var(--shadow);
-    text-align:center;
+    background:var(--card); backdrop-filter:blur(var(--glass-blur));
+    border:1px solid var(--border); border-radius:var(--radius-md);
+    padding:1.5rem; text-align:center; box-shadow:var(--shadow);
     transition: all var(--dur) var(--easing);
   }
-  .stat-card:hover{
-    transform: translateY(-4px);
-    box-shadow: 0 36px 72px rgba(0,8,24,.45), var(--glow);
-  }
-  .stat-number{
-    font-size:2rem;
-    font-weight:800;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  }
-  html[data-theme="light"] .stat-number{
-    background:none; -webkit-text-fill-color:initial; color:var(--accent);
-  }
-  .stat-label{
-    color:var(--muted);
-    font-size:0.85rem;
-    margin-top:0.3rem;
-  }
-
-  /* Buttons */
-  .btn{
-    display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
-    padding:.85rem 1.15rem; border-radius:var(--radius-pill);
-    text-decoration:none; font-weight:600;
-    transition: all var(--dur) var(--easing);
-    color:var(--text);
-    background: linear-gradient(180deg, rgba(6,182,212,.16) 0%, rgba(14,165,233,.10) 100%);
-    border:1px solid rgba(6,182,212,.28);
-    box-shadow: 0 6px 18px rgba(0,8,24,.35);
-  }
-  .btn:hover,.btn:focus-visible{
-    outline:none; transform: translateY(-1px);
-    background: linear-gradient(180deg, rgba(6,182,212,.22) 0%, rgba(14,165,233,.16) 100%);
-    box-shadow: 0 10px 26px rgba(0,8,24,.45), 0 0 0 6px rgba(6,182,212,.12);
-  }
-  .btn.outline{
-    background: rgba(10,14,31,.55);
-    border:1px solid rgba(6,182,212,.22);
-    box-shadow:none;
-  }
-  .btn.outline:hover,.btn.outline:focus-visible{
-    background: rgba(6,182,212,.10);
-    box-shadow: 0 6px 18px rgba(0,8,24,.35);
-  }
-
-  html[data-theme="light"] .btn{
-    color:var(--heading);
-    background: rgba(255,255,255,.55);
-    border:1px solid rgba(8,145,178,.35);
-    box-shadow: 0 6px 18px rgba(15,23,42,.12);
-  }
-  html[data-theme="light"] .btn:hover,
-  html[data-theme="light"] .btn:focus-visible{
-    background: rgba(255,255,255,.70);
-    box-shadow: 0 10px 30px rgba(15,23,42,.16), 0 0 0 6px rgba(8,145,178,.12);
-  }
-  html[data-theme="light"] .btn.outline{
-    background: rgba(255,255,255,.45);
-    border:1px solid rgba(8,145,178,.35);
-  }
+  .stat-card:hover{ transform:translateY(-4px); box-shadow:var(--glow), var(--shadow) }
+  .stat-number{ font-size:2.5rem; font-weight:800; color:var(--accent); line-height:1 }
+  .stat-label{ margin-top:.5rem; color:var(--muted); font-size:.9rem; text-transform:uppercase; letter-spacing:.5px }
 
   /* =============================
-     SECTIONS (Experience, Projects, etc.)
+     SECTIONS
      ============================= */
-  main{ width:100% }
   section{
-    min-height: calc(100vh - var(--nav-h));
-    position:relative;
-    display:grid; place-items:center;
-    padding:4.2rem 1.5rem; text-align:center;
+    padding:5rem 0; position:relative; overflow:hidden;
   }
-  .section-inner{ width:100%; max-width:1140px }
-
+  .section-inner{ max-width:1140px; margin:0 auto; padding:0 1.2rem }
   .section-title{
-    font-size:clamp(1.8rem,3.5vw,2.4rem);
-    margin-bottom:2rem;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-    text-shadow: var(--glow);
-  }
-  html[data-theme="light"] .section-title{
-    background:none; -webkit-text-fill-color:initial; color:var(--heading); text-shadow:none;
+    font-size:clamp(2rem, 4vw, 2.75rem); text-align:center; margin-bottom:3rem;
   }
 
-  section::before{
-    content:""; position:absolute; inset:-12vmax; z-index:-1; pointer-events:none;
-    background:
-      radial-gradient(40% 40% at 15% 20%, rgba(6,182,212,.12), transparent 60%),
-      radial-gradient(36% 36% at 85% 80%, rgba(14,165,233,.10), transparent 60%);
-    filter: blur(28px); opacity:.7;
+  /* Card Grid */
+  .cards{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
+    gap:2rem;
   }
-
-  /* Timeline (Experience) */
-  .timeline{
-    position:relative;
-    padding-left:40px;
-    max-width:900px;
-    margin:0 auto;
-    text-align:left;
-  }
-  .timeline::before{
-    content:'';
-    position:absolute;
-    left:0; top:0; bottom:0;
-    width:2px;
-    background: linear-gradient(180deg, var(--accent), var(--accent-purple));
-  }
-  .timeline-item{
-    position:relative;
-    margin-bottom:2.5rem;
-    padding-left:30px;
-  }
-  .timeline-item::before{
-    content:'';
-    position:absolute;
-    left:-47px; top:0;
-    width:16px; height:16px;
-    background: var(--accent);
-    border:3px solid var(--bg);
-    border-radius:50%;
-    box-shadow: var(--glow);
-  }
-
-  /* Cards (Projects, Skills, Certifications reuse this) */
-  .cards{ display:flex; flex-wrap:wrap; gap:2rem; justify-content:center }
   .card{
-    flex:1 1 360px;
-    text-align:left;
-    padding:1.9rem;
-    border-radius:var(--radius-md);
-    background: var(--card);
-    border:1px solid var(--border);
-    backdrop-filter: blur(var(--glass-blur));
-    box-shadow: var(--shadow);
+    background:var(--card); backdrop-filter:blur(var(--glass-blur));
+    border:1px solid var(--border); border-radius:var(--radius-md);
+    padding:1.8rem; box-shadow:var(--shadow);
     transition: all var(--dur) var(--easing);
   }
-  .card:hover{
-    transform: translateY(-4px);
-    box-shadow: 0 36px 72px rgba(0,8,24,.45), var(--glow);
-    border-color: rgba(6,182,212,.35);
-  }
-  .card h3{ color: var(--heading); margin-bottom:.75rem; font-size:1.25rem }
+  .card:hover{ transform:translateY(-6px); box-shadow:var(--glow), var(--shadow) }
+  .card h3{ margin-bottom:1rem; font-size:1.4rem }
+  .card p{ color:var(--muted) }
 
-
-  /* ===== PROJECT IMAGE STYLES ===== */
+  /* Project Images - FIXED FOR DESKTOP */
   .project-image{
-    width: 100%;
+    width:100%; 
     height: 200px;
-    margin-bottom: 1rem;
-    border-radius: 10px;
-    overflow: hidden;
-    background: linear-gradient(135deg, rgba(6,182,212,0.08), rgba(14,165,233,0.05));
-    border: 1px solid var(--border);
-    position: relative;
-  }
-
-  .project-image img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-  }
-
-  .project-image::before{
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, transparent 60%, rgba(10,14,31,0.4) 100%);
-    pointer-events: none;
-  }
-
-  .card:hover .project-image img{
-    transform: scale(1.05);
-  }
-
-  html[data-theme="light"] .project-image{
-    background: linear-gradient(135deg, rgba(8,145,178,0.05), rgba(6,182,212,0.03));
-  }
-
-  /* ===== CERTIFICATION IMAGE STYLES ===== */
-  .cert-image{
-    width: 100%;
-    height: 180px;
-    margin-bottom: 1rem;
-    border-radius: 10px;
-    overflow: hidden;
-    background: linear-gradient(135deg, rgba(6,182,212,0.08), rgba(139,92,246,0.05));
-    border: 1px solid var(--border);
+    border-radius:12px; 
+    overflow:hidden; 
+    margin-bottom:1.2rem;
+    background: rgba(6,182,212,.05);
     display: flex;
     align-items: center;
     justify-content: center;
   }
-
-  .cert-image img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
+  .project-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
   }
 
-  .cert-card:hover .cert-image img{
-    transform: scale(1.02);
-  }
-
-  /* Placeholder if an image is missing */
-  .cert-image:empty::before,
-  .project-image:empty::before{
-    content: '📄 Image';
-    font-size: 2rem;
-    color: var(--muted);
-  }
-
-  html[data-theme="light"] .cert-image{
-    background: linear-gradient(135deg, rgba(8,145,178,0.05), rgba(139,92,246,0.03));
-  }
-
-
-
-
-
-  /* Pills & Tags */
-  .pills{ display:flex; flex-wrap:wrap; gap:.5rem; margin:.5rem 0 1rem }
-  .pill{
-    padding:6px 12px;
-    border-radius:999px;
-    font-size:.85rem;
-    background: rgba(6,182,212,.14);
-    border:1px solid rgba(6,182,212,.28);
-    color:inherit;
-    transition: all var(--dur) var(--easing);
-  }
-  .pill:hover{
-    transform: translateY(-1px);
-    box-shadow: var(--glow);
-    background: rgba(6,182,212,.22);
-  }
-
-  /* Project metrics grid */
+  /* Project metadata grid */
   .project-meta{
-    display:grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap:0.8rem;
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:.8rem;
     margin:1rem 0;
-    padding:1rem;
-    background: rgba(6,182,212,.05);
-    border-radius:10px;
   }
-  .metric-item{
-    text-align:center;
+  .metric-item{ text-align:center }
+  .metric-value{ font-weight:700; color:var(--accent); font-size:.95rem }
+  .metric-label{ font-size:.8rem; color:var(--muted); margin-top:.2rem }
+
+  /* Pills/Tags */
+  .pills{
+    display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1rem;
   }
-  .metric-value{
-    font-size:1.3rem;
-    font-weight:700;
-    color:var(--accent);
-  }
-  .metric-label{
-    font-size:0.75rem;
-    color:var(--muted);
-    text-transform:uppercase;
-    letter-spacing:0.5px;
+  .pill{
+    display:inline-block; padding:.4rem .9rem; border-radius:var(--radius-pill);
+    background:rgba(6,182,212,.15); color:var(--accent);
+    font-size:.85rem; font-weight:500; border:1px solid rgba(6,182,212,.25);
   }
 
-  /* =========================================
-     CERTIFICATIONS SECTION (LinkedIn + Cadence)
-     - Uses its own grid + small helpers
-     - Edit only the HTML section to add/remove items
-     ========================================= */
+  /* Timeline for Experience */
+  .timeline{
+    max-width:900px; margin:0 auto; position:relative; padding-left:40px;
+  }
+  .timeline::before{
+    content:''; position:absolute; left:0; top:0; bottom:0; width:2px;
+    background:linear-gradient(180deg, transparent, var(--accent), transparent);
+  }
+  .timeline-item{
+    position:relative; padding-left:30px; margin-bottom:2.5rem;
+  }
+  .timeline-item::before{
+    content:''; position:absolute; left:-44px; top:12px;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--accent); border:3px solid var(--bg);
+    box-shadow: 0 0 0 4px rgba(6,182,212,.2);
+  }
+
+  /* Certifications Grid */
   .cert-grid{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap:1.5rem;
-    margin-top:2rem;
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
+    gap:2rem;
   }
-
   .cert-card{
-    text-align:left;
+    display:flex; flex-direction:column;
   }
-
+  .cert-image{
+    width:100%; 
+    height:180px;
+    border-radius:12px; 
+    overflow:hidden; 
+    margin-bottom:1rem;
+    background: rgba(6,182,212,.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cert-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
   .cert-status{
-    font-size:0.8rem;
-    text-transform:uppercase;
-    letter-spacing:0.08em;
-    color:var(--muted);
-    margin-bottom:0.35rem;
+    font-size:.85rem; color:var(--muted); margin-bottom:.5rem; text-transform:uppercase; letter-spacing:.5px;
   }
-
   .cert-title{
-    font-size:1.05rem;
-    font-weight:600;
-    margin-bottom:0.25rem;
-    color:var(--heading);
+    font-size:1.15rem; margin-bottom:.75rem; line-height:1.4;
   }
-
   .cert-meta{
-    font-size:0.9rem;
-    color:var(--muted);
-    margin-bottom:0.45rem;
+    color:var(--muted); font-size:.95rem; line-height:1.6; flex-grow:1; margin-bottom:1rem;
   }
-
   .cert-tag{
-    display:inline-block;
-    margin-top:0.4rem;
-    padding:0.25rem 0.6rem;
-    border-radius:999px;
-    font-size:0.75rem;
-    color:var(--text);
-    background: rgba(15,23,42,0.7);
-    border:1px solid rgba(148,163,184,0.4);
+    display:inline-block; padding:.4rem .9rem; border-radius:var(--radius-pill);
+    background:rgba(139,92,246,.15); color:var(--accent-purple);
+    font-size:.85rem; font-weight:500; border:1px solid rgba(139,92,246,.25);
   }
-
-  html[data-theme="light"] .cert-tag{
-    background: rgba(226,232,240,0.9);
-    color:#0F172A;
-    border:1px solid rgba(148,163,184,0.7);
-  }
-
-  /* (Optional) If you later want images per certificate,
-     you can add a .cert-image block and style like this:
-
-     .cert-image{
-       width:100%;
-       height:150px;
-       border-radius:12px;
-       overflow:hidden;
-       margin-bottom:1rem;
-       background:
-         radial-gradient(40% 40% at 15% 20%, rgba(6,182,212,.18), transparent 60%),
-         radial-gradient(36% 36% at 85% 80%, rgba(129,140,248,.20), transparent 60%);
-       display:flex;
-       align-items:center;
-       justify-content:center;
-       color:var(--muted);
-       font-size:0.85rem;
-     }
-
-     .cert-image img{
-       width:100%;
-       height:100%;
-       object-fit:cover;
-       display:block;
-     }
-  */
 
   /* Reveal Animations */
   .reveal{ opacity:1; transform:none; transition: opacity var(--dur) var(--easing), transform var(--dur) var(--easing) }
@@ -611,16 +402,47 @@
   /* Footer */
   footer{ text-align:center; padding:2rem 1rem; color:var(--muted); border-top:1px solid var(--border) }
 
-  /* Responsive adjustments */
-  @media (max-width:900px){
-    :root{ --edge-mask-inner: 48%; --edge-mask-outer: 70%; }
+  /* Go to Top Button */
+  .go-to-top{
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 6px 20px rgba(6,182,212,.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: all var(--dur) var(--easing);
+    z-index: 999;
   }
-  @media (max-width:600px){
-    :root{ --edge-mask-inner: 52%; --edge-mask-outer: 74%; }
+  .go-to-top.visible{
+    opacity: 1;
+    pointer-events: all;
+  }
+  .go-to-top:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(6,182,212,.5);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width:768px){
+    .stats-grid{ grid-template-columns: repeat(2, 1fr) }
     .timeline{ padding-left:20px }
     .timeline-item{ padding-left:20px }
     .timeline-item::before{ left:-33px }
-    .stats-grid{ grid-template-columns: repeat(2, 1fr) }
+  }
+
+  @media (max-width:600px){
+    .project-meta{ grid-template-columns: 1fr }
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -634,23 +456,31 @@
   <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:auto">Skip to content</a>
 
   <!-- ======================================
-       NAVIGATION BAR (ribbon at the top)
-       - To add a new section, add a link here
-         and a matching <section id="..."> below.
+       NAVIGATION BAR (Hamburger Menu)
        ====================================== -->
   <nav aria-label="Primary" class="nav-wrap">
-    <div class="container">
-      <div class="nav-pill">
-        <a href="#home">Home</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#experience">Experience</a>
-        <a href="#certifications">Certifications</a>
-        <a href="#contact">Contact</a>
+    <div class="nav-container">
+      <div class="nav-brand">Shubham Upadhyay</div>
+      <div class="nav-controls">
         <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme"></button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </div>
   </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="nav-menu" id="navMenu">
+    <a href="#home" class="nav-link">Home</a>
+    <a href="#experience" class="nav-link">Experience</a>
+    <a href="#projects" class="nav-link">Projects</a>
+    <a href="#skills" class="nav-link">Skills</a>
+    <a href="#certifications" class="nav-link">Certifications</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </div>
 
   <!-- ======================================
        HEADER / HERO SECTION
@@ -685,7 +515,6 @@
 
   <main id="main">
 
-
 <!-- ======================================
      PROJECTS SECTION
      ====================================== -->
@@ -702,7 +531,7 @@
                alt="Network-on-Chip router RTL to GDSII implementation"
                loading="lazy">
         </div>
-        <h3>🧠 NoC Router RTL2GDSII</h3>
+        <h3>NoC Router RTL2GDSII</h3>
         <p style="color:var(--muted); margin:.5rem 0">
           Implementation of a 2D-mesh Network-on-Chip router from RTL to GDSII using the OpenROAD flow and open-source PDKs.
         </p>
@@ -740,7 +569,7 @@
         <div class="project-image">
           <img src="assets/projects/rr-arbiter.png" alt="Round-robin arbiter waveforms" loading="lazy">
         </div>
-        <h3>🔁 Round-Robin Arbiter</h3>
+        <h3>Round-Robin Arbiter</h3>
         <p style="color:var(--muted); margin:.5rem 0">
           Fair round-robin bus arbiter with starvation-free scheduling and multi-testbench verification.
         </p>
@@ -776,7 +605,7 @@
         <div class="project-image">
           <img src="assets/projects/riscv-core.png" alt="RISC-V 5-stage pipeline diagram" loading="lazy">
         </div>
-        <h3>🧠 RISC-V RV32I Processor</h3>
+        <h3>RISC-V RV32I Processor</h3>
         <p style="color:var(--muted); margin:.5rem 0">
           RV32I core with both single-cycle and 5-stage pipelined implementations, including hazard detection and forwarding.
         </p>
@@ -794,8 +623,8 @@
             <div class="metric-label">Hazards</div>
           </div>
           <div class="metric-item">
-            <div class="metric-value">TB</div>
-            <div class="metric-label">Core-Level</div>
+            <div class="metric-value">FWD</div>
+            <div class="metric-label">Forwarding</div>
           </div>
         </div>
         <div class="pills">
@@ -812,7 +641,7 @@
         <div class="project-image">
           <img src="assets/projects/async-fifo.png" alt="Asynchronous FIFO with dual clock domains" loading="lazy">
         </div>
-        <h3>⏱️ Asynchronous FIFO (Dual-Clock)</h3>
+        <h3>Asynchronous FIFO (Dual-Clock)</h3>
         <p style="color:var(--muted); margin:.5rem 0">
           Dual-clock asynchronous FIFO with Gray-coded pointers, synchronizers, and focused CDC verification.
         </p>
@@ -848,7 +677,7 @@
         <div class="project-image">
           <img src="assets/projects/traffic-fsm.png" alt="Smart traffic controller state diagram" loading="lazy">
         </div>
-        <h3>🚦 Smart Traffic Light Controller FSM</h3>
+        <h3>Smart Traffic Light Controller FSM</h3>
         <p style="color:var(--muted); margin:.5rem 0">
           Sensor-driven traffic controller with emergency override, adaptive timing, and waveform-verified state coverage.
         </p>
@@ -884,7 +713,7 @@
         <div class="project-image">
           <img src="assets/projects/sync-fifo.png" alt="Synchronous FIFO block diagram" loading="lazy">
         </div>
-        <h3>💾 Synchronous FIFO with Gray Code Pointers</h3>
+        <h3>Synchronous FIFO with Gray Code Pointers</h3>
         <p style="color:var(--muted); margin:.5rem 0">
           Production-ready FIFO with Gray-code pointers, full/empty detection, and clean CDC boundaries for SoC datapaths.
         </p>
@@ -920,7 +749,7 @@
         <div class="project-image">
           <img src="assets/projects/sram.png" alt="Dual-port SRAM architecture" loading="lazy">
         </div>
-        <h3>🔲 Dual-Port SRAM with Collision Detection</h3>
+        <h3>Dual-Port SRAM with Collision Detection</h3>
         <p style="color:var(--muted); margin:.5rem 0">
           True dual-port memory with configurable depth/width, read-during-write definition, and collision detection.
         </p>
@@ -956,7 +785,7 @@
         <div class="project-image">
           <img src="assets/projects/dadda-multiplier.png" alt="8x8 Dadda multiplier reduction tree" loading="lazy">
         </div>
-        <h3>✖️ 8×8 Dadda Multiplier Analysis</h3>
+        <h3>8×8 Dadda Multiplier Analysis</h3>
         <p style="color:var(--muted); margin:.5rem 0">
           Structural implementation of an 8×8 Dadda multiplier with delay and power analysis at 45&nbsp;nm.
         </p>
@@ -992,7 +821,7 @@
         <div class="project-image">
           <img src="assets/projects/sorting-visualizer.png" alt="Sorting algorithm visualization" loading="lazy">
         </div>
-        <h3>📊 Sorting Algorithm Visualizer</h3>
+        <h3>Sorting Algorithm Visualizer</h3>
         <p style="color:var(--muted); margin:.5rem 0">
           Python-based GUI to visualize classic sorting algorithms and their time-step evolution.
         </p>
@@ -1027,7 +856,7 @@
         <div class="project-image">
           <img src="assets/projects/lfsr.png" alt="LFSR feedback taps diagram" loading="lazy">
         </div>
-        <h3>🔐 Linear Feedback Shift Register (LFSR)</h3>
+        <h3>Linear Feedback Shift Register</h3>
         <p style="color:var(--muted); margin:.5rem 0">
           Parameterizable LFSR for pseudo-random sequence generation, suitable for DFT pattern generation and simple cryptographic primitives.
         </p>
@@ -1062,21 +891,16 @@
   </div>
 </section>
 
-
-
-
-
     <!-- ======================================
          SKILLS SECTION
-         - Add new skill group: duplicate .card inside .cards
          ====================================== -->
     <section id="skills" class="reveal">
       <div class="section-inner">
-        <h2 class="section-title">🛠️ Technical Skills</h2>
+        <h2 class="section-title">Technical Skills</h2>
         <div class="cards">
 
           <div class="card">
-            <h3>💻 Hardware Description Languages</h3>
+            <h3>Hardware Description Languages</h3>
             <div class="pills">
               <span class="pill">Verilog</span>
               <span class="pill">SystemVerilog</span>
@@ -1085,7 +909,7 @@
           </div>
 
           <div class="card">
-            <h3>🔧 RTL Design</h3>
+            <h3>RTL Design</h3>
             <div class="pills">
               <span class="pill">FSM Design</span>
               <span class="pill">Datapath/Controller</span>
@@ -1097,7 +921,7 @@
           </div>
 
           <div class="card">
-            <h3>✅ Verification</h3>
+            <h3>Verification</h3>
             <div class="pills">
               <span class="pill">SystemVerilog Assertions</span>
               <span class="pill">UVM</span>
@@ -1108,7 +932,7 @@
           </div>
 
           <div class="card">
-            <h3>⚡ Synthesis & Timing</h3>
+            <h3>Synthesis & Timing</h3>
             <div class="pills">
               <span class="pill">Synopsys DC</span>
               <span class="pill">Genus</span>
@@ -1120,7 +944,7 @@
           </div>
 
           <div class="card">
-            <h3>📐 Physical Design</h3>
+            <h3>Physical Design</h3>
             <div class="pills">
               <span class="pill">Floorplanning</span>
               <span class="pill">Placement</span>
@@ -1132,7 +956,7 @@
           </div>
 
           <div class="card">
-            <h3>🛠️ EDA Tools</h3>
+            <h3>EDA Tools</h3>
             <div class="pills">
               <span class="pill">Vivado</span>
               <span class="pill">Quartus</span>
@@ -1145,7 +969,7 @@
           </div>
 
           <div class="card">
-            <h3>🔍 Design for Test</h3>
+            <h3>Design for Test</h3>
             <div class="pills">
               <span class="pill">Scan Insertion</span>
               <span class="pill">ATPG</span>
@@ -1156,7 +980,7 @@
           </div>
 
           <div class="card">
-            <h3>🤖 Scripting & Automation</h3>
+            <h3>Scripting & Automation</h3>
             <div class="pills">
               <span class="pill">Python</span>
               <span class="pill">TCL</span>
@@ -1169,7 +993,7 @@
           </div>
 
           <div class="card">
-            <h3>🔗 Bus Protocols</h3>
+            <h3>Bus Protocols</h3>
             <div class="pills">
               <span class="pill">AMBA (AHB/APB)</span>
               <span class="pill">AXI</span>
@@ -1181,7 +1005,7 @@
           </div>
 
           <div class="card">
-            <h3>🎛️ FPGA Platforms</h3>
+            <h3>FPGA Platforms</h3>
             <div class="pills">
               <span class="pill">Xilinx (Artix-7, Zynq)</span>
               <span class="pill">Intel (Cyclone, Arria)</span>
@@ -1197,7 +1021,6 @@
 
     <!-- ======================================
          EXPERIENCE SECTION
-         - Add another job: duplicate .timeline-item
          ====================================== -->
     <section id="experience" class="reveal">
       <div class="section-inner">
@@ -1265,16 +1088,75 @@
 
     <!-- ======================================
          CERTIFICATIONS SECTION
+         Reordered: Cadence → Udemy → LinkedIn
          ====================================== -->
     <section id="certifications" class="reveal">
       <div class="section-inner">
-        <h2 class="section-title">🎓 Certifications</h2>
+        <h2 class="section-title">Certifications</h2>
         <p style="font-size:1.05rem; color:var(--muted); max-width:640px; margin:0 auto 2rem;">
           Selected coursework and industry training across computer architecture, RISC-V, Git, RTL design, and Cadence flows.
         </p>
 
         <div class="cert-grid">
 
+          <!-- CADENCE CERTIFICATIONS FIRST -->
+          
+          <!-- Cadence – RTL to GDSII -->
+          <article class="card cert-card">
+            <div class="cert-image">
+              <img src="assets/certifications/cadence-rtl-gds.png" alt="Cadence RTL-to-GDSII Flow certificate" loading="lazy">
+            </div>
+            <div class="cert-status">Completed · Cadence</div>
+            <h3 class="cert-title">Cadence RTL-to-GDSII Flow v7.0</h3>
+            <div class="cert-meta">
+              End-to-end digital implementation flow: synthesis, place-and-route, timing closure, and signoff.
+            </div>
+            <span class="cert-tag">Physical Design Flow</span>
+          </article>
+
+          <!-- Cadence – Digital Design and Signoff -->
+          <article class="card cert-card">
+            <div class="cert-image">
+              <img src="assets/certifications/cadence-signoff.png" alt="Digital Design and Signoff certificate" loading="lazy">
+            </div>
+            <div class="cert-status">Completed · Cadence</div>
+            <h3 class="cert-title">Digital Design and Signoff Academic Curriculum v1.0</h3>
+            <div class="cert-meta">
+              Digital implementation, timing analysis, power optimization, and signoff verification.
+            </div>
+            <span class="cert-tag">Digital Signoff</span>
+          </article>
+
+          <!-- UDEMY CERTIFICATIONS -->
+          
+          <!-- Udemy STA 1 -->
+          <article class="card cert-card">
+            <div class="cert-image">
+              <img src="assets/certifications/udemy-sta1.png" alt="Static Timing Analysis-1 (VSD)" loading="lazy">
+            </div>
+            <div class="cert-status">Completed · Udemy</div>
+            <h3 class="cert-title">Static Timing Analysis - Part 1</h3>
+            <div class="cert-meta">
+               Timing Path Analysis, Setup and Hold Time Verification, On-Chip Variation (OCV) Timing, Latch Timing Analysis, and STA fundamentals.
+            </div>
+            <span class="cert-tag">Static Timing Analysis</span>
+          </article>
+          
+          <!-- Udemy Verilog HDL_VLSI Hardware Design Comprehensive Masterclass -->
+          <article class="card cert-card">
+            <div class="cert-image">
+              <img src="assets/certifications/udemy-hdl.png" alt="Verilog HDL_VLSI Hardware Design Comprehensive Masterclass" loading="lazy">
+            </div>
+            <div class="cert-status">Completed · Udemy</div>
+            <h3 class="cert-title">Verilog HDL Hardware Design Comprehensive Masterclass</h3>
+            <div class="cert-meta">
+               RTL Design (Verilog/VHDL), Application-Specific Integrated Circuits (ASIC), and FPGA & ASIC Design Flow.
+            </div>
+            <span class="cert-tag">Verilog · HDL</span>
+          </article>
+
+          <!-- LINKEDIN CERTIFICATIONS -->
+          
           <!-- LinkedIn – Computer Architecture -->
           <article class="card cert-card">
             <div class="cert-image">
@@ -1320,81 +1202,25 @@
               <img src="assets/certifications/linkedin-perl.png" alt="Perl 5 Essential Training certificate" loading="lazy">
             </div>
             <div class="cert-status">Completed · LinkedIn Learning</div>
-            <h3 class="cert-title">Learning PERL for EDA Scripting</h3>
+            <h3 class="cert-title">Learning Perl for EDA Scripting</h3>
             <div class="cert-meta">
               Mastered Perl one-liners for efficient text processing, regex pattern matching, and command-line automation in scripting workflows.
             </div>
-            <span class="cert-tag">Verilog · FPGA</span>
+            <span class="cert-tag">Perl · Scripting</span>
           </article>
 
-          <!-- LinkedIn – Perl -->
+          <!-- LinkedIn – Verilog -->
           <article class="card cert-card">
             <div class="cert-image">
               <img src="assets/certifications/linkedin-verilog.png" alt="Learning Verilog for FPGA Development certificate" loading="lazy">
             </div>
             <div class="cert-status">Completed · LinkedIn Learning</div>
-            <h3 class="cert-title">Learning PERL for EDA Scripting</h3>
+            <h3 class="cert-title">Learning Verilog for FPGA Development</h3>
             <div class="cert-meta">
               Verilog RTL development for FPGA applications.
             </div>
             <span class="cert-tag">Verilog · FPGA</span>
           </article>
-
-
-
-          <!-- Cadence – RTL to GDSII -->
-          <article class="card cert-card">
-            <div class="cert-image">
-              <img src="assets/certifications/cadence-rtl-gds.png" alt="Cadence RTL-to-GDSII Flow certificate" loading="lazy">
-            </div>
-            <div class="cert-status">Completed · Cadence</div>
-            <h3 class="cert-title">Cadence RTL-to-GDSII Flow v7.0</h3>
-            <div class="cert-meta">
-              End-to-end digital implementation flow: synthesis, place-and-route, timing closure, and signoff.
-            </div>
-            <span class="cert-tag">Physical Design Flow</span>
-          </article>
-
-          <!-- Cadence – Digital Design and Signoff -->
-          <article class="card cert-card">
-            <div class="cert-image">
-              <img src="assets/certifications/cadence-signoff.png" alt="Digital Design and Signoff certificate" loading="lazy">
-            </div>
-            <div class="cert-status">Completed · Cadence</div>
-            <h3 class="cert-title">Digital Design and Signoff Academic Curriculum v1.0 (Online)</h3>
-            <div class="cert-meta">
-              Digital implementation, timing analysis, power optimization, and signoff verification.
-            </div>
-            <span class="cert-tag">Digital Signoff</span>
-          </article>
-
-          <!-- Udemy STA 1 -->
-          <article class="card cert-card">
-            <div class="cert-image">
-              <img src="assets/certifications/udemy-sta1.png" alt="Static Timing Analysis-1 (VSD)" loading="lazy">
-            </div>
-            <div class="cert-status">Completed · Udemy</div>
-            <h3 class="cert-title">Digital Design and Signoff Academic Curriculum v1.0 (Online)</h3>
-            <div class="cert-meta">
-               Timing Path Analysis, Setup and Hold Time Verification, On-Chip Variation (OCV) Timing, Latch Timing Analysis,  STA
-            </div>
-            <span class="cert-tag">Static Timing Analysis</span>
-          </article>
-
-          
-          <!-- Udemy Verilog HDL_VLSI Hardware Design Comprehensive Masterclass -->
-          <article class="card cert-card">
-            <div class="cert-image">
-              <img src="assets/certifications/udemy-hdl.png" alt="Verilog HDL_VLSI Hardware Design Comprehensive Masterclass" loading="lazy">
-            </div>
-            <div class="cert-status">Completed · Udemy</div>
-            <h3 class="cert-title">Verilog HDL_VLSI Hardware Design Comprehensive Masterclass</h3>
-            <div class="cert-meta">
-               RTL Design (Verilog/VHDL), Application-Specific Integrated Circuits (ASIC), FPGA & ASIC Design Flow
-            </div>
-            <span class="cert-tag">Verilog · HDL</span>
-          </article>
-
 
         </div>
       </div>
@@ -1405,21 +1231,20 @@
 
     <!-- ======================================
          CONTACT SECTION
-         - Edit email / GitHub / LinkedIn here
          ====================================== -->
     <section id="contact" class="reveal">
       <div class="section-inner">
-        <h2 class="section-title">📬 Get In Touch</h2>
+        <h2 class="section-title">Get In Touch</h2>
         <p style="font-size:1.1rem; color:var(--muted); max-width:600px; margin:0 auto 1.6rem;">
           Open to opportunities in VLSI design, verification, and physical implementation. Let's connect!
         </p>
         <div style="display:flex; flex-direction:column; align-items:center; gap:1rem; margin-bottom:1.5rem">
-          <a href="mailto:vlsi.shubh@gmail.com" style="font-size:1.05rem">✉️ vlsi.shubh@gmail.com</a>
-          <a href="https://github.com/VLSI-Shubh" target="_blank" rel="noopener" style="font-size:1.05rem">💻 github.com/VLSI-Shubh</a>
-          <a href="https://linkedin.com/in/shubhamupadhyay0804" target="_blank" rel="noopener" style="font-size:1.05rem">🔗 linkedin.com/in/shubhamupadhyay0804</a>
+          <a href="mailto:shubhamupadhyay0804@gmail.com" style="font-size:1.05rem">shubhamupadhyay0804@gmail.com</a>
+          <a href="https://github.com/VLSI-Shubh" target="_blank" rel="noopener" style="font-size:1.05rem">github.com/VLSI-Shubh</a>
+          <a href="https://linkedin.com/in/shubhamupadhyay0804" target="_blank" rel="noopener" style="font-size:1.05rem">linkedin.com/in/shubhamupadhyay0804</a>
         </div>
         <div class="cta-row">
-          <a class="btn" href="mailto:vlsi.shubh@gmail.com">Send Email</a>
+          <a class="btn" href="mailto:shubhamupadhyay0804@gmail.com">Send Email</a>
           <a class="btn outline" href="#projects">View Projects</a>
         </div>
       </div>
@@ -1430,6 +1255,9 @@
   <footer>
     <p>&copy; 2025 Shubham Upadhyay. All rights reserved.</p>
   </footer>
+
+  <!-- Go to Top Button -->
+  <button class="go-to-top" id="goToTop" aria-label="Go to top">↑</button>
 
   <script>
     // Reveal-on-scroll animations
@@ -1443,7 +1271,7 @@
             io.unobserve(e.target);
           }
         });
-      }, { threshold: 0.05 });
+      }, { threshold: 0.15 });
       reveals.forEach(el => io.observe(el));
     }
 
@@ -1483,33 +1311,61 @@
       mq.addEventListener?.('change', () => { if (load()==='system') apply('system'); });
     })();
 
-    // Smart sticky nav (hide on scroll down, show on scroll up)
-    // NOTE: This is what makes the ribbon disappear while scrolling.
-    // If you ever want the ribbon always visible, you can remove
-    // the 'nav-hidden' class toggling in this block.
+    // Hamburger menu toggle
+    (function(){
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('navMenu');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+      });
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          navMenu.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      });
+    })();
+
+    // Smart sticky nav (shows/hides navbar background on scroll)
     (function(){
       let lastY = window.scrollY || 0;
       const body = document.body;
-      const SCROLL_DELTA = 6;
-      const HIDE_OFFSET = 120;
 
       const onScroll = () => {
         const y = window.scrollY || 0;
         if (y > 8) body.classList.add('nav-scrolled');
         else body.classList.remove('nav-scrolled');
-
-        if (Math.abs(y - lastY) > SCROLL_DELTA) {
-          if (y > lastY && y > HIDE_OFFSET) {
-            body.classList.add('nav-hidden');
-          } else {
-            body.classList.remove('nav-hidden');
-          }
-          lastY = y;
-        }
+        lastY = y;
       };
 
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
+    })();
+
+    // Go to Top button
+    (function(){
+      const goToTopBtn = document.getElementById('goToTop');
+      
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+          goToTopBtn.classList.add('visible');
+        } else {
+          goToTopBtn.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      goToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
     })();
   </script>
 </body>
