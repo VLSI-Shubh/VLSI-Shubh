@@ -563,7 +563,8 @@
 <section id="projects" class="reveal">
   <div class="section-inner">
     <h2 class="section-title">Featured Projects</h2>
-    <div class="cards">
+    <div class="cards">      
+
 
       <!-- NoC Router RTL2GDSII -->
       <article class="card">
@@ -857,41 +858,6 @@
         <a class="btn outline" href="https://github.com/VLSI-Shubh/Delay-and-Power-Analysis-of-a-Static-8x8-Dadda-Multiplier-Circuit" target="_blank" rel="noopener" style="margin-top:.5rem">View on GitHub →</a>
       </article>
 
-      <!-- Sorting Algorithm Visualizer (Python) -->
-      <article class="card">
-        <div class="project-image">
-          <img src="assets/projects/sorting-visualizer.png" alt="Sorting algorithm visualization" loading="lazy">
-        </div>
-        <h3>Sorting Algorithm Visualizer</h3>
-        <p style="color:var(--muted); margin:.5rem 0">
-          Python-based GUI to visualize classic sorting algorithms and their time-step evolution.
-        </p>
-        <div class="project-meta">
-          <div class="metric-item">
-            <div class="metric-value">5+</div>
-            <div class="metric-label">Algorithms</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-value">Step</div>
-            <div class="metric-label">By-Step View</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-value">Pause</div>
-            <div class="metric-label">Control</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-value">Live</div>
-            <div class="metric-label">Metrics</div>
-          </div>
-        </div>
-        <div class="pills">
-          <span class="pill">Python</span>
-          <span class="pill">Algorithms</span>
-          <span class="pill">Visualization</span>
-        </div>
-        <a class="btn outline" href="https://github.com/VLSI-Shubh/Sorting-Algorithm-Visualizer-in-Python" target="_blank" rel="noopener" style="margin-top:.5rem">View on GitHub →</a>
-      </article>
-
       <!-- Linear Feedback Shift Register -->
       <article class="card">
         <div class="project-image">
@@ -927,6 +893,84 @@
         </div>
         <a class="btn outline" href="https://github.com/VLSI-Shubh/Linear-Feedback-Shift-Register-LFSR-" target="_blank" rel="noopener" style="margin-top:.5rem">View on GitHub →</a>
       </article>
+
+      <!-- ESP32 Multi-Sensor IoT Edge-to-Cloud System -->
+      <article class="card">
+        <div class="project-image">
+          <img src="assets/projects/esp32_iot.png" alt="ESP32 IoT edge-to-cloud system architecture" loading="lazy">
+        </div>
+        <h3>ESP32 Multi-Sensor IoT Edge-to-Cloud System</h3>
+        <p style="color:var(--muted); margin:.5rem 0">
+           Firmware platform for ESP32-based multi-sensor telemetry with real-time acquisition, local buffering, MQTT-based cloud sync, and robust delivery under intermittent networks.
+        </p>
+        <div class="project-meta">
+          <div class="metric-item">
+            <div class="metric-value">FreeRTOS</div>
+            <div class="metric-label">Firmware</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-value">MQTT</div>
+            <div class="metric-label">Transport</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-value">LittleFS</div>
+            <div class="metric-label">Persistence</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-value">OTA</div>
+            <div class="metric-label">Updates</div>
+          </div>
+        </div>
+        <div class="pills">
+          <span class="pill">C/C++</span>
+          <span class="pill">ESP32</span>
+          <span class="pill">FreeRTOS</span>
+          <span class="pill">MQTT</span>
+          <span class="pill">Docker</span>
+          <span class="pill">Linux</span>
+          <span class="pill">IoT</span>
+        </div>
+        <button class="btn outline" style="margin-top:.5rem" disabled>
+        Project under NDA
+        </button>
+      </article>
+
+      <!-- Sorting Algorithm Visualizer (Python) -->
+      <article class="card">
+        <div class="project-image">
+          <img src="assets/projects/sorting-visualizer.png" alt="Sorting algorithm visualization" loading="lazy">
+        </div>
+        <h3>Sorting Algorithm Visualizer</h3>
+        <p style="color:var(--muted); margin:.5rem 0">
+          Python-based GUI to visualize classic sorting algorithms and their time-step evolution.
+        </p>
+        <div class="project-meta">
+          <div class="metric-item">
+            <div class="metric-value">5+</div>
+            <div class="metric-label">Algorithms</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-value">Step</div>
+            <div class="metric-label">By-Step View</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-value">Pause</div>
+            <div class="metric-label">Control</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-value">Live</div>
+            <div class="metric-label">Metrics</div>
+          </div>
+        </div>
+        <div class="pills">
+          <span class="pill">Python</span>
+          <span class="pill">Algorithms</span>
+          <span class="pill">Visualization</span>
+        </div>
+        <a class="btn outline" href="https://github.com/VLSI-Shubh/Sorting-Algorithm-Visualizer-in-Python" target="_blank" rel="noopener" style="margin-top:.5rem">View on GitHub →</a>
+      </article>
+
+
 
     </div>
   </div>
@@ -1063,10 +1107,24 @@
     <!-- ======================================
          EXPERIENCE SECTION
          ====================================== -->
+
     <section id="experience" class="reveal">
       <div class="section-inner">
         <h2 class="section-title">Professional Experience</h2>
         <div class="timeline">
+          <div class="timeline-item">
+            <div class="card">
+              <h3>Firmware/Hardware Engineer</h3>
+              <p style="color:var(--muted); margin:.25rem 0 .75rem;">
+                WinWinLabs (Volunteer) | Remote | Aug 2025 – Present
+              </p>
+              <ul style="color:var(--muted); line-height:1.75; margin:0; padding-left:1.2rem">
+                <li>Developed C/C++ firmware for ESP32 IoT devices supporting multi-sensor telemetry, MQTT communication, OTA updates, and local persistence under real-time constraints.</li>
+                <li>Tested and debugged embedded systems across fault conditions, validating interrupt-driven operation, network recovery, storage safety, and device-to-backend data integrity.</li>
+              </ul>
+            </div>
+          </div>
+
           <div class="timeline-item">
             <div class="card">
               <h3>Graduate Teaching Assistant – EPICS</h3>
@@ -1088,10 +1146,8 @@
                 Thyssenkrupp Crankshaft Company | Illinois, USA | May 2024 – Aug 2024
               </p>
               <ul style="color:var(--muted); line-height:1.75; margin:0; padding-left:1.2rem">
-                <li>Designed parameterized RTL blocks for real-time measurement systems with &lt;5ns latency requirements</li>
-                <li>Developed self-checking testbenches achieving 98% functional coverage using SystemVerilog assertions</li>
-                <li>Reduced integration time by 20% through modular design and comprehensive verification strategy</li>
-                <li>Synthesized designs targeting Xilinx Artix-7 achieving 150 MHz operation with 65% LUT utilization</li>
+                <li>Evaluated electrical compatibility and lifecycle status of Marposs inspection systems across multiple production machines, supporting upgrade planning and minimizing integration risks during phased modernization.</li>
+                <li>Created standardized electrical BOMs and documentation, working with OEM support teams to align replacement components and improve maintenance readiness.</li>
               </ul>
             </div>
           </div>
