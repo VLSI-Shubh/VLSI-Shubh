@@ -5,7 +5,7 @@ MS in Electrical Engineering, Purdue University
 
 [![Email](https://img.shields.io/badge/Email-vlsi.shubh@gmail.com-blue?style=flat-square&logo=gmail&logoColor=white)](mailto:vlsi.shubh@gmail.com)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Shubham%20Upadhyay-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/shubhamupadhyay0804)
-[![Resume](https://img.shields.io/badge/Resume-View%20PDF-brightgreen?style=flat-square&logo=google-drive&logoColor=white)](https://drive.google.com/file/d/1tPXmRhtbw7lPNnLKJvvKyUQjEdvfDIAj/view?usp=sharing)
+[![Resume](https://img.shields.io/badge/Resume-View%20PDF-brightgreen?style=flat-square&logo=google-drive&logoColor=white)](https://drive.google.com/file/d/1ACpZX0AcyLUook0ImAcFcnWlYr8NrvXo/view?usp=sharing)
 
  
 
@@ -114,6 +114,7 @@ Petrocil Engineering • Mumbai, India
 - Scalable, synthesizable RTL design  
 
  
+
 
 
 
