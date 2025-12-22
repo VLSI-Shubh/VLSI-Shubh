@@ -1,6 +1,6 @@
 # Shubham Kapil Upadhyay
 
-**Digital IC Design Engineer** _(RTL & FPGA/ASIC)_  
+**Digital IC Design Engineer** _(RTL & FPGA/ASIC Design)_  
 MS in Electrical Engineering, Purdue University
 
 [![Email](https://img.shields.io/badge/Email-vlsi.shubh@gmail.com-0A66C2?style=flat-square&logo=gmail&logoColor=white)](mailto:vlsi.shubh@gmail.com)
@@ -115,6 +115,7 @@ Petrocil Engineering • Mumbai, India
 - Scalable, synthesizable RTL design  
 
  
+
 
 
 
