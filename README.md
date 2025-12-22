@@ -1,11 +1,12 @@
 # Shubham Kapil Upadhyay
 
-**VLSI and Digital Design Engineer**  
+**Digital IC Design Engineer** _(RTL & FPGA/ASIC)_  
 MS in Electrical Engineering, Purdue University
 
-[![Email](https://img.shields.io/badge/Email-vlsi.shubh@gmail.com-blue?style=flat-square&logo=gmail&logoColor=white)](mailto:vlsi.shubh@gmail.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Shubham%20Upadhyay-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/shubhamupadhyay0804)
-[![Resume](https://img.shields.io/badge/Resume-View%20PDF-brightgreen?style=flat-square&logo=google-drive&logoColor=white)](https://drive.google.com/file/d/1ACpZX0AcyLUook0ImAcFcnWlYr8NrvXo/view?usp=sharing)
+[![Email](https://img.shields.io/badge/Email-vlsi.shubh@gmail.com-0A66C2?style=flat-square&logo=gmail&logoColor=white)](mailto:vlsi.shubh@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Shubham%20Upadhyay-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/shubhamupadhyay0804)
+[![Resume](https://img.shields.io/badge/Resume-View%20PDF-4C1?style=flat-square&logo=googledrive&logoColor=white)](https://drive.google.com/file/d/1ACpZX0AcyLUook0ImAcFcnWlYr8NrvXo/view?usp=sharing)
+[![Portfolio](https://img.shields.io/badge/Portfolio-View%20Portfolio-0A66C2?style=flat-square&logo=vercel&logoColor=white)](https://vlsi-shubh.vercel.app/)
 
  
 
@@ -114,6 +115,7 @@ Petrocil Engineering • Mumbai, India
 - Scalable, synthesizable RTL design  
 
  
+
 
 
 
