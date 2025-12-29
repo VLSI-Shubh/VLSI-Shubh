@@ -5,9 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Shubham Upadhyay | Digital IC Design Engineer (RTL & FPGA/ASIC Design)</title>
 
-<meta name="description" content="Shubham Upadhyay – Digital IC Design Engineer: RTL design, verification, synthesis, physical design, and FPGA projects."/>
-<meta property="og:title" content="Shubham Upadhyay | Digital IC Design Engineer (RTL &amp; FPGA/ASIC Design)"/>
-<meta property="og:description" content="RTL design, verification, synthesis, and physical implementation portfolio."/>
+<meta name="description"
+      content="Shubham Upadhyay – Digital IC Design Engineer: RTL design, verification, synthesis, physical design, and FPGA projects."/>
+<meta property="og:title"
+      content="Shubham Upadhyay | Digital IC Design Engineer (RTL &amp; FPGA/ASIC Design)"/>
+<meta property="og:description"
+      content="RTL design, verification, synthesis, and physical implementation portfolio."/>
 <meta property="og:type" content="website"/>
 <meta name="theme-color" content="#06B6D4"/>
 
@@ -15,13 +18,487 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
-<!-- External CSS -->
-<link rel="stylesheet" href="css/style.css"/>
+<style>
+  /* =============================
+     VLSI Theme
+     ============================= */
+  :root{
+    --space-900:#0A0E1F; --space-800:#0F1629;
+    --bg: var(--space-900);
+    --text:#E2E8F0; --heading:#F1F5F9; --muted:#94A3B8;
+
+    --accent:#06B6D4; --accent-2:#0EA5E9;
+    --accent-purple:#8B5CF6;
+
+    --card:rgba(15,22,41,.60);
+    --border:rgba(148,163,184,.15);
+    --shadow:0 28px 60px rgba(0,6,22,.55);
+    --glass-blur:12px;
+
+    --radius-md:16px; --radius-pill:9999px; --nav-h:70px;
+
+    --hover-glow: rgba(6,182,212,.40);
+    --glow:0 0 30px var(--hover-glow);
+
+    --easing:cubic-bezier(.2,.65,.2,1); --dur:280ms;
+    --hero-nudge: 22px;
+  }
+  @media (max-width:768px){ :root{ --hero-nudge: 14px; } }
+
+  html[data-theme="light"]{
+    --bg:#FFFFFF;
+    --text:#1E293B;
+    --heading:#0F172A;
+    --muted:#475569;
+
+    --accent:#0891B2;
+    --accent-2:#06B6D4;
+
+    --card: rgba(255,255,255,.75);
+    --border: rgba(0,0,0,.15);
+    --shadow: 0 18px 40px rgba(10,10,20,.12);
+    --hover-glow: rgba(8,145,178,.45);
+    --glow:0 0 36px var(--hover-glow);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html, body{
+    color:var(--text); background:var(--bg);
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    line-height:1.6; scroll-behavior:smooth;
+    text-rendering: optimizeLegibility;
+  }
+
+  html{ scroll-padding-top: var(--nav-h); }
+
+  h1,h2,h3{
+    font-family:"Space Grotesk", Inter, system-ui, sans-serif;
+    letter-spacing:.2px;
+    color:var(--heading);
+    font-weight:700;
+  }
+  a{ color:var(--accent); text-decoration:none; transition: filter var(--dur) var(--easing) }
+  a:hover{ filter: brightness(1.15) }
+  .container{ width:100%; max-width:1140px; margin:0 auto; padding:0 1.2rem }
+
+  /* Background gradients */
+  body{
+    position: relative;
+    background:
+      radial-gradient(1200px 700px at 50% -260px, rgba(6,182,212,.15), transparent 70%),
+      linear-gradient(180deg, #0A0E1F 0%, #0A0E1F 60%, #0D1323 100%);
+  }
+  html[data-theme="light"] body{
+    background:
+      radial-gradient(700px 450px at 80% -12%, rgba(6,182,212,.08), transparent 72%),
+      linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 60%);
+  }
+
+  nav, header, main, footer { position: relative; z-index: 1; }
+
+  /* =============================
+     HAMBURGER NAVIGATION
+     ============================= */
+  .nav-wrap{
+    position: fixed; top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    z-index: 1000; 
+    display:flex; align-items:center; 
+    background: transparent;
+    padding:.6rem 0;
+    transition: background 280ms var(--easing);
+  }
+  
+  body.nav-scrolled .nav-wrap{
+    background: linear-gradient(180deg, rgba(10,14,31,.95), rgba(15,22,41,.85));
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0,0,0,.3);
+  }
+
+  .nav-container{
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-brand{
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--heading);
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 1001;
+  }
+
+  .nav-controls{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    z-index: 1001;
+  }
+
+  /* Hamburger button */
+  .hamburger{
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    padding: 0;
+    z-index: 1001;
+  }
+
+  .hamburger span{
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--heading);
+    border-radius: 2px;
+    transition: all 280ms var(--easing);
+  }
+
+  .hamburger.active span:nth-child(1){
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger.active span:nth-child(2){
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3){
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile menu overlay */
+  .nav-menu{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(10,14,31,.98), rgba(15,22,41,.95));
+    backdrop-filter: blur(16px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 320ms var(--easing);
+    z-index: 999;
+    padding-top: var(--nav-h);
+  }
+
+  html[data-theme="light"] .nav-menu{
+    background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(248,250,252,.95));
+  }
+
+  .nav-menu.active{
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .nav-menu a{
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--heading);
+    padding: 0.75rem 2rem;
+    border-radius: 12px;
+    transition: all 280ms var(--easing);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .nav-menu a:hover{
+    background: rgba(6,182,212,.2);
+    color: var(--accent);
+    transform: translateX(5px);
+  }
+
+  /* Theme toggle button */
+  .theme-toggle{
+    width:40px; height:40px; display:flex; align-items:center; justify-content:center;
+    border:none; background:rgba(6,182,212,.15); color:var(--accent);
+    border-radius:50%; cursor:pointer;
+    transition: all var(--dur) var(--easing);
+  }
+  .theme-toggle:hover{ background:rgba(6,182,212,.25); transform:rotate(20deg) }
+  .theme-toggle svg{ width:20px; height:20px }
+
+  /* =============================
+     HERO SECTION
+     ============================= */
+  .hero{
+    min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:calc(var(--nav-h) + 2rem) 1.2rem 4rem; position: relative;
+  }
+  
+  .profile-image{
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    border: 4px solid var(--accent);
+    box-shadow: 0 8px 32px rgba(6,182,212,.4), 0 0 0 8px rgba(6,182,212,.1);
+    transition: all var(--dur) var(--easing);
+    background: var(--card);
+  }
+  
+  .profile-image:hover{
+    transform: scale(1.05);
+    box-shadow: 0 12px 40px rgba(6,182,212,.5), 0 0 0 12px rgba(6,182,212,.15);
+  }
+  
+  .profile-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .logo-name{
+    font-size:clamp(2rem, 5vw, 3.5rem); font-weight:800; margin-bottom:.3rem;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  .logo-subtitle{
+    font-size:1.2rem; color:var(--muted); margin-bottom:1.5rem; letter-spacing:1px; text-transform:uppercase;
+  }
+  .hero h2{
+    font-size:clamp(1.15rem, 2.5vw, 1.5rem); max-width:700px; color:var(--text); margin:0 auto 2rem; font-weight:500;
+  }
+
+  /* CTA buttons */
+  .cta-row{
+    display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; margin-bottom:3rem;
+  }
+  .btn{
+    display:inline-block; padding:.9rem 2rem; border-radius:var(--radius-md);
+    font-weight:600; background:linear-gradient(135deg, var(--accent), var(--accent-2));
+    color:#fff; border:none; cursor:pointer; transition: all var(--dur) var(--easing);
+    box-shadow: 0 6px 20px rgba(6,182,212,.35);
+  }
+  .btn:hover{ transform:translateY(-3px); box-shadow:0 10px 28px rgba(6,182,212,.5) }
+  .btn.outline{
+    background:transparent; color:var(--accent);
+    border:2px solid var(--accent); box-shadow:none;
+  }
+  .btn.outline:hover{ background:rgba(6,182,212,.10) }
+
+  /* Stats cards */
+  .stats-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+    gap:1.5rem; max-width:600px; margin:0 auto;
+  }
+  .stat-card{
+    background:var(--card); backdrop-filter:blur(var(--glass-blur));
+    border:1px solid var(--border); border-radius:var(--radius-md);
+    padding:1.5rem; text-align:center; box-shadow:var(--shadow);
+    transition: all var(--dur) var(--easing);
+  }
+  .stat-card:hover{ transform:translateY(-4px); box-shadow:var(--glow), var(--shadow) }
+  .stat-number{ font-size:2.5rem; font-weight:800; color:var(--accent); line-height:1 }
+  .stat-label{ margin-top:.5rem; color:var(--muted); font-size:.9rem; text-transform:uppercase; letter-spacing:.5px }
+
+  /* =============================
+     SECTIONS
+     ============================= */
+  section{
+    padding:5rem 0; position:relative; overflow:hidden;
+  }
+  .section-inner{ max-width:1140px; margin:0 auto; padding:0 1.2rem }
+  .section-title{
+    font-size:clamp(2rem, 4vw, 2.75rem); text-align:center; margin-bottom:3rem;
+  }
+
+  /* Card Grid */
+  .cards{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
+    gap:2rem;
+  }
+  .card{
+    background:var(--card); backdrop-filter:blur(var(--glass-blur));
+    border:1px solid var(--border); border-radius:var(--radius-md);
+    padding:1.8rem; box-shadow:var(--shadow);
+    transition: all var(--dur) var(--easing);
+  }
+  .card:hover{ transform:translateY(-6px); box-shadow:var(--glow), var(--shadow) }
+  .card h3{ margin-bottom:1rem; font-size:1.4rem }
+  .card p{ color:var(--muted) }
+
+  /* Project Images - FIXED FOR DESKTOP */
+  .project-image{
+    width:100%; 
+    height: 200px;
+    border-radius:12px; 
+    overflow:hidden; 
+    margin-bottom:1.2rem;
+    background: rgba(6,182,212,.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .project-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  /* Project metadata grid */
+  .project-meta{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:.8rem;
+    margin:1rem 0;
+  }
+  .metric-item{ text-align:center }
+  .metric-value{ font-weight:700; color:var(--accent); font-size:.95rem }
+  .metric-label{ font-size:.8rem; color:var(--muted); margin-top:.2rem }
+
+  /* Pills/Tags */
+  .pills{
+    display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1rem;
+  }
+  .pill{
+    display:inline-block; padding:.4rem .9rem; border-radius:var(--radius-pill);
+    background:rgba(6,182,212,.15); color:var(--accent);
+    font-size:.85rem; font-weight:500; border:1px solid rgba(6,182,212,.25);
+  }
+
+  /* Timeline for Experience */
+  .timeline{
+    max-width:900px; margin:0 auto; position:relative; padding-left:40px;
+  }
+  .timeline::before{
+    content:''; position:absolute; left:0; top:0; bottom:0; width:2px;
+    background:linear-gradient(180deg, transparent, var(--accent), transparent);
+  }
+  .timeline-item{
+    position:relative; padding-left:30px; margin-bottom:2.5rem;
+  }
+  .timeline-item::before{
+    content:''; position:absolute; left:-44px; top:12px;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--accent); border:3px solid var(--bg);
+    box-shadow: 0 0 0 4px rgba(6,182,212,.2);
+  }
+
+  /* Certifications Grid */
+  .cert-grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
+    gap:2rem;
+  }
+  .cert-card{
+    display:flex; flex-direction:column;
+  }
+  .cert-image{
+    width:100%; 
+    height:180px;
+    border-radius:12px; 
+    overflow:hidden; 
+    margin-bottom:1rem;
+    background: rgba(6,182,212,.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cert-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .cert-status{
+    font-size:.85rem; color:var(--muted); margin-bottom:.5rem; text-transform:uppercase; letter-spacing:.5px;
+  }
+  .cert-title{
+    font-size:1.15rem; margin-bottom:.75rem; line-height:1.4;
+  }
+  .cert-meta{
+    color:var(--muted); font-size:.95rem; line-height:1.6; flex-grow:1; margin-bottom:1rem;
+  }
+  .cert-tag{
+    display:inline-block; padding:.4rem .9rem; border-radius:var(--radius-pill);
+    background:rgba(139,92,246,.15); color:var(--accent-purple);
+    font-size:.85rem; font-weight:500; border:1px solid rgba(139,92,246,.25);
+  }
+
+  /* Reveal Animations */
+  .reveal{ opacity:1; transform:none; transition: opacity var(--dur) var(--easing), transform var(--dur) var(--easing) }
+  .reveal.is-hidden{ opacity:0; transform: translateY(40px) }
+  .reveal.is-visible{ opacity:1; transform:none }
+
+  /* Footer */
+  footer{ text-align:center; padding:2rem 1rem; color:var(--muted); border-top:1px solid var(--border) }
+
+  /* Go to Top Button */
+  .go-to-top{
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 6px 20px rgba(6,182,212,.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: all var(--dur) var(--easing);
+    z-index: 999;
+  }
+  .go-to-top.visible{
+    opacity: 1;
+    pointer-events: all;
+  }
+  .go-to-top:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(6,182,212,.5);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width:768px){
+    .stats-grid{ grid-template-columns: repeat(2, 1fr) }
+    .timeline{ padding-left:20px }
+    .timeline-item{ padding-left:20px }
+    .timeline-item::before{ left:-33px }
+  }
+
+  @media (max-width:600px){
+    .project-meta{ grid-template-columns: 1fr }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{ transition:none !important; animation:none !important }
+  }
+</style>
 </head>
 
 <body>
+  <!-- Skip link for accessibility -->
   <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:auto">Skip to content</a>
 
+  <!-- ======================================
+       NAVIGATION BAR (Hamburger Menu)
+       ====================================== -->
   <nav aria-label="Primary" class="nav-wrap">
     <div class="nav-container">
       <div class="nav-brand">Shubham Upadhyay</div>
@@ -36,6 +513,7 @@
     </div>
   </nav>
 
+  <!-- Mobile Menu Overlay -->
   <div class="nav-menu" id="navMenu">
     <a href="#home" class="nav-link">Home</a>
     <a href="#experience" class="nav-link">Experience</a>
@@ -45,19 +523,23 @@
     <a href="#contact" class="nav-link">Contact</a>
   </div>
 
+  <!-- ======================================
+       HEADER / HERO SECTION
+       ====================================== -->
   <header id="home" class="reveal">
     <div class="hero">
       <div class="profile-image">
         <img src="assets/profile/headshot.jpeg" alt="Shubham Upadhyay" loading="eager">
       </div>
       <div class="logo-name">Shubham Upadhyay</div>
-      <div class="logo-subtitle">Digital IC Design Engineer (RTL &amp; FPGA/ASIC Design)</div>
+     <div class="logo-subtitle">Digital IC Design Engineer (RTL &amp; FPGA/ASIC Design)</div>
       <h2>Crafting High-Performance Silicon from RTL to Tapeout</h2>
       <div class="cta-row">
         <a class="btn" href="#projects">View Projects</a>
         <a class="btn outline" href="https://github.com/VLSI-Shubh" target="_blank" rel="noopener">GitHub</a>
         <a class="btn outline" href="https://linkedin.com/in/shubhamupadhyay0804" target="_blank" rel="noopener">LinkedIn</a>
       </div>
+
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-number">15+</div>
@@ -77,14 +559,22 @@
 
   <main id="main">
 
+<!-- ======================================
+     PROJECTS SECTION
+     ====================================== -->
+
 <section id="projects" class="reveal">
   <div class="section-inner">
     <h2 class="section-title">Featured Projects</h2>
-    <div class="cards">
+    <div class="cards">      
 
+
+      <!-- NoC Router RTL2GDSII -->
       <article class="card">
         <div class="project-image">
-          <img src="assets/projects/noc-router.png" alt="Network-on-Chip router RTL to GDSII implementation" loading="lazy">
+          <img src="assets/projects/noc-router.png"
+               alt="Network-on-Chip router RTL to GDSII implementation"
+               loading="lazy">
         </div>
         <h3>NoC Router RTL2GDSII</h3>
         <p style="color:var(--muted); margin:.5rem 0">
@@ -114,9 +604,12 @@
           <span class="pill">Physical Design</span>
           <span class="pill">OpenROAD</span>
         </div>
-        <a class="btn outline" href="https://github.com/VLSI-Shubh/NoCRouter-RTL2GDSII" target="_blank" rel="noopener" style="margin-top:.5rem">View on GitHub →</a>
+        <a class="btn outline" href="https://github.com/VLSI-Shubh/NoCRouter-RTL2GDSII" target="_blank" rel="noopener" style="margin-top:.5rem">
+          View on GitHub →
+        </a>
       </article>
 
+      <!-- Round-Robin Arbiter -->
       <article class="card">
         <div class="project-image">
           <img src="assets/projects/rr-arbiter.png" alt="Round-robin arbiter waveforms" loading="lazy">
@@ -152,6 +645,7 @@
         <a class="btn outline" href="https://github.com/VLSI-Shubh/Round-Robin-Arbiter" target="_blank" rel="noopener" style="margin-top:.5rem">View on GitHub →</a>
       </article>
 
+      <!-- RISC-V 32I Processor -->
       <article class="card">
         <div class="project-image">
           <img src="assets/projects/riscv-core.png" alt="RISC-V 5-stage pipeline diagram" loading="lazy">
@@ -187,6 +681,7 @@
         <a class="btn outline" href="https://github.com/VLSI-Shubh/RISCV-32I-Processor" target="_blank" rel="noopener" style="margin-top:.5rem">View on GitHub →</a>
       </article>
 
+      <!-- Asynchronous FIFO -->
       <article class="card">
         <div class="project-image">
           <img src="assets/projects/async-fifo.png" alt="Asynchronous FIFO with dual clock domains" loading="lazy">
@@ -222,6 +717,7 @@
         <a class="btn outline" href="https://github.com/VLSI-Shubh/Asynchronous-FIFO" target="_blank" rel="noopener" style="margin-top:.5rem">View on GitHub →</a>
       </article>
 
+      <!-- Smart Traffic Controller FSM -->
       <article class="card">
         <div class="project-image">
           <img src="assets/projects/traffic-fsm.png" alt="Smart traffic controller state diagram" loading="lazy">
@@ -257,6 +753,7 @@
         <a class="btn outline" href="https://github.com/VLSI-Shubh/Smart-Traffic-Controller-FSM" target="_blank" rel="noopener" style="margin-top:.5rem">View on GitHub →</a>
       </article>
 
+      <!-- Synchronous FIFO -->
       <article class="card">
         <div class="project-image">
           <img src="assets/projects/sync-fifo.png" alt="Synchronous FIFO block diagram" loading="lazy">
@@ -292,6 +789,7 @@
         <a class="btn outline" href="https://github.com/VLSI-Shubh/Synchronous-FIFO" target="_blank" rel="noopener" style="margin-top:.5rem">View on GitHub →</a>
       </article>
 
+      <!-- Dual-Port SRAM -->
       <article class="card">
         <div class="project-image">
           <img src="assets/projects/sram.png" alt="Dual-port SRAM architecture" loading="lazy">
@@ -327,6 +825,7 @@
         <a class="btn outline" href="https://github.com/VLSI-Shubh/SRAM" target="_blank" rel="noopener" style="margin-top:.5rem">View on GitHub →</a>
       </article>
 
+      <!-- 8×8 Dadda Multiplier -->
       <article class="card">
         <div class="project-image">
           <img src="assets/projects/dadda-multiplier.png" alt="8x8 Dadda multiplier reduction tree" loading="lazy">
@@ -362,6 +861,7 @@
         <a class="btn outline" href="https://github.com/VLSI-Shubh/Delay-and-Power-Analysis-of-a-Static-8x8-Dadda-Multiplier-Circuit" target="_blank" rel="noopener" style="margin-top:.5rem">View on GitHub →</a>
       </article>
 
+      <!-- Linear Feedback Shift Register -->
       <article class="card">
         <div class="project-image">
           <img src="assets/projects/lfsr.png" alt="LFSR feedback taps diagram" loading="lazy">
@@ -397,6 +897,7 @@
         <a class="btn outline" href="https://github.com/VLSI-Shubh/Linear-Feedback-Shift-Register-LFSR-" target="_blank" rel="noopener" style="margin-top:.5rem">View on GitHub →</a>
       </article>
 
+      <!-- ESP32 Multi-Sensor IoT Edge-to-Cloud System -->
       <article class="card">
         <div class="project-image">
           <img src="assets/projects/esp32_iot.png" alt="ESP32 IoT edge-to-cloud system architecture" loading="lazy">
@@ -432,9 +933,12 @@
           <span class="pill">Linux</span>
           <span class="pill">IoT</span>
         </div>
-        <button class="btn outline" style="margin-top:.5rem" disabled>Project under NDA</button>
+        <button class="btn outline" style="margin-top:.5rem" disabled>
+        Project under NDA
+        </button>
       </article>
 
+      <!-- Sorting Algorithm Visualizer (Python) -->
       <article class="card">
         <div class="project-image">
           <img src="assets/projects/sorting-visualizer.png" alt="Sorting algorithm visualization" loading="lazy">
@@ -469,14 +973,20 @@
         <a class="btn outline" href="https://github.com/VLSI-Shubh/Sorting-Algorithm-Visualizer-in-Python" target="_blank" rel="noopener" style="margin-top:.5rem">View on GitHub →</a>
       </article>
 
+
+
     </div>
   </div>
 </section>
 
+    <!-- ======================================
+         SKILLS SECTION
+         ====================================== -->
     <section id="skills" class="reveal">
       <div class="section-inner">
         <h2 class="section-title">Technical Skills</h2>
         <div class="cards">
+
           <div class="card">
             <h3>Hardware Description Languages</h3>
             <div class="pills">
@@ -485,6 +995,7 @@
               <span class="pill">VHDL</span>
             </div>
           </div>
+
           <div class="card">
             <h3>RTL Design</h3>
             <div class="pills">
@@ -496,6 +1007,7 @@
               <span class="pill">Arithmetic Units</span>
             </div>
           </div>
+
           <div class="card">
             <h3>Verification</h3>
             <div class="pills">
@@ -506,6 +1018,7 @@
               <span class="pill">Waveform Debug</span>
             </div>
           </div>
+
           <div class="card">
             <h3>Synthesis & Timing</h3>
             <div class="pills">
@@ -517,6 +1030,7 @@
               <span class="pill">CTS</span>
             </div>
           </div>
+
           <div class="card">
             <h3>Physical Design</h3>
             <div class="pills">
@@ -528,6 +1042,7 @@
               <span class="pill">IR Drop</span>
             </div>
           </div>
+
           <div class="card">
             <h3>EDA Tools</h3>
             <div class="pills">
@@ -540,6 +1055,7 @@
               <span class="pill">Verdi</span>
             </div>
           </div>
+
           <div class="card">
             <h3>Design for Test</h3>
             <div class="pills">
@@ -550,6 +1066,7 @@
               <span class="pill">Fault Simulation</span>
             </div>
           </div>
+
           <div class="card">
             <h3>Scripting & Automation</h3>
             <div class="pills">
@@ -562,6 +1079,7 @@
               <span class="pill">CI/CD</span>
             </div>
           </div>
+
           <div class="card">
             <h3>Bus Protocols</h3>
             <div class="pills">
@@ -573,6 +1091,7 @@
               <span class="pill">I2C</span>
             </div>
           </div>
+
           <div class="card">
             <h3>FPGA Platforms</h3>
             <div class="pills">
@@ -582,16 +1101,18 @@
               <span class="pill">FPGA Debug</span>
             </div>
           </div>
+
           <div class="card">
             <h3>Embedded Firmware</h3>
-            <div class="pills">
-              <span class="pill">C/C++</span>
-              <span class="pill">Embedded C</span>
-              <span class="pill">ESP32</span>
-              <span class="pill">Interrupts</span>
-              <span class="pill">LittleFS</span>
+              <div class="pills">
+                <span class="pill">C/C++</span>
+                <span class="pill">Embedded C</span>
+                <span class="pill">ESP32</span>
+                <span class="pill">Interrupts</span>
+                <span class="pill">LittleFS</span>
+              </div>
             </div>
-          </div>
+
           <div class="card">
             <h3>RTOS & Connectivity</h3>
             <div class="pills">
@@ -603,6 +1124,7 @@
               <span class="pill">WebSockets</span>
             </div>
           </div>
+
           <div class="card">
             <h3>Sensors</h3>
             <div class="pills">
@@ -611,12 +1133,16 @@
               <span class="pill">BME280</span>
               <span class="pill">DS18B20</span>
               <span class="pill">DHT22</span>
+              <span class="pill">BME280</span>
               <span class="pill">BMP280</span>
+              <span class="pill">MPU6050</span>
               <span class="pill">BH1750</span>
               <span class="pill">HC-SR04</span>
               <span class="pill">INA219</span>
+              <span class="pill">DHT22</span>
             </div>
           </div>
+
           <div class="card">
             <h3>Debugging & Deployment</h3>
             <div class="pills">
@@ -628,9 +1154,15 @@
               <span class="pill">Linux</span>
             </div>
           </div>
+
         </div>
       </div>
     </section>
+
+
+    <!-- ======================================
+         EXPERIENCE SECTION
+         ====================================== -->
 
     <section id="experience" class="reveal">
       <div class="section-inner">
@@ -648,6 +1180,7 @@
               </ul>
             </div>
           </div>
+
           <div class="timeline-item">
             <div class="card">
               <h3>Graduate Teaching Assistant – EPICS</h3>
@@ -661,6 +1194,7 @@
               </ul>
             </div>
           </div>
+
           <div class="timeline-item">
             <div class="card">
               <h3>Engineering Intern</h3>
@@ -673,6 +1207,7 @@
               </ul>
             </div>
           </div>
+
           <div class="timeline-item">
             <div class="card">
               <h3>Junior Electrical Manager</h3>
@@ -685,6 +1220,7 @@
               </ul>
             </div>
           </div>
+
           <div class="timeline-item">
             <div class="card">
               <h3>Senior Electrical Design Engineer</h3>
@@ -701,13 +1237,24 @@
       </div>
     </section>
 
+
+
+    <!-- ======================================
+         CERTIFICATIONS SECTION
+         Reordered: Cadence → Udemy → LinkedIn
+         ====================================== -->
     <section id="certifications" class="reveal">
       <div class="section-inner">
         <h2 class="section-title">Certifications</h2>
         <p style="font-size:1.05rem; color:var(--muted); max-width:640px; margin:0 auto 2rem;">
           Selected coursework and industry training across computer architecture, RISC-V, Git, RTL design, and Cadence flows.
         </p>
+
         <div class="cert-grid">
+
+          <!-- CADENCE CERTIFICATIONS FIRST -->
+          
+          <!-- Cadence – RTL to GDSII -->
           <article class="card cert-card">
             <div class="cert-image">
               <img src="assets/certifications/cadence-rtl-gds.png" alt="Cadence RTL-to-GDSII Flow certificate" loading="lazy">
@@ -719,6 +1266,8 @@
             </div>
             <span class="cert-tag">Physical Design Flow</span>
           </article>
+
+          <!-- Cadence – Digital Design and Signoff -->
           <article class="card cert-card">
             <div class="cert-image">
               <img src="assets/certifications/cadence-signoff.png" alt="Digital Design and Signoff certificate" loading="lazy">
@@ -730,6 +1279,10 @@
             </div>
             <span class="cert-tag">Digital Signoff</span>
           </article>
+
+          <!-- UDEMY CERTIFICATIONS -->
+          
+          <!-- Udemy STA 1 -->
           <article class="card cert-card">
             <div class="cert-image">
               <img src="assets/certifications/udemy-sta1.png" alt="Static Timing Analysis-1 (VSD)" loading="lazy">
@@ -741,6 +1294,8 @@
             </div>
             <span class="cert-tag">Static Timing Analysis</span>
           </article>
+          
+          <!-- Udemy Verilog HDL_VLSI Hardware Design Comprehensive Masterclass -->
           <article class="card cert-card">
             <div class="cert-image">
               <img src="assets/certifications/udemy-hdl.png" alt="Verilog HDL_VLSI Hardware Design Comprehensive Masterclass" loading="lazy">
@@ -752,6 +1307,10 @@
             </div>
             <span class="cert-tag">Verilog · HDL</span>
           </article>
+
+          <!-- LINKEDIN CERTIFICATIONS -->
+          
+          <!-- LinkedIn – Computer Architecture -->
           <article class="card cert-card">
             <div class="cert-image">
               <img src="assets/certifications/linkedin-arch.png" alt="Computer Architecture Essentials certificate" loading="lazy">
@@ -763,6 +1322,8 @@
             </div>
             <span class="cert-tag">Computer Architecture</span>
           </article>
+
+          <!-- LinkedIn – RISC-V -->
           <article class="card cert-card">
             <div class="cert-image">
               <img src="assets/certifications/linkedin-riscv.png" alt="Getting Started with RISC-V certificate" loading="lazy">
@@ -774,6 +1335,8 @@
             </div>
             <span class="cert-tag">RISC-V</span>
           </article>
+
+          <!-- LinkedIn – Git -->
           <article class="card cert-card">
             <div class="cert-image">
               <img src="assets/certifications/linkedin-git.png" alt="Git Essential Training certificate" loading="lazy">
@@ -785,6 +1348,8 @@
             </div>
             <span class="cert-tag">Git / GitHub</span>
           </article>
+
+          <!-- LinkedIn – Perl -->
           <article class="card cert-card">
             <div class="cert-image">
               <img src="assets/certifications/linkedin-perl.png" alt="Perl 5 Essential Training certificate" loading="lazy">
@@ -796,6 +1361,8 @@
             </div>
             <span class="cert-tag">Perl · Scripting</span>
           </article>
+
+          <!-- LinkedIn – Verilog -->
           <article class="card cert-card">
             <div class="cert-image">
               <img src="assets/certifications/linkedin-verilog.png" alt="Learning Verilog for FPGA Development certificate" loading="lazy">
@@ -807,10 +1374,17 @@
             </div>
             <span class="cert-tag">Verilog · FPGA</span>
           </article>
+
         </div>
       </div>
     </section>
 
+
+
+
+    <!-- ======================================
+         CONTACT SECTION
+         ====================================== -->
     <section id="contact" class="reveal">
       <div class="section-inner">
         <h2 class="section-title">Get In Touch</h2>
@@ -835,9 +1409,117 @@
     <p>&copy; 2025 Shubham Upadhyay. All rights reserved.</p>
   </footer>
 
+  <!-- Go to Top Button -->
   <button class="go-to-top" id="goToTop" aria-label="Go to top">↑</button>
 
-  <!-- External JavaScript -->
-  <script src="js/script.js"></script>
+  <script>
+    // Reveal-on-scroll animations
+    const reveals = document.querySelectorAll(".reveal");
+    if ('IntersectionObserver' in window) {
+      reveals.forEach(el => el.classList.add('is-hidden'));
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.05 });
+      reveals.forEach(el => io.observe(el));
+    }
+
+    // Theme toggle: System → Dark → Light
+    (function(){
+      const btn = document.getElementById('themeToggle');
+      const root = document.documentElement;
+      const KEY = 'themePreference';
+
+      const icons = {
+        system:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"></rect><line x1="8" y1="22" x2="16" y2="22"></line><line x1="12" y1="18" x2="12" y2="22"></line></svg>`,
+        dark:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`,
+        light:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`
+      };
+
+      const sysPrefersDark = () => window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const load = () => { try { return localStorage.getItem(KEY) || 'system'; } catch { return 'system'; } };
+      const save = v => { try { localStorage.setItem(KEY, v); } catch {} };
+      const next = v => v==='system' ? 'dark' : v==='dark' ? 'light' : 'system';
+
+      function apply(pref){
+        const theme = pref === 'system' ? (sysPrefersDark() ? 'dark' : 'light') : pref;
+        root.setAttribute('data-theme', theme);
+        btn.innerHTML = icons[pref] || icons.system;
+        btn.setAttribute('aria-label', `Theme: ${pref}`);
+      }
+
+      let pref = load();
+      apply(pref);
+      btn.addEventListener('click', () => {
+        pref = next(pref);
+        save(pref);
+        apply(pref);
+      });
+
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+      mq.addEventListener?.('change', () => { if (load()==='system') apply('system'); });
+    })();
+
+    // Hamburger menu toggle
+    (function(){
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('navMenu');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+      });
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          navMenu.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      });
+    })();
+
+    // Smart sticky nav (shows/hides navbar background on scroll)
+    (function(){
+      let lastY = window.scrollY || 0;
+      const body = document.body;
+
+      const onScroll = () => {
+        const y = window.scrollY || 0;
+        if (y > 8) body.classList.add('nav-scrolled');
+        else body.classList.remove('nav-scrolled');
+        lastY = y;
+      };
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    // Go to Top button
+    (function(){
+      const goToTopBtn = document.getElementById('goToTop');
+      
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+          goToTopBtn.classList.add('visible');
+        } else {
+          goToTopBtn.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      goToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
