@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Blog | Shubham Upadhyay - VLSI Design</title>
+
+<meta name="description" content="Technical blog posts about VLSI design, RTL, verification, and hardware engineering"/>
+<meta property="og:title" content="Blog | Shubham Upadhyay"/>
+<meta property="og:description" content="VLSI Design Blog - RTL, Verification, Physical Design"/>
+<meta property="og:type" content="website"/>
+<meta name="theme-color" content="#06B6D4"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Portfolio CSS -->
+<link rel="stylesheet" href="../css/style.css"/>
+
+<!-- Blog listing specific styles -->
+<style>
+  .blog-listing {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: calc(var(--nav-h) + 3rem) 1.5rem 4rem;
+  }
+  
+  .blog-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
+  .blog-header h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: 1rem;
+    color: var(--heading);
+  }
+  
+  .blog-header p {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .blog-posts {
+    display: grid;
+    gap: 2rem;
+  }
+  
+  .blog-post-card {
+    background: var(--card);
+    backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    transition: all var(--dur) var(--easing);
+    text-decoration: none;
+    display: block;
+  }
+  
+  .blog-post-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--glow), var(--shadow);
+  }
+  
+  .post-date {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .post-date::before {
+    content: "📅";
+  }
+  
+  .post-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--heading);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+  
+  .post-excerpt {
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+  
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .post-tag {
+    display: inline-block;
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--radius-pill);
+    background: rgba(6,182,212,.15);
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid rgba(6,182,212,.25);
+  }
+  
+  .read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  
+  .read-more::after {
+    content: "→";
+    transition: transform var(--dur) var(--easing);
+  }
+  
+  .blog-post-card:hover .read-more::after {
+    transform: translateX(5px);
+  }
+  
+  .no-posts {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--muted);
+  }
+  
+  .no-posts h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--heading);
+  }
+</style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav aria-label="Primary" class="nav-wrap">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="../index.html" style="color: var(--heading); text-decoration: none;">Shubham Upadhyay</a>
+      </div>
+      <div class="nav-controls">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme"></button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="nav-menu" id="navMenu">
+    <a href="../index.html#home" class="nav-link">Home</a>
+    <a href="../index.html#experience" class="nav-link">Experience</a>
+    <a href="../index.html#projects" class="nav-link">Projects</a>
+    <a href="../index.html#skills" class="nav-link">Skills</a>
+    <a href="../index.html#certifications" class="nav-link">Certifications</a>
+    <a href="../blog/" class="nav-link">Blog</a>
+    <a href="../index.html#contact" class="nav-link">Contact</a>
+  </div>
+
+  <!-- Blog Listing -->
+  <main class="blog-listing">
+    <header class="blog-header">
+      <h1>Blog</h1>
+      <p>Thoughts on VLSI design, RTL, verification, and hardware engineering</p>
+    </header>
+
+    <div class="blog-posts">
+      
+      <!-- Blog Post 1: HDLs Are NOT Programming Languages -->
+      <a href="posts/hdl-vs-programming/" class="blog-post-card">
+        <div class="post-date">December 30, 2024</div>
+        <h2 class="post-title">HDLs Are NOT Programming Languages!</h2>
+        <p class="post-excerpt">
+          Demystifying a common misunderstanding among students entering VLSI. Learn the fundamental differences between Hardware Description Languages and Programming Languages, from syntax to execution models.
+        </p>
+        <div class="post-tags">
+          <span class="post-tag">HDL</span>
+          <span class="post-tag">Verilog</span>
+          <span class="post-tag">Programming</span>
+          <span class="post-tag">Beginner</span>
+        </div>
+        <span class="read-more">Read More</span>
+      </a>
+
+      <!-- Blog Post 2: Add your next post here -->
+      <!-- 
+      <a href="posts/your-next-post/" class="blog-post-card">
+        <div class="post-date">January 5, 2025</div>
+        <h2 class="post-title">Your Next Blog Title</h2>
+        <p class="post-excerpt">
+          Brief description of your next blog post...
+        </p>
+        <div class="post-tags">
+          <span class="post-tag">RTL</span>
+          <span class="post-tag">Design</span>
+        </div>
+        <span class="read-more">Read More</span>
+      </a>
+      -->
+
+      <!-- Blog Post 3: Template for future posts -->
+      <!-- 
+      <a href="posts/post-slug/" class="blog-post-card">
+        <div class="post-date">Month Day, Year</div>
+        <h2 class="post-title">Post Title</h2>
+        <p class="post-excerpt">
+          2-3 sentence excerpt...
+        </p>
+        <div class="post-tags">
+          <span class="post-tag">Tag1</span>
+          <span class="post-tag">Tag2</span>
+        </div>
+        <span class="read-more">Read More</span>
+      </a>
+      -->
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer style="text-align:center; padding:2rem 1rem; color:var(--muted); border-top:1px solid var(--border); margin-top: 3rem;">
+    <p>&copy; 2025 Shubham Upadhyay. All rights reserved.</p>
+  </footer>
+
+  <!-- Go to Top Button -->
+  <button class="go-to-top" id="goToTop" aria-label="Go to top">↑</button>
+  
+  <!-- JavaScript -->
+  <script src="../js/script.js"></script>
+</body>
+</html>

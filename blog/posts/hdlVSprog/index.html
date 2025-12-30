@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Why HDL Is Not Programming | Shubham Upadhyay</title>
+
+<meta name="description" content="Why HDL Is Not Programming - VLSI Design Blog"/>
+<meta property="og:title" content="Why HDL Is Not Programming"/>
+<meta property="og:type" content="article"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Portfolio CSS -->
+<link rel="stylesheet" href="../css/style.css"/>
+
+<!-- Blog-specific styles -->
+<style>
+  .blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: calc(var(--nav-h) + 3rem) 1.5rem 4rem;
+  }
+
+  .blog-header {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .blog-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 1rem;
+    color: var(--heading);
+  }
+
+  .blog-meta {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .blog-content {
+    line-height: 1.8;
+    color: var(--text);
+  }
+
+  .blog-content h1 {
+    font-size: 2rem;
+    margin: 2.5rem 0 1rem;
+    color: var(--heading);
+  }
+
+  .blog-content h2 {
+    font-size: 1.6rem;
+    margin: 2rem 0 1rem;
+    color: var(--heading);
+  }
+
+  .blog-content h3 {
+    font-size: 1.3rem;
+    margin: 1.5rem 0 0.75rem;
+    color: var(--heading);
+  }
+
+  .blog-content p {
+    margin-bottom: 1.25rem;
+  }
+
+  .blog-content ul, .blog-content ol {
+    margin: 1rem 0 1.5rem 2rem;
+  }
+
+  .blog-content li {
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-content code {
+    background: rgba(6,182,212,.15);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--accent);
+  }
+
+  .blog-content pre {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+  .blog-content pre code {
+    background: none;
+    padding: 0;
+    color: var(--text);
+  }
+
+  .blog-content blockquote {
+    border-left: 4px solid var(--accent);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .blog-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin: 2rem 0;
+  }
+
+  .blog-content a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .back-button {
+    display: inline-block;
+    margin-top: 3rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--heading);
+    text-decoration: none;
+    transition: all var(--dur) var(--easing);
+  }
+
+  .back-button:hover {
+    background: rgba(6,182,212,.1);
+    transform: translateX(-3px);
+  }
+</style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav aria-label="Primary" class="nav-wrap">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="../index.html" style="color: var(--heading); text-decoration: none;">Shubham Upadhyay</a>
+      </div>
+      <div class="nav-controls">
+        <a href="../blog/" class="btn outline" style="font-size: 0.9rem; padding: 0.5rem 1rem;">← All Posts</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Blog Post -->
+  <main class="blog-post">
+    <header class="blog-header">
+      <h1 class="blog-title">Why HDL Is Not Programming</h1>
+      <p class="blog-meta">Published on December 30, 2025</p>
+    </header>
+
+    <article class="blog-content">
+<p align="center">
+<img src="assets/banner.png" alt="HDL vs Programming Languages" width="50%">
+</p>
+<p>This blog is about <em>demystifying</em> a very common
+misunderstanding that a lot of students have when entering the field of
+<strong>VLSI</strong>, especially when they come across <strong>HDLs
+(Hardware Description Languages)</strong>.</p>
+<p>And it’s not entirely their fault. Across the world, whenever someone
+hears the word <em>“language”</em>, especially in a tech context, people
+tend to associate it with programming languages, the most common being
+<strong>Python</strong>, <strong>C</strong>, or <strong>C++</strong>
+(not that other languages like <strong>Rust</strong> or
+<strong>Java</strong> are unpopular).<br />
+<a
+href="https://en.wikipedia.org/wiki/C_(programming_language)">Wikipedia:
+C influences Python/Java syntax</a></p>
+<p>Because of that common usage of the word <em>language</em> in the
+context of programming, many assume that <strong>HDLs</strong> are also
+just another kind of programming language.</p>
+<p>But that’s not the case, and in this blog, I’ll try to clarify
+why.</p>
+<h3 id="syntax-similarity-but-conceptual-difference">1. Syntax
+Similarity but Conceptual Difference</h3>
+<p>The biggest <strong>commonality</strong> between any programming
+language and an HDL is the <em>syntax</em>.<br />
+When one starts learning HDL, especially <strong>Verilog</strong>, they
+often find it quite similar to <strong>C</strong>, and that’s true to an
+extent. The syntax is indeed somewhat similar, but the
+<strong>purpose</strong> and <strong>functionality</strong> of these
+languages are fundamentally different.<br />
+<a
+href="https://www.geeksforgeeks.org/software-engineering/difference-between-hardware-description-language-and-software-language/">GeeksforGeeks
+HDL vs Software comparison</a></p>
+<p>A programming language needs existing hardware to compile and run on,
+whereas <strong>HDL</strong> is the language that <em>describes</em> or
+even <em>creates</em> that very hardware.<br />
+<a
+href="https://www.allaboutcircuits.com/technical-articles/what-is-a-hardware-description-language-hdl/">AllAboutCircuits
+HDL explainer</a></p>
+<h3 id="output-programs-vs.-circuits">2. Output: Programs
+vs. Circuits</h3>
+<p>In terms of output, programming languages can produce many kinds of
+results, from a simple <code>print("Hello World")</code> statement to
+complex data structures or algorithms.<br />
+On the other hand, the output of an HDL is a <strong>circuit</strong>,
+or at least that is the ultimate goal.</p>
+<h3 id="verilog-vs-c-a-direct-comparison">Verilog vs C: A Direct
+Comparison</h3>
+<div
+style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0;">
+<div
+style="background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem;">
+<p><strong>Verilog (Hardware Description)</strong></p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> and_gate <span class="op">(</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span>  <span class="dt">wire</span> a<span class="op">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span>  <span class="dt">wire</span> b<span class="op">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> <span class="dt">wire</span> y</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">assign</span> y <span class="op">=</span> a <span class="op">&amp;</span> b<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span></code></pre></div>
+<p><em>Describes a physical AND gate that exists continuously in
+hardware.</em></p>
+</div>
+<div
+style="background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem;">
+<p><strong>C (Programming Language)</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> b <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> y <span class="op">=</span> a <span class="op">&amp;</span> b<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> y<span class="op">);</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><em>Executes instructions to compute a value at runtime.</em></p>
+</div>
+</div>
+<style>
+@media (max-width: 850px) {
+  div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+</style>
+<p>As you can see, Verilog describes hardware while C describes
+sequential instructions.</p>
+<p>Not every HDL code can be directly turned into a circuit. That step
+is known as <strong>synthesis</strong>. If written carefully, the output
+of an HDL describes an actual circuit that breaks down into
+<strong>gates</strong>, <strong>multiplexers</strong>,
+<strong>latches</strong>, and <strong>flip-flops</strong>, which can,
+with proper tools, be further decomposed down to <strong>transistors
+(PMOS and NMOS)</strong> and beyond.<br />
+<a
+href="https://resources.pcb.cadence.com/blog/2020-hardware-description-languages-vhdl-vs-verilog-and-their-functional-uses">Cadence
+PCB HDL synthesis</a></p>
+<p>These circuits are what make up the chips used in everyday devices,
+from smartphones to cars and much more.</p>
+<h3 id="language-levels-high-and-low">3. Language Levels: High and
+Low</h3>
+<p>One of the most significant differences between programming languages
+and HDLs lies in the concept of <strong>language levels</strong>.</p>
+<p>Programming languages are categorized as <em>high-level</em> or
+<em>low-level</em> based on how easily the machine can break them down
+to execute the desired tasks.<br />
+At the lowest level, we have <strong>assembly language</strong>, which
+directly corresponds to the instruction set architecture of a given
+machine, and <strong>machine code</strong>, which the hardware
+understands without any further translation.</p>
+<p>Then comes <strong>C</strong>, one of the most popular and
+foundational languages of all.</p>
+<p><a href="https://www.tiobe.com/tiobe-index/">C ranks #2 on the TIOBE
+Index (9.29% share as of Oct 2025), powering firmware worldwide and
+available on virtually all architectures.</a></p>
+<p>C is often regarded as the <em>mother of all programming
+languages</em> because it strikes a balance. It is high-level enough to
+be human-readable, yet close enough to hardware that the compiled code
+runs efficiently without requiring heavy translation.</p>
+<p>That’s why a lot of <strong>firmware</strong> and <strong>embedded
+programming</strong> is written in C. It sits at the borderline between
+high-level and low-level, allowing direct hardware interactions,
+something not easily possible with languages like Python or Java.<br />
+<a href="https://www.youtube.com/watch?v=bUWCD45qniA">Low vs High-Level
+explanation video (2 min)</a></p>
+<p>Python, Java, and other modern programming languages are much more
+human-readable, but it takes a lot more computational resources to
+compile and execute them efficiently.</p>
+<h3 id="why-hdl-matters-for-software-engineers">4. Why HDL Matters for
+Software Engineers</h3>
+<p>A major misconception among many software developers is that HDL
+isn’t relevant to them. I strongly disagree.</p>
+<p>Just as RTL engineers benefit from knowing programming languages,
+software engineers can benefit from understanding HDLs.<br />
+With the recent trends in <strong>AI</strong> and the <strong>shortage
+of RAM</strong> in the market, efficiency is becoming increasingly
+important. Companies are optimizing their codebases to use less RAM and
+hardware resources, and a solid grasp of hardware description concepts
+can make a big difference.<br />
+<a href="https://www.sigarch.org/hdl-to-adl/">SIGARCH HDL for AI
+accelerators</a></p>
+<h3 id="execution-parallel-vs.-sequential">5. Execution: Parallel
+vs. Sequential</h3>
+<p>One of the most crucial differences between programming languages and
+HDLs is in their <strong>execution model</strong>.<br />
+HDLs are <strong>parallel</strong> by nature, whereas programming
+languages are typically <strong>sequential</strong>.</p>
+<p>What does this mean?</p>
+<p>In HDL, all lines of code are effectively active at the same time. If
+there are 100 lines of code, line 1 and line 100 start executing
+simultaneously at time <code>t = 0</code>. The difference lies only in
+how and when their outputs are processed, depending on the circuit’s
+behavior.</p>
+<p>That’s also why <strong>clock signals</strong> play such a critical
+role in HDLs. Timing governs how data moves through the hardware.</p>
+<p>Programming languages, on the other hand, execute instructions
+sequentially. Line 1 runs before line 2, and so on.<br />
+Although at a superficial level it might seem parallel due to features
+like multitasking, the underlying hardware still executes instructions
+one after another, sometimes leveraging concepts like
+<strong>pipelining</strong> or <strong>out-of-order execution</strong>,
+which again come from hardware design principles.<br />
+<a
+href="https://www.geeksforgeeks.org/software-engineering/difference-between-hardware-description-language-and-software-language/">GeeksforGeeks
+parallel vs sequential table</a></p>
+<h3 id="hdl-vs.-programming-the-pasta-burner-example">HDL
+vs. Programming: The Pasta Burner Example</h3>
+<p>Let’s wrap this up with a simple analogy.</p>
+<p>Think of HDL like cooking pasta using all four burners on a gas stove
+at once. One burner for the pasta, one for the sauce, one for the broth,
+and one for something else (I’m honestly not that great at cooking).</p>
+<p>A programming language, on the other hand, is like cooking on a
+single burner. You have to boil the water first before adding the pasta.
+If you add the pasta before the water boils, you’ll just end up burning
+it.</p>
+<p>I hope I was able to explain the basics of the difference between
+pasta… ohh sorry, <strong>programming languages</strong> and
+<strong>HDLs</strong>.</p>
+<p>I’ll be back soon with another topic like this. Hope to see you
+again.</p>
+
+    </article>
+
+    <a href="../blog/" class="back-button">← Back to All Posts</a>
+  </main>
+
+  <!-- Footer -->
+  <footer style="text-align:center; padding:2rem 1rem; color:var(--muted); border-top:1px solid var(--border); margin-top: 3rem;">
+    <p>&copy; 2025 Shubham Upadhyay. All rights reserved.</p>
+  </footer>
+
+  <!-- Go to Top Button -->
+  <button class="go-to-top" id="goToTop" aria-label="Go to top">↑</button>
+
+  <!-- JavaScript -->
+  <script src="../js/script.js"></script>
+</body>
+</html>
