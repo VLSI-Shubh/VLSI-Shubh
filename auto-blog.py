@@ -75,11 +75,7 @@ def create_blog_post(folder_path):
     # 3. Get current date
     current_date = datetime.now().strftime("%B %d, %Y")
 
-    # 4. Calculate relative path to root (for CSS/JS links)
-    depth = folder_path.count("/") - 1  # blog/posts/name = 2 levels deep
-    root_path = "../" * depth
-
-    # 5. Wrap in portfolio template
+    # 4. Wrap in portfolio template (ALL ABSOLUTE PATHS)
     wrapped_html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,8 +91,8 @@ def create_blog_post(folder_path):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
-<!-- Portfolio CSS -->
-<link rel="stylesheet" href="{root_path}css/style.css"/>
+<!-- Portfolio CSS (ABSOLUTE PATH) -->
+<link rel="stylesheet" href="/css/style.css"/>
 
 <!-- Blog-specific styles -->
 <style>
@@ -225,10 +221,10 @@ def create_blog_post(folder_path):
   <nav aria-label="Primary" class="nav-wrap">
     <div class="nav-container">
       <div class="nav-brand">
-        <a href="{root_path}index.html" style="color: var(--heading); text-decoration: none;">Shubham Upadhyay</a>
+        <a href="/index.html" style="color: var(--heading); text-decoration: none;">Shubham Upadhyay</a>
       </div>
       <div class="nav-controls">
-        <a href="{root_path}blog/" class="btn outline" style="font-size: 0.9rem; padding: 0.5rem 1rem;">← All Posts</a>
+        <a href="/blog/" class="btn outline" style="font-size: 0.9rem; padding: 0.5rem 1rem;">← All Posts</a>
       </div>
     </div>
   </nav>
@@ -244,7 +240,7 @@ def create_blog_post(folder_path):
 {content}
     </article>
 
-    <a href="{root_path}blog/" class="back-button">← Back to All Posts</a>
+    <a href="/blog/" class="back-button">← Back to All Posts</a>
   </main>
 
   <!-- Footer -->
@@ -255,20 +251,20 @@ def create_blog_post(folder_path):
   <!-- Go to Top Button -->
   <button class="go-to-top" id="goToTop" aria-label="Go to top">↑</button>
 
-  <!-- JavaScript -->
-  <script src="{root_path}js/script.js"></script>
+  <!-- JavaScript (ABSOLUTE PATH) -->
+  <script src="/js/script.js"></script>
 </body>
 </html>"""
 
-    # 6. Save as index.html in SAME folder
+    # 5. Save as index.html in SAME folder
     output_file = os.path.join(folder_path, "index.html")
     with open(output_file, "w", encoding="utf-8") as f:
         f.write(wrapped_html)
 
-    # 7. Cleanup temp file
+    # 6. Cleanup temp file
     os.remove(temp_html)
 
-    # 8. Success message
+    # 7. Success message
     print("\nBlog post created successfully!")
     print(f"  Markdown: {markdown_file}")
     print(f"  HTML:     {output_file}")
