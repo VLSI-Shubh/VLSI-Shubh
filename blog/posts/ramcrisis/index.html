@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The RAM Shortage Crisis | Shubham Upadhyay</title>
+
+<meta name="description" content="The RAM Shortage Crisis - VLSI Design Blog"/>
+<meta property="og:title" content="The RAM Shortage Crisis"/>
+<meta property="og:type" content="article"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Portfolio CSS (ABSOLUTE PATH) -->
+<link rel="stylesheet" href="/css/style.css"/>
+
+<!-- Blog-specific styles -->
+<style>
+  .blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: calc(var(--nav-h) + 3rem) 1.5rem 4rem;
+  }
+
+  .blog-header {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .blog-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 1rem;
+    color: var(--heading);
+  }
+
+  .blog-meta {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .blog-content {
+    line-height: 1.8;
+    color: var(--text);
+  }
+
+  .blog-content h1 {
+    font-size: 2rem;
+    margin: 2.5rem 0 1rem;
+    color: var(--heading);
+  }
+
+  .blog-content h2 {
+    font-size: 1.6rem;
+    margin: 2rem 0 1rem;
+    color: var(--heading);
+  }
+
+  .blog-content h3 {
+    font-size: 1.3rem;
+    margin: 1.5rem 0 0.75rem;
+    color: var(--heading);
+  }
+
+  .blog-content p {
+    margin-bottom: 1.25rem;
+  }
+
+  .blog-content ul, .blog-content ol {
+    margin: 1rem 0 1.5rem 2rem;
+  }
+
+  .blog-content li {
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-content code {
+    background: rgba(6,182,212,.15);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--accent);
+  }
+
+  .blog-content pre {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+  .blog-content pre code {
+    background: none;
+    padding: 0;
+    color: var(--text);
+  }
+
+  .blog-content blockquote {
+    border-left: 4px solid var(--accent);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .blog-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin: 2rem 0;
+  }
+
+  .blog-content a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .back-button {
+    display: inline-block;
+    margin-top: 3rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--heading);
+    text-decoration: none;
+    transition: all var(--dur) var(--easing);
+  }
+
+  .back-button:hover {
+    background: rgba(6,182,212,.1);
+    transform: translateX(-3px);
+  }
+</style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav aria-label="Primary" class="nav-wrap">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/index.html" style="color: var(--heading); text-decoration: none;">Shubham Upadhyay</a>
+      </div>
+      <div class="nav-controls">
+        <a href="/blog/" class="btn outline" style="font-size: 0.9rem; padding: 0.5rem 1rem;">← All Posts</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Blog Post -->
+  <main class="blog-post">
+    <header class="blog-header">
+      <h1 class="blog-title">The RAM Shortage Crisis</h1>
+      <p class="blog-meta">Published on January 02, 2026</p>
+    </header>
+
+    <article class="blog-content">
+<p align="center">
+<img src="assets/banner.png" alt="The Crisis" width="50%">
+</p>
+<h2 id="what-is-this-crisis-or-shortage">What is this crisis or
+shortage</h2>
+<p>So AI has taken over not just your jobs but your RAM as well. Why do
+I say that. Let us dive a bit deeper.</p>
+<p>Over the past year, conversations around hardware shortages have
+picked up again. This time, it is not GPUs alone. RAM is increasingly
+being pulled into the same discussion.</p>
+<p>So what is actually happening in the world. Why is everyone talking
+about a RAM shortage. Is there really a crisis, or is this just
+temporary market noise.</p>
+<p>To explain this properly, a few core ideas need to be laid out
+first.</p>
+<h2 id="types-of-memory">1. Types of Memory</h2>
+<p>RAM, as most people know, is simply memory. But not all memory is the
+same.</p>
+<p>At a high level, two families matter the most here:</p>
+<ul>
+<li><p><code>DDR</code> memory<br />
+Used in CPUs, system RAM, and cache hierarchies. This is the memory most
+consumers interact with directly.</p></li>
+<li><p><code>NAND</code> memory<br />
+A non volatile memory, meaning data is retained even when power is lost.
+This is why it is used in SSDs, flash drives, and storage
+devices.</p></li>
+</ul>
+<p>Some of the biggest players in this space are Samsung, Micron
+(Crucial), and SK hynix.</p>
+<p>Before getting into the shortage itself, there is another member of
+the memory family that needs attention. A distant cousin, but a very
+capable one, that has been making a lot of noise recently.</p>
+<p>That memory is <code>HBM</code>, High Bandwidth Memory.</p>
+<p>HBM is designed to deliver extremely high bandwidth while staying
+power efficient. This makes it critical for GPUs and accelerators that
+handle massive parallel workloads.</p>
+<p align="center">
+<img src="assets/hbm.png" alt="HBM stacked memory illustration" width="50%">
+</p>
+<p>And once again, this leads us straight to AI.</p>
+<h2 id="the-ai-advent">2. The AI Advent</h2>
+<p>By now, most people have come across the term LLMs, or Large Language
+Models.</p>
+<p>Everything you hear about today, whether it is GPT, Gemini, or other
+AI systems, is built on large models trained on enormous datasets.</p>
+<p>These models are data hungry.</p>
+<p>They need memory not just for training, but also for inference,
+caching, checkpoints, and intermediate outputs. Every iteration and
+improvement cycle increases memory demand.</p>
+<p>This is where HBM becomes important.</p>
+<p>HBM is fast, sits close to the GPU, and removes bandwidth bottlenecks
+that traditional DDR memory cannot handle efficiently. For AI training
+and inference, it is not just helpful, it is necessary.</p>
+<h2 id="the-real-world-picture">3. The Real World Picture</h2>
+<p>With AI investments growing rapidly, real world money is following
+AI.</p>
+<p>Every major technology company wants a share of this market, even if
+it means shifting resources away from traditional consumer products.</p>
+<p>Not riding the AI wave today essentially means losing ground
+tomorrow. Because of this, profit focus has moved from consumer hardware
+to data centers and AI infrastructure.</p>
+<p>HBM is heavily used in AI GPUs and large scale data centers. As a
+result, memory manufacturers are prioritizing HBM production over
+traditional DDR memory.</p>
+<blockquote>
+<p>According to TrendForce, HBM prices increased by roughly <strong>20
+to 30 percent</strong> between late 2023 and early 2024 due to demand
+from AI accelerators.</p>
+</blockquote>
+<p>During the same period:</p>
+<ul>
+<li>DDR4 and DDR5 prices increased by <strong>10 to 15
+percent</strong></li>
+<li>Production capacity was redirected from consumer memory toward
+HBM</li>
+<li>Supply for consumer systems tightened globally</li>
+</ul>
+<p>Micron has publicly stated that a significant portion of its future
+DRAM investments will focus on HBM for AI customers. Consumer focused
+products, such as Crucial, operate on much thinner margins in
+comparison.</p>
+<p>Samsung has also prioritized memory supply for servers and AI
+accelerators, reportedly limiting availability for mobile devices and
+consumer electronics.</p>
+<p>At the same time, modern AI GPUs now ship with massive amounts of on
+package HBM. This reduces reliance on system RAM but increases overall
+memory cost.</p>
+<p>Board partners such as ASUS and MSI still need to source DDR memory
+for consumer systems, often at higher prices, which eventually gets
+passed down to buyers.</p>
+<p align="center">
+<img src="assets/datacenter.png" alt="AI data center GPU racks" width="50%">
+</p>
+<h2 id="geopolitics">4. Geopolitics</h2>
+<p>At the end of the day, all of this affects regular consumers the
+most.</p>
+<p>Hardware becomes more expensive. Upgrade cycles slow down.
+Availability becomes unpredictable.</p>
+<p>Memory manufacturing is also deeply tied to geopolitics. These
+companies contribute heavily to national economies, and access to
+advanced memory has become a strategic advantage.</p>
+<p>Under the radar, export controls and delivery restrictions are being
+used to slow AI progress in certain regions.</p>
+<p>In today’s environment, the country that leads in AI development is
+widely believed to have a long term technological and economic
+advantage.</p>
+<p>Whether that belief proves fully true or not, it is clearly
+influencing industry decisions and government policy.</p>
+<h2 id="so-what-is-actually-happening">So What Is Actually
+Happening</h2>
+<p>This is not a traditional shortage where factories cannot produce
+memory.</p>
+<p>What we are seeing instead is a <strong>supply shift</strong>.</p>
+<ul>
+<li>New DDR memory prices increased by approximately <strong>15
+percent</strong> in the last three months compared to the previous
+quarter</li>
+<li>Used RAM prices increased by around <strong>10 percent</strong> due
+to reduced availability of new stock</li>
+<li>HBM continues to receive priority allocation</li>
+</ul>
+<p>Analysts from firms such as Gartner and TrendForce predict that AI
+driven memory demand will continue to grow for at least the next
+<strong>8 to 10 years</strong>, with HBM remaining the highest priority
+segment.</p>
+<p>If you are planning to build a PC or upgrade a system, especially one
+that is memory heavy, the advice is simple.</p>
+<p>Buy the memory early.</p>
+<p>Waiting is far more likely to cost you more, not less.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><p>TrendForce DRAM and HBM Market Reports<br />
+https://www.trendforce.com</p></li>
+<li><p>Micron Technology Investor Presentations<br />
+https://investors.micron.com</p></li>
+<li><p>Samsung Semiconductor Memory Roadmaps<br />
+https://semiconductor.samsung.com</p></li>
+<li><p>NVIDIA Data Center and AI Accelerator Documentation<br />
+https://www.nvidia.com/en-us/data-center</p></li>
+<li><p>Gartner AI Infrastructure Forecasts<br />
+https://www.gartner.com</p></li>
+</ul>
+
+    </article>
+
+    <a href="/blog/" class="back-button">← Back to All Posts</a>
+  </main>
+
+  <!-- Footer -->
+  <footer style="text-align:center; padding:2rem 1rem; color:var(--muted); border-top:1px solid var(--border); margin-top: 3rem;">
+    <p>&copy; 2025 Shubham Upadhyay. All rights reserved.</p>
+  </footer>
+
+  <!-- Go to Top Button -->
+  <button class="go-to-top" id="goToTop" aria-label="Go to top">↑</button>
+
+  <!-- JavaScript (ABSOLUTE PATH) -->
+  <script src="/js/script.js"></script>
+</body>
+</html>
