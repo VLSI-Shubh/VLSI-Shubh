@@ -189,19 +189,19 @@ on FPGAs: <strong>Synthesizable ≠ Efficient FPGA
 Implementation</strong>.</p>
 <h2 id="what-is-synthesis">1. What is Synthesis?</h2>
 <p>Synthesis is the process by which algorithmic descriptions of
-circuits are transformed into a design for electronic hardware[1]. In
+circuits are transformed into a design for electronic hardware. In
 simpler terms, it means breaking down RTL code into smaller, fundamental
 building blocks like gates, multiplexers, flip-flops, etc.</p>
-<p>When you provide RTL to synthesis tools, they essentially parse and
-break it down until it’s converted into various basic hardware blocks.
-Below is a screenshot from the synthesis output of a <a
-href="">RISCV</a> project I worked on. You can see it listing all the
-wires, muxes, gates, and other components it broke the entire circuit
-down into.</p>
-<p align="left">
-<img src="https://github.com/VLSI-Shubh/RISCV-32I-Processor/blob/a8731c4e5fb70e7b1b3c3ed6feabbee3e9759859/PipelineExecution/synth/core_pip.svg" alt="RISCV Synthesis Output" width="50%">
-</p>
-<!-- {[//]:# ([RISCV Synthesis Output](https://github.com/VLSI-Shubh/RISCV-32I-Processor/blob/a8731c4e5fb70e7b1b3c3ed6feabbee3e9759859/PipelineExecution/synth/core_pip.svg))} -->
+<p>When you provide RTL to synthesis tools, they parse and transform the
+design into lower-level hardware primitives such as gates, multiplexers,
+and interconnects. Below is an SVG view generated from the synthesized
+output of my <a
+href="https://github.com/VLSI-Shubh/RISCV-32I-Processor.git">RISC‑V</a>
+project, showcasing how the tool decomposed the design into wires,
+muxes, gates, and other fundamental components.</p>
+<p><a
+href="https://github.com/VLSI-Shubh/RISCV-32I-Processor/blob/a8731c4e5fb70e7b1b3c3ed6feabbee3e9759859/PipelineExecution/synth/core_pip.svg">RISC‑V
+Synthesis Output (SVG)</a></p>
 <h2 id="constructs">2. Constructs</h2>
 <p>The first question that comes to anyone’s mind when learning about
 synthesis is: <strong>How do I determine if code is synthesizable or
