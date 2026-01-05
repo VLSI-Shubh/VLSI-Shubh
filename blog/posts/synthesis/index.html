@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Understanding Synthesis: What Makes Verilog Code Synthesizable | Shubham Upadhyay</title>
+
+<meta name="description" content="Understanding Synthesis: What Makes Verilog Code Synthesizable - VLSI Design Blog"/>
+<meta property="og:title" content="Understanding Synthesis: What Makes Verilog Code Synthesizable"/>
+<meta property="og:type" content="article"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Portfolio CSS (ABSOLUTE PATH) -->
+<link rel="stylesheet" href="/css/style.css"/>
+
+<!-- Blog-specific styles -->
+<style>
+  .blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: calc(var(--nav-h) + 3rem) 1.5rem 4rem;
+  }
+
+  .blog-header {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .blog-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 1rem;
+    color: var(--heading);
+  }
+
+  .blog-meta {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .blog-content {
+    line-height: 1.8;
+    color: var(--text);
+  }
+
+  .blog-content h1 {
+    font-size: 2rem;
+    margin: 2.5rem 0 1rem;
+    color: var(--heading);
+  }
+
+  .blog-content h2 {
+    font-size: 1.6rem;
+    margin: 2rem 0 1rem;
+    color: var(--heading);
+  }
+
+  .blog-content h3 {
+    font-size: 1.3rem;
+    margin: 1.5rem 0 0.75rem;
+    color: var(--heading);
+  }
+
+  .blog-content p {
+    margin-bottom: 1.25rem;
+  }
+
+  .blog-content ul, .blog-content ol {
+    margin: 1rem 0 1.5rem 2rem;
+  }
+
+  .blog-content li {
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-content code {
+    background: rgba(6,182,212,.15);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--accent);
+  }
+
+  .blog-content pre {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+  .blog-content pre code {
+    background: none;
+    padding: 0;
+    color: var(--text);
+  }
+
+  .blog-content blockquote {
+    border-left: 4px solid var(--accent);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .blog-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin: 2rem 0;
+  }
+
+  .blog-content a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .back-button {
+    display: inline-block;
+    margin-top: 3rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--heading);
+    text-decoration: none;
+    transition: all var(--dur) var(--easing);
+  }
+
+  .back-button:hover {
+    background: rgba(6,182,212,.1);
+    transform: translateX(-3px);
+  }
+</style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav aria-label="Primary" class="nav-wrap">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/index.html" style="color: var(--heading); text-decoration: none;">Shubham Upadhyay</a>
+      </div>
+      <div class="nav-controls">
+        <a href="/blog/" class="btn outline" style="font-size: 0.9rem; padding: 0.5rem 1rem;">← All Posts</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Blog Post -->
+  <main class="blog-post">
+    <header class="blog-header">
+      <h1 class="blog-title">Understanding Synthesis: What Makes Verilog Code Synthesizable</h1>
+      <p class="blog-meta">Published on January 04, 2026</p>
+    </header>
+
+    <article class="blog-content">
+<p align="center">
+<img src="assets/banner.png" alt="The Crisis" width="50%">
+</p>
+<p>While discussing <a href="../hdlVSprog/index.html">“Why HDL Is Not
+Programming”</a>, I briefly touched upon the concept of
+<strong>Synthesis</strong>.</p>
+<p>In that blog, I only covered how properly written RTL code can be
+synthesized into different basic blocks, which can then be mapped onto
+either an <strong>FPGA</strong> or <strong>ASIC Chip</strong> depending
+on the target platform.</p>
+<p>Today, I’ll dive much deeper into what I actually mean by that. I’ll
+introduce something called <strong>constructs</strong> and explain the
+various conditions that determine whether code is synthesizable or
+not.</p>
+<p>Before moving forward, I want to clarify that the HDL language I’ll
+primarily use to discuss this topic (and future topics) is
+<strong>Verilog</strong>. This is simply because it’s widely used across
+the VLSI domain and is arguably the most popular HDL language, largely
+due to its syntax.</p>
+<p>I also want to mention that this blog is going to be more elaborate
+and longer than the previous ones. The concepts here require more
+context and explanation since I can’t assume everyone reading this knows
+all the terminology. However, I do assume you have some basic
+understanding of synthesis and Verilog.</p>
+<p>Also, in a future blog, I’ll explain something really important that
+many people forget or ignore, especially those new to HDL implementation
+on FPGAs: <strong>Synthesizable ≠ Efficient FPGA
+Implementation</strong>.</p>
+<h2 id="what-is-synthesis">1. What is Synthesis?</h2>
+<p>Synthesis is the process by which algorithmic descriptions of
+circuits are transformed into a design for electronic hardware[1]. In
+simpler terms, it means breaking down RTL code into smaller, fundamental
+building blocks like gates, multiplexers, flip-flops, etc.</p>
+<p>When you provide RTL to synthesis tools, they essentially parse and
+break it down until it’s converted into various basic hardware blocks.
+Below is a screenshot from the synthesis output of a <a
+href="">RISCV</a> project I worked on. You can see it listing all the
+wires, muxes, gates, and other components it broke the entire circuit
+down into.</p>
+<p align="left">
+<img src="https://github.com/VLSI-Shubh/RISCV-32I-Processor/blob/a8731c4e5fb70e7b1b3c3ed6feabbee3e9759859/PipelineExecution/synth/core_pip.svg" alt="RISCV Synthesis Output" width="50%">
+</p>
+<!-- {[//]:# ([RISCV Synthesis Output](https://github.com/VLSI-Shubh/RISCV-32I-Processor/blob/a8731c4e5fb70e7b1b3c3ed6feabbee3e9759859/PipelineExecution/synth/core_pip.svg))} -->
+<h2 id="constructs">2. Constructs</h2>
+<p>The first question that comes to anyone’s mind when learning about
+synthesis is: <strong>How do I determine if code is synthesizable or
+not?</strong> Or more specifically, <strong>what makes code
+synthesizable, and what prevents it from being
+synthesizable?</strong></p>
+<p>This is a fundamental question with many answers and interpretations.
+I’ll try to clarify it as much as I can based on my knowledge.</p>
+<p>There’s a concept in Verilog called <strong>Constructs</strong>.
+These are essentially the fundamental syntax elements used to describe
+hardware behavior and structure at the Register Transfer Level (RTL).
+They enable synthesis tools to map designs to actual gates. Constructs
+are mainly categorized into four types:</p>
+<h3 id="a.-synthesizable-constructs">A. Synthesizable Constructs</h3>
+<p>Think of these as complete recipes that synthesis tools can directly
+convert into flip-flops, wires, and logic gates without any
+guesswork.</p>
+<ul>
+<li><strong>Simple wires and regs</strong>: <code>wire a;</code>
+connects signals like physical wires, while <code>reg q;</code> creates
+storage elements like flip-flops when clocked.</li>
+<li><strong>Always blocks</strong>: <code>always @(posedge clk)</code>
+for clocked logic (sequential circuits like registers), and
+<code>always @(*)</code> for combinational logic (immediate reactions
+like AND gates).</li>
+<li><strong>Common operators</strong>: Operators like <code>+</code>,
+<code>==</code>, <code>if-else</code> map directly to adders,
+comparators, and multiplexers. The tools know exactly what hardware to
+create.</li>
+</ul>
+<h3 id="b.-partially-synthesizable-works-but-watch-out">B. Partially
+Synthesizable (Works, But Watch Out)</h3>
+<ul>
+<li><strong>Incomplete if or case statements</strong>: When you don’t
+cover all possible cases, tools assume you forgot something and add
+<strong>latches</strong> (storage elements that hold values). This is
+great for some designs but can be accidental and problematic in
+others.</li>
+<li><strong>Loops like <code>for(i=0; i&lt;4; i++)</code></strong>:
+These unroll into parallel hardware if the bounds are fixed at compile
+time. However, dynamic bounds might limit optimization.</li>
+</ul>
+<p><em>Result: You’ll get functional circuits, but you need to carefully
+review synthesis reports to avoid surprise latches or bloated
+designs.</em></p>
+<h3 id="c.-ignored-constructs">C. Ignored Constructs</h3>
+<p>Synthesis tools parse these for completeness but treat them as
+“simulation-only notes.” They generate no gates or latches.</p>
+<ul>
+<li><strong>Delays</strong>: <code>#5</code> or <code>#10 clk</code> -
+tools simply ignore the delay, so <code>a = #5 b;</code> becomes just
+<code>a = b;</code>.</li>
+<li><strong>Drive strengths</strong>:
+<code>wire (strong1, pull1) w;</code> - strengths like strong/pull are
+dropped since only connectivity matters in synthesis.</li>
+<li><strong>Timescale directives</strong>:
+<code>`timescale 1ns/1ps</code> - purely for simulation timing
+precision, completely ignored during hardware mapping.</li>
+<li><strong>Specify blocks</strong>: Timing specifications like
+<code>specparam</code> for path delays are used in timing simulation but
+bypassed in synthesis.</li>
+</ul>
+<p><em>Note: These are mostly used in testbenches for simulation
+purposes.</em></p>
+<h3 id="d.-non-synthesizable">D. Non-Synthesizable</h3>
+<p>These constructs are made completely for simulation purposes only.
+Synthesis tools will either skip them or throw errors because there’s no
+real hardware equivalent.</p>
+<ul>
+<li><strong>Delays like <code>#5</code></strong>: Pure simulation
+timing. Hardware doesn’t “wait” like software does.</li>
+<li><strong>System tasks</strong>: <code>$display</code>,
+<code>$monitor</code>, or <code>initial</code> blocks for printing
+messages or one-time setup. No gates can be inferred from these.</li>
+<li><strong>Advanced verification constructs</strong>: Things like
+<code>fork-join</code>, file I/O operations, etc. These are great for
+verifying behavior in simulation but are ignored during synthesis.</li>
+<li><strong>While and Wait loops</strong>: These are considered
+potentially infinite loops and cannot be synthesized.</li>
+</ul>
+<blockquote>
+<p><strong>Question</strong>: You might be wondering why
+<code>for</code> loops are synthesizable (or partially synthesizable)
+but <code>while</code> loops are not synthesizable at all.</p>
+</blockquote>
+<p>The answer lies in how these loops are implemented at the hardware
+level.</p>
+<div
+style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0;">
+<div
+style="background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem;">
+<p><strong>For Loop (Synthesizable)</strong></p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> counter_for <span class="op">(</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span>  <span class="dt">wire</span> clk<span class="op">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> <span class="dt">reg</span> <span class="op">[</span><span class="dv">7</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> sum</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">integer</span> i<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">always</span> <span class="op">@(</span><span class="kw">posedge</span> clk<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="kw">for</span> <span class="op">(</span>i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">8</span><span class="op">;</span> i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            sum <span class="op">=</span> sum <span class="op">+</span> i<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">end</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span></code></pre></div>
+<p><em>Loop bounds are known at compile time, so it unrolls into
+parallel hardware with fixed iterations.</em></p>
+</div>
+<div
+style="background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem;">
+<p><strong>While Loop (Non-Synthesizable)</strong></p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> counter_while <span class="op">(</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span>  <span class="dt">wire</span> clk<span class="op">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span>  <span class="dt">wire</span> <span class="op">[</span><span class="dv">7</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> limit<span class="op">,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> <span class="dt">reg</span> <span class="op">[</span><span class="dv">7</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> sum</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">integer</span> i<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">always</span> <span class="op">@(</span><span class="kw">posedge</span> clk<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">while</span> <span class="op">(</span>i <span class="op">&lt;</span> limit<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            sum <span class="op">=</span> sum <span class="op">+</span> i<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="kw">end</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span></code></pre></div>
+<p><em>Loop bounds depend on runtime input, so the synthesizer can’t
+determine required hardware resources at synthesis time.</em></p>
+</div>
+</div>
+<p><strong>Why For Loops Synthesize But While Loops Don’t:</strong></p>
+<p>The key difference is that <code>for</code> loops have
+<strong>compile-time deterministic bounds</strong>. This allows the
+synthesizer to unroll them into a fixed amount of hardware. In contrast,
+<code>while</code> loops have <strong>runtime-dependent
+conditions</strong>, making it impossible to determine the hardware
+structure during synthesis.</p>
+<p>More critically, if the condition of a <code>while</code> loop is
+never satisfied, it enters an <strong>infinite loop</strong>. In
+software, this simply hangs the program. But in hardware, you cannot
+create “infinite hardware”. Physical circuits must have finite resources
+and defined behavior. The synthesizer has no way to build hardware that
+can handle unbounded or potentially infinite iterations. This is
+fundamentally why <code>while</code> loops with non-constant conditions
+cannot be synthesized.</p>
+<h2 id="blocking-vs-non-blocking-assignments">3. Blocking vs
+Non-Blocking Assignments</h2>
+<p>One of the most critical concepts in Verilog synthesis is
+understanding the difference between <strong>blocking
+(<code>=</code>)</strong> and <strong>non-blocking
+(<code>&lt;=</code>)</strong> assignments. These two assignment
+operators fundamentally change how your code is synthesized into
+hardware.</p>
+<p align="center">
+<img src="assets/assignment.png" alt="The Crisis" width="30%">
+</p>
+<h3 id="blocking-assignment">Blocking Assignment (<code>=</code>)</h3>
+<p>Blocking assignments execute <strong>sequentially</strong>, one after
+another, within the same simulation time step. They are primarily used
+for <strong>combinational logic</strong>.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> blocking_example <span class="op">(</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> <span class="dt">wire</span> a<span class="op">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> <span class="dt">wire</span> b<span class="op">,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> <span class="dt">reg</span> y</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">always</span> <span class="op">@(</span>*<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> a <span class="op">&amp;</span> b<span class="op">;</span>  <span class="co">// Blocking assignment</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span></code></pre></div>
+<p>In this example, the assignment happens immediately, and any
+subsequent statements in the same block will see the updated value of
+<code>y</code>. This synthesizes to pure combinational logic (an AND
+gate).</p>
+<h3 id="non-blocking-assignment">Non-Blocking Assignment
+(<code>&lt;=</code>)</h3>
+<p>Non-blocking assignments schedule updates to occur at the
+<strong>end</strong> of the current simulation time step. All right-hand
+sides are evaluated first, then all left-hand sides are updated
+simultaneously. They are primarily used for <strong>sequential
+logic</strong> (registers/flip-flops).</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> nonblocking_example <span class="op">(</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> <span class="dt">wire</span> clk<span class="op">,</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> <span class="dt">wire</span> d<span class="op">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> <span class="dt">reg</span> q</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">always</span> <span class="op">@(</span><span class="kw">posedge</span> clk<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        q <span class="op">&lt;=</span> d<span class="op">;</span>  <span class="co">// Non-blocking assignment</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span></code></pre></div>
+<p>This synthesizes to a D flip-flop, where <code>q</code> captures the
+value of <code>d</code> on the rising edge of the clock.</p>
+<h3 id="why-it-matters-for-synthesis">Why It Matters for Synthesis</h3>
+<p><strong>Golden Rule:</strong> - Use <strong>blocking
+(<code>=</code>)</strong> in <code>always @(*)</code> blocks for
+<strong>combinational logic</strong> - Use <strong>non-blocking
+(<code>&lt;=</code>)</strong> in <code>always @(posedge clk)</code> or
+<code>always @(negedge clk)</code> blocks for <strong>sequential
+logic</strong></p>
+<p><strong>What happens if you mix them incorrectly?</strong></p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// INCORRECT - Blocking in sequential logic</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">always</span> <span class="op">@(</span><span class="kw">posedge</span> clk<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> b<span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> a<span class="op">;</span>  <span class="co">// Uses the NEW value of &#39;a&#39;, not the old one!</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">// CORRECT - Non-blocking in sequential logic</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">always</span> <span class="op">@(</span><span class="kw">posedge</span> clk<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    a <span class="op">&lt;=</span> b<span class="op">;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    c <span class="op">&lt;=</span> a<span class="op">;</span>  <span class="co">// Uses the OLD value of &#39;a&#39; from before the clock edge</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<p>In the incorrect example, <code>c</code> gets the value that
+<code>b</code> had, not the previous value of <code>a</code>. This
+creates entirely different hardware than you intended. Instead of two
+cascaded flip-flops, you might end up with one flip-flop followed by
+combinational logic.</p>
+<p><strong>Synthesis Impact:</strong></p>
+<table>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 19%" />
+<col style="width: 31%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr>
+<th>Assignment Type</th>
+<th>Logic Type</th>
+<th>Hardware Generated</th>
+<th>Typical Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Blocking <code>=</code></td>
+<td>Combinational</td>
+<td>Gates, Muxes</td>
+<td><code>always @(*)</code></td>
+</tr>
+<tr>
+<td>Non-Blocking <code>&lt;=</code></td>
+<td>Sequential</td>
+<td>Flip-flops, Registers</td>
+<td><code>always @(posedge clk)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Mixing these incorrectly can lead to: - Simulation vs synthesis
+mismatches - Race conditions - Unintended hardware behavior -
+Difficult-to-debug timing issues</p>
+<h2 id="handling-x-and-z-values-in-synthesis">4. Handling X and Z Values
+in Synthesis</h2>
+<p>In Verilog, there are four logic values: <code>0</code>,
+<code>1</code>, <code>x</code> (unknown/don’t care), and <code>z</code>
+(high impedance). While all four are extremely useful in simulation,
+synthesis tools handle <code>x</code> and <code>z</code> very
+differently than you might expect.</p>
+<h3 id="the-four-value-logic-system">The Four-Value Logic System</h3>
+<ul>
+<li><strong><code>0</code></strong> - Logic low</li>
+<li><strong><code>1</code></strong> - Logic high</li>
+<li><strong><code>x</code></strong> - Unknown or don’t care</li>
+<li><strong><code>z</code></strong> - High impedance (tri-state)</li>
+</ul>
+<h3 id="how-synthesis-treats-x-values">How Synthesis Treats
+<code>x</code> Values</h3>
+<p>During synthesis, <strong><code>x</code> is typically treated as a
+don’t-care condition</strong>. The synthesizer will optimize it as
+either <code>0</code> or <code>1</code>, depending on what produces the
+most efficient hardware.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> x_example <span class="op">(</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> <span class="dt">wire</span> sel<span class="op">,</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> <span class="dt">wire</span> a<span class="op">,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> <span class="dt">reg</span> y</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">always</span> <span class="op">@(</span>*<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        <span class="kw">if</span> <span class="op">(</span>sel<span class="op">)</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>            y <span class="op">=</span> a<span class="op">;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="kw">else</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>            y <span class="op">=</span> <span class="bn">1&#39;bx</span><span class="op">;</span>  <span class="co">// Don&#39;t care</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span></code></pre></div>
+<p>The synthesizer might optimize this to simply <code>y = a</code> when
+<code>sel</code> is <code>1</code>, and potentially leave <code>y</code>
+in any state when <code>sel</code> is <code>0</code> (or optimize it to
+<code>0</code> or <code>1</code> for simplicity). The <code>x</code>
+essentially tells the tool “I don’t care what happens here, optimize as
+you see fit.”</p>
+<p><strong>Important</strong>: Using <code>x</code> in RTL doesn’t
+create any special hardware. It’s purely an optimization hint. In actual
+hardware, there is no “unknown” state - a signal is always either high
+or low.</p>
+<h3 id="how-synthesis-treats-z-values">How Synthesis Treats
+<code>z</code> Values</h3>
+<p>The <code>z</code> (high impedance) value is more interesting because
+it <strong>can</strong> actually be synthesized, but only in very
+specific contexts, primarily for <strong>tri-state buffers</strong>.</p>
+<h4 id="synthesizable-use-of-z">Synthesizable Use of
+<code>z</code>:</h4>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> tristate_buffer <span class="op">(</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> <span class="dt">wire</span> enable<span class="op">,</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> <span class="dt">wire</span> data_in<span class="op">,</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> <span class="dt">wire</span> data_out</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">assign</span> data_out <span class="op">=</span> enable <span class="op">?</span> data_in <span class="op">:</span> <span class="bn">1&#39;bz</span><span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span></code></pre></div>
+<p>This creates a tri-state buffer. When <code>enable</code> is high,
+<code>data_out</code> drives <code>data_in</code>. When
+<code>enable</code> is low, <code>data_out</code> is in a high-impedance
+state (electrically disconnected), allowing other drivers to control the
+bus.</p>
+<p align="center">
+<img src="assets/buffer.png" alt="The Crisis" width="35%">
+</p>
+<blockquote>
+<p><strong>Synthesized Hardware</strong>: This directly maps to actual
+tri-state buffer primitives available in FPGAs and ASICs.</p>
+</blockquote>
+<h4 id="non-synthesizable-use-of-z">Non-Synthesizable Use of
+<code>z</code>:</h4>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> invalid_z_usage <span class="op">(</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> <span class="dt">wire</span> clk<span class="op">,</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> <span class="dt">wire</span> rst<span class="op">,</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> <span class="dt">reg</span> <span class="op">[</span><span class="dv">7</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> a</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">always</span> <span class="op">@(</span><span class="kw">posedge</span> clk<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="kw">if</span> <span class="op">(!</span>rst<span class="op">)</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>            a <span class="op">&lt;=</span> <span class="bn">8&#39;bz</span><span class="op">;</span>  <span class="co">// PROBLEM!</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="kw">else</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>            a <span class="op">&lt;=</span> <span class="bn">8&#39;b0</span><span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span></code></pre></div>
+<p><strong>Why is this problematic?</strong></p>
+<p>A register (flip-flop) <strong>cannot</strong> store a high-impedance
+state. Registers can only store binary values (<code>0</code> or
+<code>1</code>). The synthesizer will either: - Give you an error -
+Ignore the <code>z</code> assignment and treat it as a don’t-care
+(similar to <code>x</code>) - Generate unexpected hardware</p>
+<p><strong>The fundamental rule</strong>: You can only assign
+<code>z</code> to: - <strong>Continuous assignments
+(<code>assign</code>)</strong> for tri-state buffers -
+<strong>Outputs</strong> that are explicitly intended to be tri-stated -
+<strong>NOT to registers or internal signals</strong></p>
+<h3 id="practical-synthesis-guidelines-for-x-and-z">Practical Synthesis
+Guidelines for X and Z</h3>
+<p><strong>For <code>x</code> values:</strong> - Use <code>x</code> in
+simulation for initialization or don’t-care conditions - Remember that
+synthesis treats it as an optimization opportunity - Never rely on
+<code>x</code> propagating through your design because it won’t exist in
+real hardware</p>
+<p><strong>For <code>z</code> values:</strong> - Only use <code>z</code>
+for tri-state outputs with <code>assign</code> statements - Modern FPGA
+designs often avoid tri-state logic internally and use muxes instead -
+Never assign <code>z</code> to registers or clocked logic - Tri-state is
+mainly used for bidirectional I/O pins</p>
+<h3 id="example-correct-vs-incorrect-usage">Example: Correct vs
+Incorrect Usage</h3>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// CORRECT - Tri-state buffer on output</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> correct_tristate <span class="op">(</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> <span class="dt">wire</span> oe<span class="op">,</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> <span class="dt">wire</span> data<span class="op">,</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> <span class="dt">wire</span> bus</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">assign</span> bus <span class="op">=</span> oe <span class="op">?</span> data <span class="op">:</span> <span class="bn">1&#39;bz</span><span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">// INCORRECT - Trying to store Z in a register</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> incorrect_tristate <span class="op">(</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> <span class="dt">wire</span> clk<span class="op">,</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> <span class="dt">wire</span> oe<span class="op">,</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> <span class="dt">wire</span> data<span class="op">,</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> <span class="dt">reg</span> bus</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">always</span> <span class="op">@(</span><span class="kw">posedge</span> clk<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        bus <span class="op">&lt;=</span> oe <span class="op">?</span> data <span class="op">:</span> <span class="bn">1&#39;bz</span><span class="op">;</span>  <span class="co">// Won&#39;t synthesize properly!</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">// CORRECT Alternative - Use combinational logic</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> correct_alternative <span class="op">(</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> <span class="dt">wire</span> clk<span class="op">,</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> <span class="dt">wire</span> oe<span class="op">,</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> <span class="dt">wire</span> data<span class="op">,</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> <span class="dt">wire</span> bus</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    <span class="dt">reg</span> data_reg<span class="op">;</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">always</span> <span class="op">@(</span><span class="kw">posedge</span> clk<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>        data_reg <span class="op">&lt;=</span> data<span class="op">;</span>  <span class="co">// Store in register</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">assign</span> bus <span class="op">=</span> oe <span class="op">?</span> data_reg <span class="op">:</span> <span class="bn">1&#39;bz</span><span class="op">;</span>  <span class="co">// Tri-state at output</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span></code></pre></div>
+<p><strong>Key Takeaway</strong>: In modern FPGA design, tri-state logic
+is increasingly rare for internal buses. Most designs use multiplexers
+for bus sharing and reserve tri-state only for external bidirectional
+I/O pins where it’s electrically necessary.</p>
+<hr />
+<p>Before concluding this blog, I’d like to strongly recommend that you
+always refer to the <a
+href="https://www.siue.edu/~gengel/ece585WebStuff/OVI_VerilogA.pdf"><strong>IEEE
+Standard Verilog Hardware Description Language</strong></a>. Reading the
+official language reference manual will give you a much deeper
+understanding of synthesizable and non-synthesizable constructs and
+syntax.</p>
+<p>I hope this blog helped you understand the fundamentals of synthesis.
+This was indeed a long one, but the topic demands extensive context and
+explanation. If you have any questions or feedback, feel free to reach
+out!</p>
+<p><strong>Next up</strong>: In the next blog, I’ll be discussing why
+<strong>synthesizable code doesn’t automatically mean efficient FPGA
+implementation</strong>, where we’ll explore BRAM, DSP blocks, and
+resource optimization.</p>
+
+    </article>
+
+    <a href="/blog/" class="back-button">← Back to All Posts</a>
+  </main>
+
+  <!-- Footer -->
+  <footer style="text-align:center; padding:2rem 1rem; color:var(--muted); border-top:1px solid var(--border); margin-top: 3rem;">
+    <p>&copy; 2025 Shubham Upadhyay. All rights reserved.</p>
+  </footer>
+
+  <!-- Go to Top Button -->
+  <button class="go-to-top" id="goToTop" aria-label="Go to top">↑</button>
+
+  <!-- JavaScript (ABSOLUTE PATH) -->
+  <script src="/js/script.js"></script>
+</body>
+</html>
