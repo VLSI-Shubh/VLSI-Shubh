@@ -21,15 +21,12 @@ Also, in a future blog, I'll explain something really important that many people
 
 ## 1. What is Synthesis?
 
-Synthesis is the process by which algorithmic descriptions of circuits are transformed into a design for electronic hardware[1]. In simpler terms, it means breaking down RTL code into smaller, fundamental building blocks like gates, multiplexers, flip-flops, etc.
+Synthesis is the process by which algorithmic descriptions of circuits are transformed into a design for electronic hardware. In simpler terms, it means breaking down RTL code into smaller, fundamental building blocks like gates, multiplexers, flip-flops, etc.
 
-When you provide RTL to synthesis tools, they essentially parse and break it down until it's converted into various basic hardware blocks. Below is a screenshot from the synthesis output of a [RISCV]() project I worked on. You can see it listing all the wires, muxes, gates, and other components it broke the entire circuit down into.
+When you provide RTL to synthesis tools, they parse and transform the design into lower-level hardware primitives such as gates, multiplexers, and interconnects. Below is an SVG view generated from the synthesized output of my [RISC‑V](https://github.com/VLSI-Shubh/RISCV-32I-Processor.git) project, showcasing how the tool decomposed the design into wires, muxes, gates, and other fundamental components.
 
-<p align="left">
-  <img src="https://github.com/VLSI-Shubh/RISCV-32I-Processor/blob/a8731c4e5fb70e7b1b3c3ed6feabbee3e9759859/PipelineExecution/synth/core_pip.svg" alt="RISCV Synthesis Output" width="50%">
-</p>
+[RISC‑V Synthesis Output (SVG)](https://github.com/VLSI-Shubh/RISCV-32I-Processor/blob/a8731c4e5fb70e7b1b3c3ed6feabbee3e9759859/PipelineExecution/synth/core_pip.svg)
 
-<!-- {[//]:# ([RISCV Synthesis Output](https://github.com/VLSI-Shubh/RISCV-32I-Processor/blob/a8731c4e5fb70e7b1b3c3ed6feabbee3e9759859/PipelineExecution/synth/core_pip.svg))} -->
 
 
 ## 2. Constructs
