@@ -2,12 +2,11 @@
 [//]: # (Synthesizable ≠ Efficient FPGA Implementation)
 
 <p align="center">
-  <img src="assets/banner.png" alt="Banner" width="50%">
-  <br><em>Created with Gemini AI</em>
+  <img src="assets/banner.png" alt="Banner" width="70%">
 </p>
 
 
-Just like I discussed synthesis in the [previous blog](../synthesis/synthesis.md), simply having a **synthesizable RTL does not mean that the design will work efficiently on an FPGA**.
+Just like I discussed synthesis in the [previous blog](../synthesis/index.html), simply having a **synthesizable RTL does not mean that the design will work efficiently on an FPGA**.
 
 To get an RTL design implemented on an FPGA, synthesis is a very important step. A lot of students or newcomers who use FPGAs for the first time assume that once the code synthesizes successfully, it is **_automatically efficient on hardware_**.
 
@@ -49,8 +48,7 @@ At the hardware level, BRAMs are **not** implemented as fully independent multi-
 [**True dual-port SRAM**](https://github.com/VLSI-Shubh/SRAM/tree/755f03a7ce4136a16cad363dd62f7bf808ef5ea1/Dual%20Port%20/True%20Dual%20Port), where both ports can independently read and write at the same time using fully independent circuitry, is _very expensive_ in terms of **area and power**. That is why FPGA BRAM does not use that approach internally.
 
 <p align="left">
-  <img src="assets/bram.png" alt="BRAM" width="30%">
-  <br><em>Created with Gemini AI</em>
+  <img src="assets/bram.png" alt="BRAM" width="50%">
 </p>
 
 If the RTL requires behavior that BRAM cannot support, the synthesis tool **falls back** to implementing memory using LUTs. LUT-based memory is essentially a large network of multiplexers, which works functionally but is _inefficient_ in terms of area and routing.
@@ -146,8 +144,7 @@ In reality, **FPGA timing behavior depends heavily on**:
 _These delays are invisible at the RTL simulation level._
 
 <p align="left">
-  <img src="assets/sdf.png" alt="Banner" width="30%">
-  <br><em>Created with Gemini AI</em>
+  <img src="assets/sdf.png" alt="Banner" width="50%">
 </p>
 
 ### The Problem: Simulation vs Reality
