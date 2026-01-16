@@ -81,13 +81,13 @@
   .nav-wrap{
     position: fixed; top: 0; left: 0; right: 0;
     height: var(--nav-h);
-    z-index: 1000; 
-    display:flex; align-items:center; 
+    z-index: 1000;
+    display:flex; align-items:center;
     background: transparent;
     padding:.6rem 0;
     transition: background 280ms var(--easing);
   }
-  
+
   body.nav-scrolled .nav-wrap{
     background: linear-gradient(180deg, rgba(10,14,31,.95), rgba(15,22,41,.85));
     backdrop-filter: blur(12px);
@@ -222,31 +222,44 @@
     min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
     text-align:center; padding:calc(var(--nav-h) + 2rem) 1.2rem 4rem; position: relative;
   }
-  
+
+  /* UPDATED: bigger + crisper headshot (size + crop) */
   .profile-image{
-    width: 180px;
-    height: 180px;
+    width: clamp(220px, 18vw, 300px);
+    height: clamp(220px, 18vw, 300px);
     border-radius: 50%;
     overflow: hidden;
     margin-bottom: 2rem;
     border: 4px solid var(--accent);
-    box-shadow: 0 8px 32px rgba(6,182,212,.4), 0 0 0 8px rgba(6,182,212,.1);
+    box-shadow: 0 10px 36px rgba(6,182,212,.42), 0 0 0 10px rgba(6,182,212,.10);
     transition: all var(--dur) var(--easing);
     background: var(--card);
+
+    /* render stability */
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
   }
-  
+
   .profile-image:hover{
-    transform: scale(1.05);
-    box-shadow: 0 12px 40px rgba(6,182,212,.5), 0 0 0 12px rgba(6,182,212,.15);
+    transform: translateZ(0) scale(1.035);
+    box-shadow: 0 14px 44px rgba(6,182,212,.55), 0 0 0 14px rgba(6,182,212,.12);
   }
-  
+
   .profile-image img{
     width: 100%;
     height: 100%;
     object-fit: cover;
+
+    /* adjust these two if needed */
+    object-position: 50% 18%;
+    transform: scale(1.22);
+    transform-origin: 50% 35%;
+
     display: block;
+    backface-visibility: hidden;
   }
-  
+
   .logo-name{
     font-size:clamp(2rem, 5vw, 3.5rem); font-weight:800; margin-bottom:.3rem;
     background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
@@ -320,10 +333,10 @@
 
   /* Project Images - FIXED FOR DESKTOP */
   .project-image{
-    width:100%; 
+    width:100%;
     height: 200px;
-    border-radius:12px; 
-    overflow:hidden; 
+    border-radius:12px;
+    overflow:hidden;
     margin-bottom:1.2rem;
     background: rgba(6,182,212,.05);
     display: flex;
@@ -383,10 +396,10 @@
     display:flex; flex-direction:column;
   }
   .cert-image{
-    width:100%; 
+    width:100%;
     height:180px;
-    border-radius:12px; 
-    overflow:hidden; 
+    border-radius:12px;
+    overflow:hidden;
     margin-bottom:1rem;
     background: rgba(6,182,212,.05);
     display: flex;
@@ -412,6 +425,14 @@
     display:inline-block; padding:.4rem .9rem; border-radius:var(--radius-pill);
     background:rgba(139,92,246,.15); color:var(--accent-purple);
     font-size:.85rem; font-weight:500; border:1px solid rgba(139,92,246,.25);
+  }
+
+  /* NEW: actions row under certificates */
+  .cert-actions{
+    display:flex;
+    gap:.75rem;
+    margin-top:1rem;
+    flex-wrap:wrap;
   }
 
   /* Reveal Animations */
@@ -453,12 +474,89 @@
     box-shadow: 0 10px 28px rgba(6,182,212,.5);
   }
 
+  /* =============================
+     Certificate Preview Modal
+     ============================= */
+  .modal-backdrop{
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .60);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 18px;
+  }
+
+  .modal-backdrop.open{ display: flex; }
+
+  .modal{
+    width: min(980px, 100%);
+    border-radius: 18px;
+    border: 1px solid rgba(148,163,184,.25);
+    background: color-mix(in srgb, var(--card) 92%, rgba(0,0,0,0) 8%);
+    box-shadow: 0 24px 70px rgba(0,0,0,.55);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+
+  .modal-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(148,163,184,.18);
+    background: rgba(6,182,212,.06);
+  }
+
+  .modal-title{
+    font-family:"Space Grotesk", Inter, system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: .2px;
+    color: var(--heading);
+    font-size: 14px;
+  }
+
+  .modal-close{
+    border-radius: 999px;
+    border: 1px solid rgba(148,163,184,.35);
+    background: rgba(6,182,212,.10);
+    cursor: pointer;
+    padding: 8px 12px;
+    font-weight: 700;
+    color: var(--heading);
+    transition: all var(--dur) var(--easing);
+  }
+
+  .modal-close:hover{
+    border-color: var(--accent);
+    background: rgba(6,182,212,.18);
+  }
+
+  .modal-body{
+    padding: 12px;
+    max-height: min(74vh, 720px);
+    overflow: auto;
+  }
+
+  .modal-body img{
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    border: 1px solid rgba(148,163,184,.22);
+    display: block;
+  }
+
   /* Responsive adjustments */
   @media (max-width:768px){
     .stats-grid{ grid-template-columns: repeat(2, 1fr) }
     .timeline{ padding-left:20px }
     .timeline-item{ padding-left:20px }
     .timeline-item::before{ left:-33px }
+
+    /* keep it comfortably sized on phones */
+    .profile-image{ width: 200px; height: 200px; }
   }
 
   @media (max-width:600px){

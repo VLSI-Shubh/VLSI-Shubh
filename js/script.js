@@ -89,7 +89,7 @@ if ('IntersectionObserver' in window) {
 // Go to Top button
 (function(){
   const goToTopBtn = document.getElementById('goToTop');
-  
+
   window.addEventListener('scroll', () => {
     if (window.scrollY > 500) {
       goToTopBtn.classList.add('visible');
@@ -102,6 +102,66 @@ if ('IntersectionObserver' in window) {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
+    });
+  });
+})();
+
+// Certificate preview modal
+(function(){
+  const modal = document.getElementById('certModal');
+  const modalImg = document.getElementById('certModalImg');
+  const modalTitle = document.getElementById('certModalTitle');
+  const closeBtn = document.getElementById('certModalClose');
+
+  if (!modal || !modalImg || !modalTitle || !closeBtn) return;
+
+  const openModal = (title, src) => {
+    modalTitle.textContent = title || 'Preview';
+    modalImg.src = src;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = () => {
+    modal.classList.remove('open');
+    modalImg.src = '';
+    document.body.style.overflow = '';
+  };
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  // Bind preview buttons to the image in the same cert card
+  document.querySelectorAll('.cert-preview-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.cert-card');
+      const img = card ? card.querySelector('.cert-image img') : null;
+      if (!img) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const title =
+        (card.querySelector('.cert-title') && card.querySelector('.cert-title').textContent) ||
+        (card.querySelector('h3') && card.querySelector('h3').textContent) ||
+        'Certificate';
+
+      openModal(title.trim(), src);
+    });
+  });
+
+  // Also allow clicking the certificate image to preview
+  document.querySelectorAll('.cert-image img').forEach(img => {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', () => {
+      const card = img.closest('.cert-card');
+      const title =
+        (card && card.querySelector('.cert-title') && card.querySelector('.cert-title').textContent) ||
+        (card && card.querySelector('h3') && card.querySelector('h3').textContent) ||
+        'Certificate';
+
+      openModal(title.trim(), img.getAttribute('src'));
     });
   });
 })();

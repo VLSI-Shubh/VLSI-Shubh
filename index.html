@@ -49,7 +49,13 @@
   <header id="home" class="reveal">
     <div class="hero">
       <div class="profile-image">
-        <img src="assets/profile/headshot.jpeg" alt="Shubham Upadhyay" loading="eager">
+        <img
+          src="assets/profile/headshot.jpeg"
+          alt="Shubham Upadhyay"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        >
       </div>
       <div class="logo-name">Shubham Upadhyay</div>
       <div class="logo-subtitle">Digital IC Design Engineer (RTL &amp; FPGA/ASIC Design)</div>
@@ -702,6 +708,7 @@
       </div>
     </section>
 
+    <!-- CERTIFICATIONS (UPDATED: Preview buttons + modal support) -->
     <section id="certifications" class="reveal">
       <div class="section-inner">
         <h2 class="section-title">Certifications</h2>
@@ -709,6 +716,7 @@
           Selected coursework and industry training across computer architecture, RISC-V, Git, RTL design, and Cadence flows.
         </p>
         <div class="cert-grid">
+
           <article class="card cert-card">
             <div class="cert-image">
               <img src="assets/certifications/cadence-rtl-gds.png" alt="Cadence RTL-to-GDSII Flow certificate" loading="lazy">
@@ -719,7 +727,11 @@
               End-to-end digital implementation flow: synthesis, place-and-route, timing closure, and signoff.
             </div>
             <span class="cert-tag">Physical Design Flow</span>
+            <div class="cert-actions">
+              <button class="btn outline cert-preview-btn" type="button">Preview</button>
+            </div>
           </article>
+
           <article class="card cert-card">
             <div class="cert-image">
               <img src="assets/certifications/cadence-signoff.png" alt="Digital Design and Signoff certificate" loading="lazy">
@@ -730,7 +742,11 @@
               Digital implementation, timing analysis, power optimization, and signoff verification.
             </div>
             <span class="cert-tag">Digital Signoff</span>
+            <div class="cert-actions">
+              <button class="btn outline cert-preview-btn" type="button">Preview</button>
+            </div>
           </article>
+
           <article class="card cert-card">
             <div class="cert-image">
               <img src="assets/certifications/udemy-sta1.png" alt="Static Timing Analysis-1 (VSD)" loading="lazy">
@@ -741,7 +757,11 @@
                Timing Path Analysis, Setup and Hold Time Verification, On-Chip Variation (OCV) Timing, Latch Timing Analysis, and STA fundamentals.
             </div>
             <span class="cert-tag">Static Timing Analysis</span>
+            <div class="cert-actions">
+              <button class="btn outline cert-preview-btn" type="button">Preview</button>
+            </div>
           </article>
+
           <article class="card cert-card">
             <div class="cert-image">
               <img src="assets/certifications/udemy-hdl.png" alt="Verilog HDL_VLSI Hardware Design Comprehensive Masterclass" loading="lazy">
@@ -752,7 +772,11 @@
                RTL Design (Verilog/VHDL), Application-Specific Integrated Circuits (ASIC), and FPGA & ASIC Design Flow.
             </div>
             <span class="cert-tag">Verilog · HDL</span>
+            <div class="cert-actions">
+              <button class="btn outline cert-preview-btn" type="button">Preview</button>
+            </div>
           </article>
+
           <article class="card cert-card">
             <div class="cert-image">
               <img src="assets/certifications/linkedin-arch.png" alt="Computer Architecture Essentials certificate" loading="lazy">
@@ -763,7 +787,11 @@
               Fundamentals of pipelines, memory hierarchy, and performance trade-offs in modern processors.
             </div>
             <span class="cert-tag">Computer Architecture</span>
+            <div class="cert-actions">
+              <button class="btn outline cert-preview-btn" type="button">Preview</button>
+            </div>
           </article>
+
           <article class="card cert-card">
             <div class="cert-image">
               <img src="assets/certifications/linkedin-riscv.png" alt="Getting Started with RISC-V certificate" loading="lazy">
@@ -774,7 +802,11 @@
               RISC-V ISA basics, toolchain setup, and workflows for open instruction set architectures.
             </div>
             <span class="cert-tag">RISC-V</span>
+            <div class="cert-actions">
+              <button class="btn outline cert-preview-btn" type="button">Preview</button>
+            </div>
           </article>
+
           <article class="card cert-card">
             <div class="cert-image">
               <img src="assets/certifications/linkedin-git.png" alt="Git Essential Training certificate" loading="lazy">
@@ -785,7 +817,11 @@
               Version control, branching, collaboration, and GitHub-based workflows for hardware projects.
             </div>
             <span class="cert-tag">Git / GitHub</span>
+            <div class="cert-actions">
+              <button class="btn outline cert-preview-btn" type="button">Preview</button>
+            </div>
           </article>
+
           <article class="card cert-card">
             <div class="cert-image">
               <img src="assets/certifications/linkedin-perl.png" alt="Perl 5 Essential Training certificate" loading="lazy">
@@ -796,7 +832,11 @@
               Mastered Perl one-liners for efficient text processing, regex pattern matching, and command-line automation in scripting workflows.
             </div>
             <span class="cert-tag">Perl · Scripting</span>
+            <div class="cert-actions">
+              <button class="btn outline cert-preview-btn" type="button">Preview</button>
+            </div>
           </article>
+
           <article class="card cert-card">
             <div class="cert-image">
               <img src="assets/certifications/linkedin-verilog.png" alt="Learning Verilog for FPGA Development certificate" loading="lazy">
@@ -807,7 +847,11 @@
               Verilog RTL development for FPGA applications.
             </div>
             <span class="cert-tag">Verilog · FPGA</span>
+            <div class="cert-actions">
+              <button class="btn outline cert-preview-btn" type="button">Preview</button>
+            </div>
           </article>
+
         </div>
       </div>
     </section>
@@ -837,6 +881,19 @@
   </footer>
 
   <button class="go-to-top" id="goToTop" aria-label="Go to top">↑</button>
+
+  <!-- Certificate Preview Modal -->
+  <div class="modal-backdrop" id="certModal" role="dialog" aria-modal="true" aria-label="Certificate preview">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title" id="certModalTitle">Preview</div>
+        <button class="modal-close" id="certModalClose" type="button" aria-label="Close preview">Close</button>
+      </div>
+      <div class="modal-body">
+        <img id="certModalImg" alt="Certificate preview"/>
+      </div>
+    </div>
+  </div>
 
   <!-- External JavaScript -->
   <script src="js/script.js"></script>
