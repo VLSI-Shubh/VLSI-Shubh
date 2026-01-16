@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Synthesizable ≠ Efficient FPGA Implementation | Shubham Upadhyay</title>
+
+<meta name="description" content="Synthesizable ≠ Efficient FPGA Implementation - VLSI Design Blog"/>
+<meta property="og:title" content="Synthesizable ≠ Efficient FPGA Implementation"/>
+<meta property="og:type" content="article"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Portfolio CSS (ABSOLUTE PATH) -->
+<link rel="stylesheet" href="/css/style.css"/>
+
+<!-- Blog-specific styles -->
+<style>
+  .blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: calc(var(--nav-h) + 3rem) 1.5rem 4rem;
+  }
+
+  .blog-header {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .blog-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 1rem;
+    color: var(--heading);
+  }
+
+  .blog-meta {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .blog-content {
+    line-height: 1.8;
+    color: var(--text);
+  }
+
+  .blog-content h1 {
+    font-size: 2rem;
+    margin: 2.5rem 0 1rem;
+    color: var(--heading);
+  }
+
+  .blog-content h2 {
+    font-size: 1.6rem;
+    margin: 2rem 0 1rem;
+    color: var(--heading);
+  }
+
+  .blog-content h3 {
+    font-size: 1.3rem;
+    margin: 1.5rem 0 0.75rem;
+    color: var(--heading);
+  }
+
+  .blog-content p {
+    margin-bottom: 1.25rem;
+  }
+
+  .blog-content ul, .blog-content ol {
+    margin: 1rem 0 1.5rem 2rem;
+  }
+
+  .blog-content li {
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-content code {
+    background: rgba(6,182,212,.15);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--accent);
+  }
+
+  .blog-content pre {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+  .blog-content pre code {
+    background: none;
+    padding: 0;
+    color: var(--text);
+  }
+
+  .blog-content blockquote {
+    border-left: 4px solid var(--accent);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .blog-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin: 2rem 0;
+  }
+
+  .blog-content a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .back-button {
+    display: inline-block;
+    margin-top: 3rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--heading);
+    text-decoration: none;
+    transition: all var(--dur) var(--easing);
+  }
+
+  .back-button:hover {
+    background: rgba(6,182,212,.1);
+    transform: translateX(-3px);
+  }
+</style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav aria-label="Primary" class="nav-wrap">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/index.html" style="color: var(--heading); text-decoration: none;">Shubham Upadhyay</a>
+      </div>
+      <div class="nav-controls">
+        <a href="/blog/" class="btn outline" style="font-size: 0.9rem; padding: 0.5rem 1rem;">← All Posts</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Blog Post -->
+  <main class="blog-post">
+    <header class="blog-header">
+      <h1 class="blog-title">Synthesizable ≠ Efficient FPGA Implementation</h1>
+      <p class="blog-meta">Published on January 16, 2026</p>
+    </header>
+
+    <article class="blog-content">
+<p align="center">
+<img src="assets/banner.png" alt="Banner" width="70%"> <br><em>Created
+with Gemini AI</em>
+</p>
+<p>Just like I discussed synthesis in the <a
+href="../synthesis/synthesis.md">previous blog</a>, simply having a
+<strong>synthesizable RTL does not mean that the design will work
+efficiently on an FPGA</strong>.</p>
+<p>To get an RTL design implemented on an FPGA, synthesis is a very
+important step. A lot of students or newcomers who use FPGAs for the
+first time assume that once the code synthesizes successfully, it is
+<strong><em>automatically efficient on hardware</em></strong>.</p>
+<p><strong>That is not true</strong>, and that is exactly what this blog
+is about.</p>
+<h2
+id="importance-of-the-statement-synthesizable-efficient-fpga-implementation">1.
+Importance of the statement Synthesizable ≠ Efficient FPGA
+Implementation</h2>
+<p>No matter which FPGA you use, <strong>synthesis will always be an
+essential step</strong>. The reason is simple. If your code is not
+synthesizable, it cannot be broken down into basic hardware blocks such
+as <strong>flip-flops</strong>, <strong>combinational logic</strong>,
+and <strong>memory elements</strong>. If the hardware cannot be
+inferred, it cannot be mapped onto the FPGA fabric.</p>
+<p>An FPGA is a <strong>Field Programmable Gate Array</strong> made up
+of configurable logic elements. These logic elements can only implement
+what the synthesis tool is able to infer from the RTL. <em>If the RTL is
+not synthesizable, the FPGA simply cannot be programmed with
+it.</em></p>
+<p>However, <strong>synthesis alone is not enough</strong>. There are
+several other factors that decide whether the design will be efficient
+on FPGA hardware. Some of the important ones are: - Proper use of SRAM
+that can map to <strong>BRAM</strong> - Keeping <strong>LUT
+usage</strong> under control - Using <strong>correct signal
+widths</strong></p>
+<p>These points become <em>critical</em> as the design grows in size and
+complexity.</p>
+<h2 id="resource-exhaustion">2. Resource Exhaustion</h2>
+<p>Before getting into more complex implementation issues, the easiest
+one to understand is <strong>resource exhaustion</strong>.</p>
+<p>FPGAs are arrays of logic units called <strong>LUTs</strong> (Look-Up
+Tables) that can be programmed and reprogrammed. These LUTs are
+<em>limited in number</em>. Unlike ASICs, where the logic is custom
+built for a specific application, FPGA logic is general purpose.
+<em>This flexibility comes at the cost of limited resources.</em></p>
+<p>ASICs can have far more optimized logic for a specific task, but they
+are also <strong>very risky</strong>. Any RTL bug that slips through
+verification and makes it to fabrication can render the entire chip
+<em>unusable</em>. That is why <strong>FPGA prototyping</strong> is such
+an important step before ASIC manufacturing.</p>
+<p>When implementing designs on FPGA, you must <strong>always</strong>
+be aware of how many LUTs, flip-flops, and memory resources are being
+used. Poor RTL decisions can easily waste resources and prevent the
+design from fitting on the device.</p>
+<h2 id="sram-and-bram">3. SRAM and BRAM</h2>
+<h3 id="what-is-bram">What is BRAM</h3>
+<p><strong>BRAM</strong> stands for <strong>Block RAM</strong>. These
+are prebuilt memory blocks available inside the FPGA fabric. They are
+<em>far more efficient</em> than implementing memory using LUTs.</p>
+<p>At the hardware level, BRAMs are <strong>not</strong> implemented as
+fully independent multi-ported SRAMs like those used in high-end ASIC
+designs. Instead, BRAMs are implemented using <strong>shared memory
+arrays</strong> with internal sequencing and arbitration. In practical
+terms, this means BRAM behaves like what is commonly referred to as <a
+href="https://github.com/VLSI-Shubh/SRAM/tree/755f03a7ce4136a16cad363dd62f7bf808ef5ea1/Dual%20Port%20/Pseudo%20Dual%20port"><strong>pseudo
+dual-port SRAM</strong></a>.</p>
+<blockquote>
+<p>Even though BRAM exposes two ports, the most commonly used
+configuration is <strong>one write port and one read port</strong>.
+These ports are <em>not physically independent</em> in silicon. They
+share the same underlying memory array and operate under strict timing
+rules.</p>
+</blockquote>
+<p><a
+href="https://github.com/VLSI-Shubh/SRAM/tree/755f03a7ce4136a16cad363dd62f7bf808ef5ea1/Dual%20Port%20/True%20Dual%20Port"><strong>True
+dual-port SRAM</strong></a>, where both ports can independently read and
+write at the same time using fully independent circuitry, is <em>very
+expensive</em> in terms of <strong>area and power</strong>. That is why
+FPGA BRAM does not use that approach internally.</p>
+<p align="left">
+<img src="assets/bram.png" alt="BRAM" width="50%"> <br><em>Created with
+Gemini AI</em>
+</p>
+<p>If the RTL requires behavior that BRAM cannot support, the synthesis
+tool <strong>falls back</strong> to implementing memory using LUTs.
+LUT-based memory is essentially a large network of multiplexers, which
+works functionally but is <em>inefficient</em> in terms of area and
+routing.</p>
+<h3 id="synchronous-vs-asynchronous-read">Synchronous vs Asynchronous
+Read</h3>
+<p>BRAM supports <strong>only synchronous read</strong>. That means data
+is returned on a <strong>clock edge</strong>, <em>not immediately</em>
+when the address changes.</p>
+<p>Example of <strong>synchronous read</strong>, which
+<strong>can</strong> infer BRAM:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">always</span> <span class="op">@(</span><span class="kw">posedge</span> clk<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">if</span> <span class="op">(</span>we<span class="op">)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        mem<span class="op">[</span>addr<span class="op">]</span> <span class="op">&lt;=</span> data_in<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    data_out <span class="op">&lt;=</span> mem<span class="op">[</span>addr<span class="op">];</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<p>Example of <strong>asynchronous read</strong>, which
+<strong>cannot</strong> be mapped to BRAM:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">assign</span> data_out <span class="op">=</span> mem<span class="op">[</span>addr<span class="op">];</span></span></code></pre></div>
+<p>Asynchronous read <em>forces</em> the tool to use LUTs instead of
+BRAM because BRAM physically <strong>cannot support</strong>
+combinational address-to-data paths.</p>
+<h3 id="reset-behavior-and-bram">Reset Behavior and BRAM</h3>
+<p>Another common issue is <strong>reset behavior</strong>. BRAM
+<strong>cannot</strong> reset every memory location using a reset
+signal. If the RTL tries to reset the contents of memory, the tool
+<em>cannot map it to BRAM</em> and will instead use registers or
+LUTs.</p>
+<p><strong>Correct approach</strong>: Reset <strong>control logic and
+pointers</strong>, <em>not memory contents</em>.</p>
+<p>Example of safe reset logic:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">always</span> <span class="op">@(</span><span class="kw">posedge</span> clk<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">if</span> <span class="op">(!</span>rst_n<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        rd_ptr <span class="op">&lt;=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        wr_ptr <span class="op">&lt;=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<p><strong>Important</strong>: Never try to reset the actual memory
+array like this:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ❌ BAD - This will NOT map to BRAM</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">always</span> <span class="op">@(</span><span class="kw">posedge</span> clk<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">if</span> <span class="op">(!</span>rst_n<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="kw">for</span> <span class="op">(</span>int i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> MEM_DEPTH<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            mem<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;=</span> <span class="dv">0</span><span class="op">;</span>  <span class="co">// Trying to reset all memory</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<h2 id="why-synthesizable-rtl-still-fails-to-be-efficient">4. Why
+Synthesizable RTL Still Fails to Be Efficient</h2>
+<p>RTL can be <strong>fully synthesizable</strong> and still map
+<em>very poorly</em> to FPGA hardware if it assumes <strong>ASIC-style
+memory behavior</strong>. This includes assumptions like: -
+<strong>Asynchronous read</strong> - <strong>Arbitrary reset of
+memory</strong> - <strong>Fully independent memory ports</strong></p>
+<p>When these assumptions are violated, the synthesis tool has
+<strong>no choice</strong> but to use LUTs and registers instead of
+BRAM. This results in: - <em>Higher resource usage</em> - <em>Worse
+timing</em> - <em>Inefficient designs</em></p>
+<h2 id="not-using-a-proper-sdf-file">5. Not Using a Proper SDF File</h2>
+<p>Another <strong>critically overlooked</strong> issue is
+<strong>timing verification</strong>. Without proper post-synthesis or
+post-place-and-route timing analysis using an <strong>SDF (Standard
+Delay Format)</strong> file, designs that work in simulation may
+<em>fail on real hardware</em>.</p>
+<h3 id="what-is-an-sdf-file">What is an SDF File?</h3>
+<p>An <strong>SDF file</strong> is a standardized file format that
+contains <strong>detailed timing information</strong> about your design
+after it has been mapped to actual FPGA resources. It includes: -
+<strong>Propagation delays</strong> through LUTs and other logic
+elements - <strong>Interconnect delays</strong> between components -
+<strong>Setup and hold times</strong> for flip-flops -
+<strong>Clock-to-output delays</strong></p>
+<h3 id="why-sdf-matters-for-fpga">Why SDF Matters for FPGA</h3>
+<p>At the RTL simulation level, timing is <strong>idealized</strong>.
+Your testbench assumes: - Zero delay through combinational logic -
+Instantaneous signal propagation - Perfect setup/hold timing</p>
+<p>In reality, <strong>FPGA timing behavior depends heavily on</strong>:
+- <em>Routing delays</em> - How far signals need to travel on the FPGA
+fabric - <em>Placement</em> - Where logic elements are physically
+located - <em>Fanout</em> - How many destinations a signal drives -
+<em>Logic depth</em> - Number of LUTs a signal passes through</p>
+<p><em>These delays are invisible at the RTL simulation level.</em></p>
+<p align="left">
+<img src="assets/sdf.png" alt="Banner" width="50%"> <br><em>Created with
+Gemini AI</em>
+</p>
+<h3 id="the-problem-simulation-vs-reality">The Problem: Simulation vs
+Reality</h3>
+<p>Consider this common scenario:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// RTL that works fine in simulation</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">always</span> <span class="op">@(</span><span class="kw">posedge</span> clk<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    temp <span class="op">&lt;=</span> a <span class="op">&amp;</span> b<span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    result <span class="op">&lt;=</span> temp <span class="op">|</span> c<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<p>In <strong>RTL simulation</strong>: - Both statements execute with
+zero delay - Timing appears perfect</p>
+<p>On <strong>actual FPGA hardware</strong>: - AND operation has
+propagation delay through LUT - Routing delay from temp to OR gate - OR
+operation has its own LUT delay - If total delay exceeds clock period,
+<strong>timing violation occurs</strong></p>
+<h3 id="common-timing-issues-caught-by-sdf">Common Timing Issues Caught
+by SDF</h3>
+<ol type="1">
+<li><strong>Setup Time Violations</strong>: Data changes too close to
+clock edge</li>
+<li><strong>Hold Time Violations</strong>: Data changes too soon after
+clock edge<br />
+</li>
+<li><strong>Clock-to-Output Delays</strong>: Output signal arrives late
+for next stage</li>
+<li><strong>Cross-Clock Domain Issues</strong>: Signals crossing between
+clock domains without proper synchronization</li>
+</ol>
+<h3 id="best-practices">Best Practices</h3>
+<p>✓ <strong>Always</strong> run gate-level simulation with SDF for
+critical paths<br />
+✓ <strong>Check</strong> timing reports from place-and-route tools<br />
+✓ <strong>Add</strong> timing constraints to guide the tool<br />
+✓ <strong>Use</strong> proper clock domain crossing techniques</p>
+<p>✗ <strong>Never</strong> rely solely on RTL simulation for timing
+validation<br />
+✗ <strong>Don’t</strong> ignore timing warnings from synthesis
+tools<br />
+✗ <strong>Avoid</strong> tight timing paths without margin</p>
+<h3 id="the-bottom-line">The Bottom Line</h3>
+<p><strong>SDF-based timing simulation is the bridge between RTL and
+hardware reality.</strong> Without it, you’re flying blind your design
+might synthesize perfectly, use resources efficiently, and still
+<em>fail catastrophically on actual hardware</em> due to timing issues
+you never detected in simulation.</p>
+<h2 id="closing-thoughts">Closing Thoughts</h2>
+<p>I have implemented several of my designs on the <strong>TinyFPGA BX
+board</strong>, and I can confidently say that <strong>FPGA bring-up is
+a valuable skill</strong>. Understanding how RTL maps to actual hardware
+makes a <em>massive difference</em> in design quality.</p>
+<p>The key takeaways from this blog are: - <strong>Synthesizable ≠
+Efficient</strong> - Always verify resource usage - <strong>BRAM
+inference requires specific coding patterns</strong> - Synchronous
+reads, no arbitrary resets - <strong>Timing verification is
+critical</strong> - Use SDF files for realistic simulation -
+<strong>Resource awareness matters</strong> - Monitor LUTs, FFs, and
+memory utilization</p>
+<p>If you are working with the TinyFPGA BX and want an up-to-date
+reference, I have created a <a
+href="/assets/TinyFPGA-BX-Handbook.md">handbook</a> for it since most
+online resources are outdated.</p>
+<p>Thank you, and I hope to see you in the next one!</p>
+
+    </article>
+
+    <a href="/blog/" class="back-button">← Back to All Posts</a>
+  </main>
+
+  <!-- Footer -->
+  <footer style="text-align:center; padding:2rem 1rem; color:var(--muted); border-top:1px solid var(--border); margin-top: 3rem;">
+    <p>&copy; 2025 Shubham Upadhyay. All rights reserved.</p>
+  </footer>
+
+  <!-- Go to Top Button -->
+  <button class="go-to-top" id="goToTop" aria-label="Go to top">↑</button>
+
+  <!-- JavaScript (ABSOLUTE PATH) -->
+  <script src="/js/script.js"></script>
+</body>
+</html>
