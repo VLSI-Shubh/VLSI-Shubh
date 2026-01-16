@@ -223,10 +223,10 @@
     text-align:center; padding:calc(var(--nav-h) + 2rem) 1.2rem 4rem; position: relative;
   }
 
-  /* UPDATED: bigger + crisper headshot (size + crop) */
+  /* UPDATED: clearer headshot */
   .profile-image{
-    width: clamp(220px, 18vw, 300px);
-    height: clamp(220px, 18vw, 300px);
+    width: 240px;
+    height: 240px;
     border-radius: 50%;
     overflow: hidden;
     margin-bottom: 2rem;
@@ -234,31 +234,24 @@
     box-shadow: 0 10px 36px rgba(6,182,212,.42), 0 0 0 10px rgba(6,182,212,.10);
     transition: all var(--dur) var(--easing);
     background: var(--card);
-
-    /* render stability */
     transform: translateZ(0);
-    will-change: transform;
-    backface-visibility: hidden;
   }
 
   .profile-image:hover{
-    transform: translateZ(0) scale(1.035);
+    transform: translateZ(0) scale(1.04);
     box-shadow: 0 14px 44px rgba(6,182,212,.55), 0 0 0 14px rgba(6,182,212,.12);
   }
 
-  .profile-image img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 
-    /* adjust these two if needed */
-    object-position: 50% 18%;
-    transform: scale(1.22);
-    transform-origin: 50% 35%;
-
-    display: block;
-    backface-visibility: hidden;
-  }
+.profile-image img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 18%;
+  transform: scale(1.25);   /* <-- this is the “use 50% of image” effect */
+  transform-origin: center;
+  display: block;
+}
 
   .logo-name{
     font-size:clamp(2rem, 5vw, 3.5rem); font-weight:800; margin-bottom:.3rem;
@@ -555,8 +548,7 @@
     .timeline-item{ padding-left:20px }
     .timeline-item::before{ left:-33px }
 
-    /* keep it comfortably sized on phones */
-    .profile-image{ width: 200px; height: 200px; }
+    .profile-image{ width:180px; height:180px; }
   }
 
   @media (max-width:600px){
