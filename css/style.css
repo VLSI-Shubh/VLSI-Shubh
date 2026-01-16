@@ -468,3 +468,77 @@
   @media (prefers-reduced-motion:reduce){
     *{ transition:none !important; animation:none !important }
   }
+  /* =============================
+   Featured Blog Posts Grid
+   ============================= */
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.blog-card {
+  /* Inherits from .card styling already in your CSS */
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-card .btn {
+  margin-top: auto; /* Pushes button to bottom */
+  width: fit-content;
+}
+
+/* View All Card - spans full width */
+.view-all-card {
+  grid-column: 1 / -1; /* Spans both columns */
+  background: linear-gradient(135deg, 
+    rgba(6,182,212,.12) 0%, 
+    rgba(14,165,233,.08) 100%);
+  border: 2px solid rgba(6,182,212,.25);
+  transition: all var(--dur) var(--easing);
+}
+
+.view-all-card:hover {
+  border-color: rgba(6,182,212,.45);
+  background: linear-gradient(135deg, 
+    rgba(6,182,212,.18) 0%, 
+    rgba(14,165,233,.12) 100%);
+}
+
+.view-all-card h3 {
+  font-size: 1.75rem;
+}
+
+/* Light theme adjustments */
+html[data-theme="light"] .view-all-card {
+  background: linear-gradient(135deg, 
+    rgba(8,145,178,.10) 0%, 
+    rgba(6,182,212,.06) 100%);
+  border-color: rgba(8,145,178,.30);
+}
+
+html[data-theme="light"] .view-all-card:hover {
+  border-color: rgba(8,145,178,.50);
+  background: linear-gradient(135deg, 
+    rgba(8,145,178,.15) 0%, 
+    rgba(6,182,212,.10) 100%);
+}
+
+/* Responsive - stack on mobile */
+@media (max-width: 768px) {
+  .blog-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .view-all-card {
+    grid-column: 1; /* No spanning needed in single column */
+  }
+}

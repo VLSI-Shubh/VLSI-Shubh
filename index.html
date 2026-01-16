@@ -39,10 +39,10 @@
   <div class="nav-menu" id="navMenu">
     <a href="#home" class="nav-link">Home</a>
     <a href="#projects" class="nav-link">Projects</a>
+    <a href="#featured-blog" class="nav-link">Blog</a>
     <a href="#skills" class="nav-link">Skills</a>
     <a href="#experience" class="nav-link">Experience</a>
     <a href="#certifications" class="nav-link">Certifications</a>
-    <a href="blog" class="nav-link">Blogs</a>
     <a href="#contact" class="nav-link">Contact</a>
   </div>
 
@@ -473,6 +473,92 @@
     </div>
   </div>
 </section>
+
+<!-- Featured Blog Posts Section -->
+
+<section id="featured-blog" class="reveal">
+  <div class="section-inner">
+    <h2 class="section-title">Featured Blog Posts</h2>
+    <p style="font-size:1.05rem; color:var(--muted); max-width:640px; margin:0 auto 2rem;">
+      Technical insights on VLSI design, RTL, verification, and hardware engineering.
+    </p>
+    
+    <div class="blog-grid">
+      
+      <!-- Blog Post 1: Synthesizable ≠ Efficient FPGA Implementation -->
+      <article class="card blog-card">
+        <h3>Synthesizable ≠ Efficient FPGA Implementation</h3>
+        <p style="color:var(--muted); margin:.75rem 0">
+          Understanding why synthesizable RTL doesn't guarantee efficient FPGA implementation covering BRAM inference, resource optimization, and critical timing verification.
+        </p>
+        <div class="pills">
+          <span class="pill">RTL</span>
+          <span class="pill">FPGA</span>
+          <span class="pill">BRAM</span>
+          <span class="pill">Timing</span>
+        </div>
+        <a class="btn outline" href="/blog/posts/fpgablog/" style="margin-top:1rem">Read Post →</a>
+      </article>
+
+      <!-- Blog Post 2: Understanding Synthesis -->
+      <article class="card blog-card">
+        <h3>Understanding Synthesis: What Makes Verilog Code Synthesizable</h3>
+        <p style="color:var(--muted); margin:.75rem 0">
+          A deep dive into Verilog synthesis fundamentals, exploring constructs, blocking vs non-blocking assignments, and why some code translates to hardware while others don't.
+        </p>
+        <div class="pills">
+          <span class="pill">Synthesis</span>
+          <span class="pill">RTL</span>
+          <span class="pill">Verilog</span>
+        </div>
+        <a class="btn outline" href="/blog/posts/synthesis/" style="margin-top:1rem">Read Post →</a>
+      </article>
+
+      <!-- Blog Post 3: The RAM Shortage Crisis -->
+      <article class="card blog-card">
+        <h3>The RAM Shortage Crisis!</h3>
+        <p style="color:var(--muted); margin:.75rem 0">
+          Exploring how AI's explosive growth is straining global RAM supply chains and reshaping memory architecture demands.
+        </p>
+        <div class="pills">
+          <span class="pill">RAM</span>
+          <span class="pill">HBM</span>
+          <span class="pill">AI</span>
+          <span class="pill">Memory</span>
+        </div>
+        <a class="btn outline" href="/blog/posts/ramcrisis/index.html" style="margin-top:1rem">Read Post →</a>
+      </article>
+
+      <!-- Blog Post 4: HDLs Are NOT Programming Languages -->
+      <article class="card blog-card">
+        <h3>HDLs Are NOT Programming Languages!</h3>
+        <p style="color:var(--muted); margin:.75rem 0">
+          Demystifying the fundamental differences between Hardware Description Languages and Programming Languages, from syntax to execution models.
+        </p>
+        <div class="pills">
+          <span class="pill">HDL</span>
+          <span class="pill">Verilog</span>
+          <span class="pill">Beginner</span>
+        </div>
+        <a class="btn outline" href="/blog/posts/hdlVSprog/index.html" style="margin-top:1rem">Read Post →</a>
+      </article>
+
+      <!-- View All Posts Card (spans full width) -->
+      <article class="card view-all-card">
+        <div style="text-align:center; padding:1rem 0">
+          <h3 style="margin-bottom:1rem">Explore All Blog Posts</h3>
+          <p style="color:var(--muted); margin-bottom:1.5rem; max-width:500px; margin-left:auto; margin-right:auto">
+            Dive deeper into my technical writing on RTL design, verification, FPGA implementation, synthesis, and hardware engineering topics.
+          </p>
+          <a class="btn" href="/blog/">View All Posts →</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
 
     <section id="skills" class="reveal">
       <div class="section-inner">
