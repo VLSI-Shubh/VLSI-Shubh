@@ -203,7 +203,7 @@ The key takeaways from this blog are:
 - **Timing verification is critical** - Use SDF files for realistic simulation
 - **Resource awareness matters** - Monitor LUTs, FFs, and memory utilization
 
-If you are working with the TinyFPGA BX and want an up-to-date reference, I have created a [handbook](/assets/TinyFPGA-BX-Handbook.md) for it since most online resources are outdated.
+If you are working with the TinyFPGA BX and want an up-to-date reference, I have created a [handbook](TinyFPGA-BX-Handbook.md) for it since most online resources are outdated.
 
 Thank you, and I hope to see you in the next one!
 
