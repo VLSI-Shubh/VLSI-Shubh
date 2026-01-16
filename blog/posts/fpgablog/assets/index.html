@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TinyFPGA BX Handbook | Shubham Upadhyay</title>
+
+<meta name="description" content="TinyFPGA BX Handbook - VLSI Design Blog"/>
+<meta property="og:title" content="TinyFPGA BX Handbook"/>
+<meta property="og:type" content="article"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Portfolio CSS (ABSOLUTE PATH) -->
+<link rel="stylesheet" href="/css/style.css"/>
+
+<!-- Blog-specific styles -->
+<style>
+  .blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: calc(var(--nav-h) + 3rem) 1.5rem 4rem;
+  }
+
+  .blog-header {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .blog-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 1rem;
+    color: var(--heading);
+  }
+
+  .blog-meta {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .blog-content {
+    line-height: 1.8;
+    color: var(--text);
+  }
+
+  .blog-content h1 {
+    font-size: 2rem;
+    margin: 2.5rem 0 1rem;
+    color: var(--heading);
+  }
+
+  .blog-content h2 {
+    font-size: 1.6rem;
+    margin: 2rem 0 1rem;
+    color: var(--heading);
+  }
+
+  .blog-content h3 {
+    font-size: 1.3rem;
+    margin: 1.5rem 0 0.75rem;
+    color: var(--heading);
+  }
+
+  .blog-content p {
+    margin-bottom: 1.25rem;
+  }
+
+  .blog-content ul, .blog-content ol {
+    margin: 1rem 0 1.5rem 2rem;
+  }
+
+  .blog-content li {
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-content code {
+    background: rgba(6,182,212,.15);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--accent);
+  }
+
+  .blog-content pre {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+  .blog-content pre code {
+    background: none;
+    padding: 0;
+    color: var(--text);
+  }
+
+  .blog-content blockquote {
+    border-left: 4px solid var(--accent);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .blog-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin: 2rem 0;
+  }
+
+  .blog-content a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .back-button {
+    display: inline-block;
+    margin-top: 3rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--heading);
+    text-decoration: none;
+    transition: all var(--dur) var(--easing);
+  }
+
+  .back-button:hover {
+    background: rgba(6,182,212,.1);
+    transform: translateX(-3px);
+  }
+</style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav aria-label="Primary" class="nav-wrap">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/index.html" style="color: var(--heading); text-decoration: none;">Shubham Upadhyay</a>
+      </div>
+      <div class="nav-controls">
+        <a href="/blog/" class="btn outline" style="font-size: 0.9rem; padding: 0.5rem 1rem;">← All Posts</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Blog Post -->
+  <main class="blog-post">
+    <header class="blog-header">
+      <h1 class="blog-title">TinyFPGA BX Handbook</h1>
+      <p class="blog-meta">Published on January 16, 2026</p>
+    </header>
+
+    <article class="blog-content">
+<h1 id="tinyfpga-bx-programming-handbook-windows-edition">TinyFPGA BX
+Programming Handbook (Windows Edition)</h1>
+<p><strong>Complete Guide for Modern FPGA Development Using Apio
+1.2.1</strong></p>
+<p><strong>Last Updated:</strong> January 2026<br />
+<strong>Target OS:</strong> Windows 10/11<br />
+<strong>Apio Version:</strong> 1.2.1 (Latest Release)<br />
+<strong>Board:</strong> TinyFPGA BX (Lattice iCE40LP8K-CM81)</p>
+<h2 id="table-of-contents">📋 Table of Contents</h2>
+<ol type="1">
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#whats-changed-since-2018">What’s Changed Since
+2018</a></li>
+<li><a href="#windows-installation-guide">Windows Installation
+Guide</a></li>
+<li><a href="#universal-project-structure">Universal Project
+Structure</a></li>
+<li><a href="#development-workflow">Development Workflow</a></li>
+<li><a href="#troubleshooting-guide">Troubleshooting Guide</a></li>
+<li><a href="#pin-reference-guide">Pin Reference Guide</a></li>
+<li><a href="#quick-reference">Quick Reference</a></li>
+<li><a href="#resources--links">Resources &amp; Links</a></li>
+</ol>
+<h2 id="introduction">Introduction</h2>
+<h3 id="the-problem-outdated-official-guide">The Problem: Outdated
+Official Guide</h3>
+<p><strong>The Issue:</strong> The <a
+href="https://tinyfpga.com/bx/guide.html">official TinyFPGA BX guide</a>
+recommends: - <strong>Atom Editor</strong> (discontinued December 2022
+❌) - <strong>Apio 0.4.0b5</strong> (from 2018, 8 years old ❌) -
+<strong>Old commands</strong> like <code>apio verify</code> and
+<code>apio build</code></p>
+<p><strong>The Solution:</strong> This handbook uses modern tools: - ✅
+<strong>Any text editor</strong> (VS Code, Notepad++, Sublime, or just
+Command Prompt) - ✅ <strong>Apio 1.2.1</strong> (latest as of January
+2026) - ✅ <strong>New commands</strong> like <code>apio lint</code> and
+<code>apio upload</code></p>
+<h3 id="what-is-tinyfpga-bx">What is TinyFPGA BX?</h3>
+<ul>
+<li><strong>FPGA:</strong> Lattice iCE40LP8K-CM81<br />
+</li>
+<li><strong>Logic Elements:</strong> 7,680 LUTs (Logic cells)<br />
+</li>
+<li><strong>RAM:</strong> 128 KB (32 × 4KB blocks)<br />
+</li>
+<li><strong>User I/O Pins:</strong> 41 pins<br />
+</li>
+<li><strong>Size:</strong> 18mm × 36mm (breadboard-friendly)<br />
+</li>
+<li><strong>USB:</strong> Built-in bootloader (no external programmer
+needed)<br />
+</li>
+<li><strong>Toolchain:</strong> 100% open-source (Project IceStorm)</li>
+</ul>
+<h3 id="how-programming-works">How Programming Works</h3>
+<pre><code>Verilog Code
+    ↓
+Yosys (Synthesis) → Converts to netlist
+    ↓
+NextPNR (Place &amp; Route) → Physical layout
+    ↓
+IcePack (Bitstream Generation) → .bin file
+    ↓
+tinyprog (USB Upload) → Programs FPGA</code></pre>
+<p><strong>Apio automates all of these steps!</strong></p>
+<h2 id="whats-changed-since-2018">What’s Changed Since 2018</h2>
+<h3 id="major-updates">Major Updates</h3>
+<table>
+<thead>
+<tr>
+<th>Old (2018)</th>
+<th>New (2026)</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>apio==0.4.0b5</code></td>
+<td><code>apio==1.2.1</code></td>
+<td>Complete rewrite</td>
+</tr>
+<tr>
+<td><code>pip install apio</code></td>
+<td>Installer <code>.exe</code></td>
+<td>Professional packaging</td>
+</tr>
+<tr>
+<td><code>apio install ...</code></td>
+<td>Built-in packages</td>
+<td>No separate installation</td>
+</tr>
+<tr>
+<td><code>apio verify</code></td>
+<td><code>apio lint</code></td>
+<td>Command renamed</td>
+</tr>
+<tr>
+<td><code>apio build</code></td>
+<td>Integrated in <code>upload</code></td>
+<td>Automatic build</td>
+</tr>
+<tr>
+<td>Atom IDE</td>
+<td>Any editor</td>
+<td>No IDE required</td>
+</tr>
+<tr>
+<td>Python 3.6</td>
+<td>Python 3.14</td>
+<td>Modern Python</td>
+</tr>
+</tbody>
+</table>
+<h3 id="why-you-cant-use-old-guides">Why You Can’t Use Old Guides</h3>
+<ol type="1">
+<li><strong>Apio 0.4.0b5 requires manual package installation</strong> →
+Modern Apio bundles everything</li>
+<li><strong>Old commands don’t exist</strong> → <code>apio verify</code>
+is now <code>apio lint</code></li>
+<li><strong>Different project structure</strong> → <code>apio.ini</code>
+format changed</li>
+<li><strong>USB drivers</strong> → Windows 10/11 handles
+automatically</li>
+</ol>
+<h2 id="windows-installation-guide">Windows Installation Guide</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li><strong>Windows 10 or Windows 11</strong> (64-bit)</li>
+<li><strong>USB data cable</strong> (NOT charge-only)</li>
+<li><strong>TinyFPGA BX board</strong></li>
+<li><strong>Administrator privileges</strong> (for installation
+only)</li>
+</ul>
+<h3 id="step-1-download-apio-cli-installer">Step 1: Download Apio CLI
+Installer</h3>
+<p><strong>Official Release Page:</strong>
+https://github.com/FPGAwars/apio/releases</p>
+<ol type="1">
+<li><p><strong>Find Latest Stable Release:</strong> Look for the most
+recent release <strong>without</strong> “Pre-release” tag</p>
+<ul>
+<li>As of January 2026: <code>2026-01-08</code> or later</li>
+</ul></li>
+<li><p><strong>Download Windows Installer:</strong></p>
+<pre><code>apio-cli-windows-amd64-[DATE]-installer.exe</code></pre>
+<p>Example:
+<code>apio-cli-windows-amd64-20260108-installer.exe</code></p></li>
+<li><p><strong>IMPORTANT: Unblock the File</strong></p>
+<ul>
+<li>Right-click the downloaded <code>.exe</code> file</li>
+<li>Select <strong>Properties</strong></li>
+<li>Check the <strong>Unblock</strong> checkbox at the bottom</li>
+<li>Click <strong>OK</strong></li>
+<li><em>This allows Windows to run the unsigned installer</em></li>
+</ul></li>
+</ol>
+<h3 id="step-2-install-apio-cli">Step 2: Install Apio CLI</h3>
+<ol type="1">
+<li><strong>Double-click</strong> the installer file</li>
+<li><strong>Windows SmartScreen Warning:</strong> Click “More info” →
+“Run anyway”</li>
+<li><strong>Follow the installer wizard:</strong>
+<ul>
+<li>Accept license</li>
+<li>Choose installation location (default:
+<code>C:\Program Files\apio</code>)</li>
+<li>Installer automatically adds Apio to PATH</li>
+</ul></li>
+<li><strong>Click “Finish”</strong> when complete</li>
+</ol>
+<h3 id="step-3-verify-installation">Step 3: Verify Installation</h3>
+<p><strong>IMPORTANT:</strong> Open a <strong>NEW</strong> Command
+Prompt window after installation.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode cmd"><code class="sourceCode dosbat"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>apio -<span class="at">-version</span></span></code></pre></div>
+<p><strong>Expected Output:</strong></p>
+<pre><code>apio, version 1.2.1</code></pre>
+<p>If you see <code>apio is not recognized...</code>, restart your
+computer and try again.</p>
+<h3 id="step-4-install-tinyprog-usb-programmer">Step 4: Install tinyprog
+(USB Programmer)</h3>
+<p>Apio CLI does NOT include tinyprog, so we install it separately:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode cmd"><code class="sourceCode dosbat"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pip install tinyprog</span></code></pre></div>
+<p><strong>Verify tinyprog:</strong></p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode cmd"><code class="sourceCode dosbat"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>tinyprog -<span class="at">-help</span></span></code></pre></div>
+<h3 id="step-5-test-board-connection">Step 5: Test Board Connection</h3>
+<ol type="1">
+<li><strong>Connect TinyFPGA BX</strong> via USB</li>
+<li><strong>Press RESET button</strong> on board
+<ul>
+<li><strong>Boot LED should pulse</strong> slowly (breathing
+effect)</li>
+<li>This means bootloader is active</li>
+</ul></li>
+<li><strong>List connected boards:</strong></li>
+</ol>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode cmd"><code class="sourceCode dosbat"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tinyprog <span class="at">-l</span></span></code></pre></div>
+<p><strong>Expected Output:</strong></p>
+<pre><code>TinyFPGA BX detected at:
+    Bootloader (v1.0.1)
+    Serial: 12345678-1234-1234-1234-123456789012
+    Type: TinyFPGA BX</code></pre>
+<p>If you see errors, see <a
+href="#troubleshooting-guide">Troubleshooting</a>.</p>
+<h3 id="step-6-update-bootloader-recommended">Step 6: Update Bootloader
+(Recommended)</h3>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode cmd"><code class="sourceCode dosbat"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tinyprog -<span class="at">-update-bootloader</span></span></code></pre></div>
+<p>Follow prompts. This fixes USB issues on older boards.</p>
+<h2 id="universal-project-structure">Universal Project Structure</h2>
+<p>Every TinyFPGA BX project needs exactly 3 files:</p>
+<pre><code>my-project/
+├── apio.ini       # Project configuration (REQUIRED)
+├── pins.pcf       # Pin mappings (REQUIRED)
+└── main.v         # Top-level Verilog (REQUIRED)</code></pre>
+<p><strong>That’s it!</strong> No extra folders, no complex
+structure.</p>
+<h3 id="file-1-apio.ini-project-configuration">File 1: apio.ini (Project
+Configuration)</h3>
+<p><strong>Purpose:</strong> Tells Apio which board you’re using and
+what the top module is called.</p>
+<p><strong>Template:</strong></p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode ini"><code class="sourceCode ini"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[env:tinyfpga-bx]</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="dt">board </span><span class="ot">=</span><span class="st"> tinyfpga-bx</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="dt">top-module </span><span class="ot">=</span><span class="st"> main</span></span></code></pre></div>
+<p><strong>CRITICAL NOTES:</strong> - Board name is
+<strong><code>tinyfpga-bx</code></strong> (lowercase, with hyphen) - Top
+module <strong>MUST</strong> be named <code>main</code> - Do NOT change
+these values</p>
+<h3 id="file-2-pins.pcf-pin-constraints">File 2: pins.pcf (Pin
+Constraints)</h3>
+<p><strong>Purpose:</strong> Maps Verilog port names to physical FPGA
+pins.</p>
+<p><strong>Important Notes:</strong> - <strong>Pin numbers use FPGA ball
+names</strong> (like <code>B3</code>, <code>A2</code>) <strong>NOT
+physical board pin numbers</strong> - The on-board LED is at FPGA pin
+<strong><code>B3</code></strong> (not pin 6) - The 16MHz clock is at
+FPGA pin <strong><code>B2</code></strong></p>
+<p><strong>Template:</strong></p>
+<pre class="pcf"><code># Clock (16MHz internal oscillator)
+set_io clk B2
+
+# On-board LED (NOT pin 6, it&#39;s FPGA ball B3)
+set_io led B3
+
+# External pins (example - see pin reference for more)
+# set_io button A2
+# set_io output_pin H9</code></pre>
+<p><strong>Common Mistake:</strong> Using board pin numbers instead of
+FPGA ball names. - ❌ WRONG: <code>set_io led 6</code><br />
+- ✅ CORRECT: <code>set_io led B3</code></p>
+<h3 id="file-3-main.v-top-level-verilog">File 3: main.v (Top-Level
+Verilog)</h3>
+<p><strong>Purpose:</strong> Your FPGA design code.</p>
+<p><strong>Critical Rules:</strong> 1. <strong>Module MUST be named
+<code>main</code></strong> (not <code>top</code>, not anything else) 2.
+<strong>All ports here must match pins.pcf exactly</strong> 3.
+<strong>Port names are case-sensitive</strong></p>
+<p><strong>Template:</strong></p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">// main.v - Top-level module for TinyFPGA BX</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> main <span class="op">(</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span>  clk<span class="op">,</span>        <span class="co">// 16MHz clock from B2</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> led         <span class="co">// On-board LED at B3</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Your design code here</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Example: Blink LED at ~0.6Hz</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">reg</span> <span class="op">[</span><span class="dv">23</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> counter <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">always</span> <span class="op">@(</span><span class="kw">posedge</span> clk<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        counter <span class="op">&lt;=</span> counter <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">assign</span> led <span class="op">=</span> counter<span class="op">[</span><span class="dv">23</span><span class="op">];</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span></code></pre></div>
+<h2 id="development-workflow">Development Workflow</h2>
+<h3 id="quick-start-create-new-project">Quick Start: Create New
+Project</h3>
+<p><strong>Open Command Prompt and run:</strong></p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode cmd"><code class="sourceCode dosbat"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">mkdir</span> my<span class="at">-project</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> my<span class="at">-project</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">REM Create apio.ini</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> [env:tinyfpga-bx] <span class="kw">&gt;</span> apio.ini</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> board = tinyfpga-bx <span class="kw">&gt;&gt;</span> apio.ini</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> top-module = main <span class="kw">&gt;&gt;</span> apio.ini</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">REM Create pins.pcf</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> # Pin constraints <span class="kw">&gt;</span> pins.pcf</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> set_io clk B2 <span class="kw">&gt;&gt;</span> pins.pcf</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> set_io led B3 <span class="kw">&gt;&gt;</span> pins.pcf</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">REM Create main.v </span><span class="er">(</span><span class="co">copy template above</span><span class="er">)</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>notepad main.v</span></code></pre></div>
+<h3 id="standard-development-commands">Standard Development
+Commands</h3>
+<p><strong>Modern Apio 1.2.1 uses simplified commands:</strong></p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode cmd"><code class="sourceCode dosbat"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">REM 1. CHECK SYNTAX </span><span class="er">(</span><span class="co">optional but recommended</span><span class="er">)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>apio lint</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">REM 2. BUILD </span><span class="er">&amp;</span><span class="co"> UPLOAD TO FPGA </span><span class="er">(</span><span class="co">one command does both!</span><span class="er">)</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>apio upload</span></code></pre></div>
+<p><strong>That’s it!</strong> Just two commands.</p>
+<h3 id="command-details">Command Details</h3>
+<h4 id="apio-lint---check-syntax"><code>apio lint</code> - Check
+Syntax</h4>
+<ul>
+<li><strong>Purpose:</strong> Validates Verilog syntax before
+synthesis</li>
+<li><strong>Speed:</strong> Very fast (~1 second)</li>
+<li><strong>When to use:</strong> While coding, before uploading</li>
+<li><strong>Output:</strong> Shows syntax errors and warnings</li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode cmd"><code class="sourceCode dosbat"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>C:\Users\You\my-project<span class="kw">&gt;</span> apio lint</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>[INFO] Linting...</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>[INFO] main.v: No issues found</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>[SUCCESS] Lint completed</span></code></pre></div>
+<h4 id="apio-upload---build-program-fpga"><code>apio upload</code> -
+Build &amp; Program FPGA</h4>
+<ul>
+<li><strong>Purpose:</strong> Synthesizes design, generates bitstream,
+and uploads to FPGA</li>
+<li><strong>Speed:</strong> 30-90 seconds (depending on design
+complexity)</li>
+<li><strong>When to use:</strong> When ready to test on hardware</li>
+</ul>
+<p><strong>What it does automatically:</strong> 1. Runs synthesis
+(Yosys) 2. Place &amp; route (NextPNR) 3. Generates bitstream (IcePack)
+4. Uploads via USB (tinyprog)</p>
+<p><strong>Requirements:</strong> - Board must be connected - Press
+RESET button before upload (boot LED pulses)</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode cmd"><code class="sourceCode dosbat"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>C:\Users\You\my-project<span class="kw">&gt;</span> apio upload</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>[INFO] Building project...</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>[INFO] Synthesis (Yosys<span class="kw">)</span>...</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>[INFO] Place <span class="kw">&amp;</span> Route (NextPNR<span class="kw">)</span>...</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>Info: Device utilisation:</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>Info:   ICESTORM_LC:    24/ 7680     0%</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>Info:   ICESTORM_RAM:    0/   32     0%</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>Info:   SB_IO:           2/   41     4%</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>[INFO] Generating bitstream...</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>[INFO] Uploading to TinyFPGA BX...</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>[INFO] Programming TinyFPGA BX...</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>[SUCCESS] Upload complete!</span></code></pre></div>
+<h3 id="understanding-build-output">Understanding Build Output</h3>
+<p><strong>Resource Utilization:</strong></p>
+<pre><code>Info: Device utilisation:
+Info:   ICESTORM_LC:   1234/ 7680    16%
+Info:   ICESTORM_RAM:     2/   32     6%
+Info:   SB_IO:            5/   41    12%</code></pre>
+<p><strong>What it means:</strong> - <strong>ICESTORM_LC:</strong> Logic
+cells used (each = ~1 LUT + 1 flip-flop) -
+<strong>ICESTORM_RAM:</strong> Block RAM usage (128KB total) -
+<strong>SB_IO:</strong> I/O pins used</p>
+<p><strong>Limits:</strong> - Max 7,680 logic cells - Max 32 RAM blocks
+(4KB each) - Max 41 user I/O pins</p>
+<h3 id="testing-your-design">Testing Your Design</h3>
+<p><strong>After uploading:</strong> 1. <strong>Press RESET
+button</strong> to exit bootloader 2. <strong>Your design runs
+immediately</strong> 3. <strong>LED/outputs should activate</strong></p>
+<p><strong>To reprogram:</strong> 1. <strong>Press RESET button</strong>
+→ Boot LED pulses 2. Run <code>apio upload</code> again</p>
+<h2 id="troubleshooting-guide">Troubleshooting Guide</h2>
+<h3 id="error-board-tinyfpga-bx-not-connected">Error: “board
+‘tinyfpga-bx’ not connected”</h3>
+<p><strong>Symptoms:</strong></p>
+<pre><code>[ERROR] Board &#39;tinyfpga-bx&#39; not connected</code></pre>
+<p><strong>Causes &amp; Solutions:</strong></p>
+<p><strong>1. Board not in bootloader mode</strong> -
+<strong>Fix:</strong> Press RESET button on board -
+<strong>Verify:</strong> Boot LED should pulse slowly -
+<strong>Then:</strong> Run <code>apio upload</code> within 8 seconds</p>
+<p><strong>2. USB cable is charge-only</strong> - <strong>Fix:</strong>
+Try a different USB cable - <strong>Test:</strong> Cable must support
+data transfer</p>
+<p><strong>3. USB driver not installed (Windows 7/8 only)</strong> -
+<strong>Windows 10/11:</strong> Drivers install automatically -
+<strong>Windows 7/8:</strong> Install <a
+href="https://www.pjrc.com/teensy/serial_install.exe">universal serial
+driver</a></p>
+<p><strong>4. Wrong USB port</strong></p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode cmd"><code class="sourceCode dosbat"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">REM Check which port the board is on</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>tinyprog <span class="at">-l</span></span></code></pre></div>
+<h3 id="error-cannot-open-apio.ini">Error: “cannot open apio.ini”</h3>
+<p><strong>Cause:</strong> <code>apio.ini</code> file missing or in
+wrong directory</p>
+<p><strong>Fix:</strong></p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode cmd"><code class="sourceCode dosbat"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">REM Make sure you&#39;re in the project directory</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> C:\path\to\your\project</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">REM Verify apio.ini exists</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="bu">dir</span> apio.ini</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">REM If missing, recreate it</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> [env:tinyfpga-bx] <span class="kw">&gt;</span> apio.ini</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> board = tinyfpga-bx <span class="kw">&gt;&gt;</span> apio.ini</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> top-module = main <span class="kw">&gt;&gt;</span> apio.ini</span></code></pre></div>
+<h3 id="error-module-main-not-found">Error: “module ‘main’ not
+found”</h3>
+<p><strong>Cause:</strong> Top module in Verilog isn’t named
+<code>main</code></p>
+<p><strong>Fix:</strong></p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">// WRONG:</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> top <span class="op">(</span>...<span class="op">);</span>          <span class="co">// ❌</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> blink <span class="op">(</span>...<span class="op">);</span>        <span class="co">// ❌</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> TinyFPGA_BX <span class="op">(</span>...<span class="op">);</span>  <span class="co">// ❌</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">// CORRECT:</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> main <span class="op">(</span>...<span class="op">);</span>         <span class="co">// ✅</span></span></code></pre></div>
+<h3 id="error-cant-resolve-port-led">Error: “can’t resolve port
+‘led’”</h3>
+<p><strong>Cause:</strong> Port name mismatch between
+<code>main.v</code> and <code>pins.pcf</code></p>
+<p><strong>Example Problem:</strong></p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">// main.v</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> main <span class="op">(</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> LED    <span class="co">// ← Capital &quot;LED&quot;</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span></code></pre></div>
+<pre class="pcf"><code># pins.pcf
+set_io led B3  # ← Lowercase &quot;led&quot;</code></pre>
+<p><strong>Fix:</strong> Names must match EXACTLY (case-sensitive):</p>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">// main.v</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> main <span class="op">(</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> led    <span class="co">// ✅ Matches pins.pcf</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span></code></pre></div>
+<h3 id="error-design-does-not-fit">Error: “design does not fit”</h3>
+<p><strong>Symptoms:</strong></p>
+<pre><code>ERROR: Design does not fit:
+       8000/7680 logic cells used</code></pre>
+<p><strong>Cause:</strong> Design too large for iCE40LP8K</p>
+<p><strong>Solutions:</strong> 1. Simplify logic 2. Reduce number of
+registers 3. Use smaller data widths 4. Share resources (muxes instead
+of parallel logic)</p>
+<h3 id="board-not-detected-by-windows">Board Not Detected by
+Windows</h3>
+<p><strong>Check Device Manager:</strong> 1. Press <code>Win + X</code>
+→ Device Manager 2. Look under “Ports (COM &amp; LPT)” 3. Should see
+“TinyFPGA BX Bootloader (COMx)”</p>
+<p><strong>If not listed:</strong> - Try different USB port - Try
+different USB cable - Restart computer - Check board power LED is on</p>
+<h3 id="bootloader-not-responding">Bootloader Not Responding</h3>
+<p><strong>Recovery Mode:</strong> 1. <strong>Disconnect USB</strong> 2.
+<strong>Press and HOLD reset button</strong> 3. <strong>Plug in
+USB</strong> (while holding button) 4. <strong>Release button after 2
+seconds</strong> 5. <strong>Boot LED should pulse</strong></p>
+<p><strong>If still not working:</strong> - Board may need JTAG recovery
+(advanced) - Contact TinyFPGA support</p>
+<h2 id="pin-reference-guide">Pin Reference Guide</h2>
+<h3 id="understanding-pin-naming">Understanding Pin Naming</h3>
+<p><strong>TinyFPGA BX has TWO pin numbering systems:</strong></p>
+<ol type="1">
+<li><strong>Board Pin Numbers (1-41):</strong> Physical pins on the
+board edges</li>
+<li><strong>FPGA Ball Names (A1, B3, etc.):</strong> Internal FPGA pin
+designations</li>
+</ol>
+<p><strong>⚠️ CRITICAL:</strong> <code>pins.pcf</code> uses <strong>FPGA
+ball names</strong>, NOT board pin numbers!</p>
+<h3 id="common-fpga-pin-assignments">Common FPGA Pin Assignments</h3>
+<table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 26%" />
+<col style="width: 28%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr>
+<th>Function</th>
+<th>FPGA Pin</th>
+<th>Board Pin</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>16MHz Clock</strong></td>
+<td><code>B2</code></td>
+<td>-</td>
+<td>Internal oscillator</td>
+</tr>
+<tr>
+<td><strong>On-board LED</strong></td>
+<td><code>B3</code></td>
+<td>-</td>
+<td>Active HIGH</td>
+</tr>
+<tr>
+<td><strong>USB D+</strong></td>
+<td><code>B4</code></td>
+<td>-</td>
+<td>Used by bootloader</td>
+</tr>
+<tr>
+<td><strong>USB D-</strong></td>
+<td><code>A4</code></td>
+<td>-</td>
+<td>Used by bootloader</td>
+</tr>
+<tr>
+<td><strong>User I/O</strong></td>
+<td><code>A2</code>, <code>A1</code>, <code>B1</code>, <code>C2</code>,
+etc.</td>
+<td>Various</td>
+<td>See full pinout</td>
+</tr>
+</tbody>
+</table>
+<h3 id="full-pin-mapping-fpga-board">Full Pin Mapping (FPGA →
+Board)</h3>
+<p>For the complete pin mapping, see the <a
+href="https://github.com/tinyfpga/TinyFPGA-BX/blob/master/apio_template/pins.pcf">official
+pins.pcf template</a>.</p>
+<p><strong>Most commonly used pins:</strong></p>
+<pre class="pcf"><code># Essential pins
+set_io clk B2       # 16MHz clock
+set_io led B3       # On-board LED
+
+# Board edge pins (examples)
+set_io PIN_1  A2
+set_io PIN_2  A1
+set_io PIN_3  B1
+set_io PIN_4  C2
+set_io PIN_5  C1
+set_io PIN_6  D2
+set_io PIN_7  D1
+set_io PIN_8  E2
+set_io PIN_9  E1
+set_io PIN_10 G2
+set_io PIN_11 H1
+set_io PIN_12 J1
+set_io PIN_13 H2</code></pre>
+<p><strong>⚠️ WARNING:</strong> Not all board pins can be used! Pins
+used by USB, SPI flash, and other functions are reserved.</p>
+<h3 id="pin-usage-rules">Pin Usage Rules</h3>
+<ol type="1">
+<li><strong>Always start with clock and LED</strong> for testing</li>
+<li><strong>Don’t use USB pins</strong> (B4, A4) - they’re reserved</li>
+<li><strong>Don’t use SPI flash pins</strong> - board won’t boot</li>
+<li><strong>3.3V logic only</strong> - do NOT apply 5V to any pin</li>
+<li><strong>Check pinout diagram</strong> before wiring external
+hardware</li>
+</ol>
+<h2 id="quick-reference">Quick Reference</h2>
+<h3 id="installation-commands">Installation Commands</h3>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode cmd"><code class="sourceCode dosbat"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">REM Download installer from:</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">REM https://github.com/FPGAwars/apio/releases</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">REM After installation, verify:</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>apio -<span class="at">-version</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co">REM Install tinyprog:</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>pip install tinyprog</span></code></pre></div>
+<h3 id="project-creation">Project Creation</h3>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode cmd"><code class="sourceCode dosbat"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">mkdir</span> my<span class="at">-project</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> my<span class="at">-project</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">REM Create required files:</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>notepad apio.ini     # Add config</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>notepad pins.pcf     # Add pin mappings</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>notepad main.v       # Add Verilog code</span></code></pre></div>
+<h3 id="development-commands">Development Commands</h3>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode cmd"><code class="sourceCode dosbat"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">REM Check syntax:</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>apio lint</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">REM Build and upload:</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>apio upload</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co">REM List connected boards:</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>tinyprog <span class="at">-l</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co">REM Update bootloader:</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>tinyprog -<span class="at">-update-bootloader</span></span></code></pre></div>
+<h3 id="required-files-template">Required Files Template</h3>
+<p><strong>apio.ini:</strong></p>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode ini"><code class="sourceCode ini"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[env:tinyfpga-bx]</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="dt">board </span><span class="ot">=</span><span class="st"> tinyfpga-bx</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="dt">top-module </span><span class="ot">=</span><span class="st"> main</span></span></code></pre></div>
+<p><strong>pins.pcf:</strong></p>
+<pre class="pcf"><code>set_io clk B2
+set_io led B3</code></pre>
+<p><strong>main.v:</strong></p>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> main <span class="op">(</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span>  clk<span class="op">,</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> led</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Your design here</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span></code></pre></div>
+<h3 id="hardware-checklist">Hardware Checklist</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" />TinyFPGA BX board</label></li>
+<li><label><input type="checkbox" />USB data cable (NOT
+charge-only)</label></li>
+<li><label><input type="checkbox" />Power LED lights up when
+connected</label></li>
+<li><label><input type="checkbox" />Boot LED pulses after pressing
+RESET</label></li>
+<li><label><input type="checkbox" />Windows Device Manager shows COM
+port</label></li>
+<li><label><input type="checkbox" /><code>tinyprog -l</code> lists the
+board</label></li>
+</ul>
+<h3 id="common-mistakes">Common Mistakes</h3>
+<table>
+<thead>
+<tr>
+<th>Mistake</th>
+<th>Correction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Using Apio 0.4.0b5</td>
+<td>Use Apio 1.2.1</td>
+</tr>
+<tr>
+<td><code>apio verify</code> command</td>
+<td>Use <code>apio lint</code></td>
+</tr>
+<tr>
+<td><code>apio build</code> separately</td>
+<td>Just use <code>apio upload</code></td>
+</tr>
+<tr>
+<td><code>set_io led 6</code></td>
+<td>Use <code>set_io led B3</code></td>
+</tr>
+<tr>
+<td><code>module top (...)</code></td>
+<td>Use <code>module main (...)</code></td>
+</tr>
+<tr>
+<td>Charge-only USB cable</td>
+<td>Use data-capable cable</td>
+</tr>
+<tr>
+<td>Board pin numbers in .pcf</td>
+<td>Use FPGA ball names (B3, etc.)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="resources-links">Resources &amp; Links</h2>
+<h3 id="official-documentation">Official Documentation</h3>
+<ul>
+<li><strong>Apio Installation Guide:</strong>
+https://fpgawars.github.io/apio/docs/installing-apio-cli/</li>
+<li><strong>Apio Release Page:</strong>
+https://github.com/FPGAwars/apio/releases</li>
+<li><strong>TinyFPGA BX User Guide:</strong>
+https://tinyfpga.com/bx/guide.html <em>(use modern commands from this
+handbook)</em></li>
+<li><strong>TinyFPGA BX GitHub:</strong>
+https://github.com/tinyfpga/TinyFPGA-BX</li>
+<li><strong>Project IceStorm:</strong>
+http://www.clifford.at/icestorm/</li>
+</ul>
+<h3 id="pin-reference">Pin Reference</h3>
+<ul>
+<li><strong>Official pins.pcf Template:</strong>
+https://github.com/tinyfpga/TinyFPGA-BX/blob/master/apio_template/pins.pcf</li>
+<li><strong>TinyFPGA BX Pinout Diagram:</strong>
+https://tinyfpga.com/bx/guide.html#pin-assignment</li>
+</ul>
+<h3 id="tutorials-examples">Tutorials &amp; Examples</h3>
+<ul>
+<li><strong>TinyFPGA BX Examples:</strong>
+https://github.com/tinyfpga/TinyFPGA-BX/tree/master/examples</li>
+<li><strong>Getting Started (Woolsey Workshop):</strong>
+https://www.woolseyworkshop.com/2019/08/30/getting-started-with-the-tinyfpga-bx/
+<em>(note: uses old Apio version)</em></li>
+<li><strong>FPGA Intro (Instructables):</strong>
+https://www.instructables.com/INTRODUCTION-TO-FPGAS-USING-TINY-FPGA-BX/
+<em>(note: uses old Apio version)</em></li>
+</ul>
+<h3 id="tools-extensions">Tools &amp; Extensions</h3>
+<ul>
+<li><strong>VS Code:</strong> https://code.visualstudio.com/</li>
+<li><strong>VS Code Verilog Extension:</strong> Search “Verilog-HDL” in
+VS Code marketplace</li>
+<li><strong>Notepad++:</strong> https://notepad-plus-plus.org/</li>
+<li><strong>GTKWave (Waveform Viewer):</strong>
+http://gtkwave.sourceforge.net/</li>
+</ul>
+<h3 id="community-support">Community &amp; Support</h3>
+<ul>
+<li><strong>TinyFPGA Discourse Forum:</strong>
+https://discourse.tinyfpga.com/</li>
+<li><strong>Reddit r/FPGA:</strong> https://www.reddit.com/r/FPGA/</li>
+<li><strong>FPGAwars GitHub:</strong> https://github.com/FPGAwars</li>
+</ul>
+<h3 id="version-information">Version Information</h3>
+<p><strong>This handbook is based on:</strong> - <strong>Apio CLI
+Version:</strong> 1.2.1 (Released December 29, 2025) - <strong>Latest
+Build:</strong> 2026-01-08 - <strong>Python Version:</strong> 3.14 -
+<strong>Package:</strong>
+<code>apio-cli-windows-amd64-20260108-installer.exe</code></p>
+<p><strong>Check for updates:</strong>
+https://github.com/FPGAwars/apio/releases/latest</p>
+<h2 id="additional-notes-for-other-operating-systems">Additional Notes
+for Other Operating Systems</h2>
+<p><strong>This handbook focuses on Windows</strong>, but Apio 1.2.1
+also supports:</p>
+<h3 id="macos">macOS</h3>
+<p><strong>Installation:</strong> - Download <code>.pkg</code> installer
+from releases page - Follow macOS-specific instructions:
+https://fpgawars.github.io/apio/docs/installing-apio-cli/</p>
+<h3 id="linux">Linux</h3>
+<p><strong>Installation:</strong> - Debian/Ubuntu: Download
+<code>.deb</code> package - Other: Use pip or binary bundle -
+<strong>IMPORTANT:</strong> Add user to <code>dialout</code> group:
+<code>bash   sudo usermod -a -G dialout $USER   logout  # Must logout for changes to take effect</code></p>
+<h2 id="about-this-handbook">About This Handbook</h2>
+<p><strong>Created:</strong> 01st January 2026<br />
+<strong>Author:</strong> <a href="https://github.com/VLSI-Shubh">Shubham
+Upadhyay</a>, Community-maintained guide based on official Apio 1.2.1
+documentation<br />
+<strong>License:</strong> <a href="../../../License.txt">MIT
+Licence</a></p>
+<p><strong>Disclaimer:</strong> TinyFPGA hardware and official
+documentation are property of TinyFPGA. Apio and IceStorm are
+open-source projects with respective licenses.</p>
+<p><strong>Contributing:</strong> Found an error or have improvements?
+The FPGA community welcomes corrections and updates!</p>
+<hr />
+<p><strong>Good luck with your FPGA projects! 🚀</strong></p>
+<p><em>Remember: Modern tools make FPGA development much easier than it
+used to be. With Apio 1.2.1, you’re just two commands away from running
+Verilog on hardware!</em></p>
+
+    </article>
+
+    <a href="/blog/" class="back-button">← Back to All Posts</a>
+  </main>
+
+  <!-- Footer -->
+  <footer style="text-align:center; padding:2rem 1rem; color:var(--muted); border-top:1px solid var(--border); margin-top: 3rem;">
+    <p>&copy; 2025 Shubham Upadhyay. All rights reserved.</p>
+  </footer>
+
+  <!-- Go to Top Button -->
+  <button class="go-to-top" id="goToTop" aria-label="Go to top">↑</button>
+
+  <!-- JavaScript (ABSOLUTE PATH) -->
+  <script src="/js/script.js"></script>
+</body>
+</html>
