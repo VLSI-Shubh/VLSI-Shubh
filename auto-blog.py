@@ -96,6 +96,13 @@ def create_blog_post(folder_path):
 
 <!-- Blog-specific styles -->
 <style>
+  /* Force solid navbar on blog pages (no transparent effect) */
+  .nav-wrap {{
+    background: linear-gradient(180deg, rgba(10,14,31,.95), rgba(15,22,41,.85)) !important;
+    backdrop-filter: blur(12px) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,.3) !important;
+  }}
+
   .blog-post {{
     max-width: 800px;
     margin: 0 auto;
@@ -224,10 +231,27 @@ def create_blog_post(folder_path):
         <a href="/index.html" style="color: var(--heading); text-decoration: none;">Shubham Upadhyay</a>
       </div>
       <div class="nav-controls">
-        <a href="/blog/" class="btn outline" style="font-size: 0.9rem; padding: 0.5rem 1rem;">← All Posts</a>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme"></button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </div>
   </nav>
+
+  <!-- Mobile Menu -->
+  <div class="nav-menu" id="navMenu">
+    <a href="/index.html#home" class="nav-link">Home</a>
+    <a href="/index.html#projects" class="nav-link">Projects</a>
+    <a href="/index.html#featured-blog" class="nav-link">Blog</a>
+    <a href="/index.html#skills" class="nav-link">Skills</a>
+    <a href="/index.html#experience" class="nav-link">Experience</a>
+    <a href="/index.html#certifications" class="nav-link">Certifications</a>
+    <a href="/blog/" class="nav-link">All Posts</a>
+    <a href="/index.html#contact" class="nav-link">Contact</a>
+  </div>
 
   <!-- Blog Post -->
   <main class="blog-post">
