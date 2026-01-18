@@ -18,6 +18,13 @@
 
 <!-- Blog-specific styles -->
 <style>
+  /* Force solid navbar on blog pages (no transparent effect) */
+  .nav-wrap {
+    background: linear-gradient(180deg, rgba(10,14,31,.95), rgba(15,22,41,.85)) !important;
+    backdrop-filter: blur(12px) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,.3) !important;
+  }
+
   .blog-post {
     max-width: 800px;
     margin: 0 auto;
@@ -146,21 +153,38 @@
         <a href="/index.html" style="color: var(--heading); text-decoration: none;">Shubham Upadhyay</a>
       </div>
       <div class="nav-controls">
-        <a href="/blog/" class="btn outline" style="font-size: 0.9rem; padding: 0.5rem 1rem;">← All Posts</a>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme"></button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </div>
   </nav>
+
+  <!-- Mobile Menu -->
+  <div class="nav-menu" id="navMenu">
+    <a href="/index.html#home" class="nav-link">Home</a>
+    <a href="/index.html#projects" class="nav-link">Projects</a>
+    <a href="/index.html#featured-blog" class="nav-link">Blog</a>
+    <a href="/index.html#skills" class="nav-link">Skills</a>
+    <a href="/index.html#experience" class="nav-link">Experience</a>
+    <a href="/index.html#certifications" class="nav-link">Certifications</a>
+    <a href="/blog/" class="nav-link">All Posts</a>
+    <a href="/index.html#contact" class="nav-link">Contact</a>
+  </div>
 
   <!-- Blog Post -->
   <main class="blog-post">
     <header class="blog-header">
       <h1 class="blog-title">The RAM Shortage Crisis</h1>
-      <p class="blog-meta">Published on January 02, 2026</p>
+      <p class="blog-meta">Published on January 18, 2026</p>
     </header>
 
     <article class="blog-content">
 <p align="center">
-<img src="assets/banner.png" alt="The Crisis" width="70%">
+<img src="assets/banner.png" alt="The Crisis" width="50%">
 </p>
 <h2 id="what-is-this-crisis-or-shortage">What is this crisis or
 shortage</h2>
@@ -197,7 +221,7 @@ capable one, that has been making a lot of noise recently.</p>
 power efficient. This makes it critical for GPUs and accelerators that
 handle massive parallel workloads.</p>
 <p align="center">
-<img src="assets/hbm.png" alt="HBM stacked memory illustration" width="70%">
+<img src="assets/hbm.png" alt="HBM stacked memory illustration" width="50%">
 </p>
 <p>And once again, this leads us straight to AI.</p>
 <h2 id="the-ai-advent">2. The AI Advent</h2>
@@ -251,7 +275,7 @@ memory cost.</p>
 for consumer systems, often at higher prices, which eventually gets
 passed down to buyers.</p>
 <p align="center">
-<img src="assets/datacenter.png" alt="AI data center GPU racks" width="70%">
+<img src="assets/datacenter.png" alt="AI data center GPU racks" width="50%">
 </p>
 <h2 id="geopolitics">4. Geopolitics</h2>
 <p>At the end of the day, all of this affects regular consumers the

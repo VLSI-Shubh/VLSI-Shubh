@@ -18,6 +18,13 @@
 
 <!-- Blog-specific styles -->
 <style>
+  /* Force solid navbar on blog pages (no transparent effect) */
+  .nav-wrap {
+    background: linear-gradient(180deg, rgba(10,14,31,.95), rgba(15,22,41,.85)) !important;
+    backdrop-filter: blur(12px) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,.3) !important;
+  }
+
   .blog-post {
     max-width: 800px;
     margin: 0 auto;
@@ -146,21 +153,38 @@
         <a href="/index.html" style="color: var(--heading); text-decoration: none;">Shubham Upadhyay</a>
       </div>
       <div class="nav-controls">
-        <a href="/blog/" class="btn outline" style="font-size: 0.9rem; padding: 0.5rem 1rem;">← All Posts</a>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme"></button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </div>
   </nav>
+
+  <!-- Mobile Menu -->
+  <div class="nav-menu" id="navMenu">
+    <a href="/index.html#home" class="nav-link">Home</a>
+    <a href="/index.html#projects" class="nav-link">Projects</a>
+    <a href="/index.html#featured-blog" class="nav-link">Blog</a>
+    <a href="/index.html#skills" class="nav-link">Skills</a>
+    <a href="/index.html#experience" class="nav-link">Experience</a>
+    <a href="/index.html#certifications" class="nav-link">Certifications</a>
+    <a href="/blog/" class="nav-link">All Posts</a>
+    <a href="/index.html#contact" class="nav-link">Contact</a>
+  </div>
 
   <!-- Blog Post -->
   <main class="blog-post">
     <header class="blog-header">
       <h1 class="blog-title">Understanding Synthesis: What Makes Verilog Code Synthesizable</h1>
-      <p class="blog-meta">Published on January 04, 2026</p>
+      <p class="blog-meta">Published on January 18, 2026</p>
     </header>
 
     <article class="blog-content">
 <p align="center">
-<img src="assets/banner.png" alt="The Crisis" width="90%">
+<img src="assets/banner.png" alt="The Crisis" width="50%">
 </p>
 <p>While discussing <a href="../hdlVSprog/index.html">“Why HDL Is Not
 Programming”</a>, I briefly touched upon the concept of
@@ -357,7 +381,7 @@ understanding the difference between <strong>blocking
 operators fundamentally change how your code is synthesized into
 hardware.</p>
 <p align="center">
-<img src="assets/assignment.png" alt="The Crisis" width="70%">
+<img src="assets/assignment.png" alt="The Crisis" width="30%">
 </p>
 <h3 id="blocking-assignment">Blocking Assignment (<code>=</code>)</h3>
 <p>Blocking assignments execute <strong>sequentially</strong>, one after
@@ -519,7 +543,7 @@ class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb7-1"><a 
 state (electrically disconnected), allowing other drivers to control the
 bus.</p>
 <p align="center">
-<img src="assets/buffer.png" alt="The Crisis" width="70%">
+<img src="assets/buffer.png" alt="The Crisis" width="35%">
 </p>
 <blockquote>
 <p><strong>Synthesized Hardware</strong>: This directly maps to actual
